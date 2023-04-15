@@ -1,0 +1,8 @@
+{
+  "name": "LevelWindowModule.View",
+  "references": [
+    "GUID:51db2d5248a843a2b4bf126ae8d8c46c",
+    "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+    "GUID:1942c15c66824256bb9f19eba7d72f3a"
+  ]
+}

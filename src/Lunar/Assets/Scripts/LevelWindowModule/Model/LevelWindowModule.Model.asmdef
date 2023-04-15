@@ -1,0 +1,21 @@
+{
+    "name": "LevelWindowModule.Model",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4d2137e55ce14861a8dba3b19bbf653e",
+        "GUID:bfa9980576d94fc69677c8c891538fdb",
+        "GUID:961111a41b7745a9bfe88d5b03f5f61e",
+        "GUID:b4cf673d5b644172b42c18346fd37dd3",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:51db2d5248a843a2b4bf126ae8d8c46c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
