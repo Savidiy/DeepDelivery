@@ -36,10 +36,14 @@ namespace Installers
             Container.Bind<StartMainState>().AsSingle();
             Container.Bind<LevelPlayMainState>().AsSingle();
 
+            Container.Bind<PlayerHolder>().AsSingle();
+            Container.Bind<PlayerFactory>().AsSingle();
+            Container.Bind<PlayerInputMover>().AsSingle();
             Container.Bind<LevelHolder>().AsSingle();
+            Container.Bind<LevelModelFactory>().AsSingle();
+            
             Container.Bind<ProgressProvider>().AsSingle();
             Container.Bind<ProgressSaver>().AsSingle();
-            Container.Bind<LevelModelFactory>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();
             

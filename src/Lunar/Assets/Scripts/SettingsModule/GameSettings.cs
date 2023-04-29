@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Savidiy.Utils;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SettingsModule
@@ -8,12 +9,21 @@ namespace SettingsModule
     [CreateAssetMenu(fileName = "GameSettings", menuName = "GameSettings", order = 0)]
     public class GameSettings : AutoSaveScriptableObject
     {
+        private const string INPUT = "Input";
+        private const string SOUND = "Sound";
         public List<LevelData> Levels;
-        public KeyCode[] RightKeys;
-        public KeyCode[] LeftKeys;
-        public KeyCode[] ShootKeys;
-        public float DefaultMusicVolume = 0.3f;
-        public float DefaultSoundVolume = 0.5f;
+
+        [FoldoutGroup(INPUT)] public KeyCode[] RightKeys;
+        [FoldoutGroup(INPUT)] public KeyCode[] LeftKeys;
+        [FoldoutGroup(INPUT)] public KeyCode[] UpKeys;
+        [FoldoutGroup(INPUT)] public KeyCode[] DownKeys;
+        [FoldoutGroup(INPUT)] public KeyCode[] ShootKeys;
+
+        public float PlayerSpeedX = 1;
+        public float PlayerSpeedY = 1;
+        
+        [FoldoutGroup(SOUND)] public float DefaultMusicVolume = 0.3f;
+        [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
     }
 
     [Serializable]
