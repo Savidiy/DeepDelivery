@@ -23,3 +23,8 @@ MonoBehaviour:
   PlayerSpeedY: 5
   DefaultMusicVolume: 0.3
   DefaultSoundVolume: 0.5
+  EnemyPrefabs:
+  - EnemyType: 1
+    EnemyBehaviour: {fileID: 8786441544911431102, guid: 0d98448415a005040b80c64e4ff4b1c5, type: 3}
+  - EnemyType: 2
+    EnemyBehaviour: {fileID: 3019363166943306336, guid: 7cc0012081de70a4bb8b01f87338d79d, type: 3}

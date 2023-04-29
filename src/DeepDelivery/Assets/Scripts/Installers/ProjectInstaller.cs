@@ -41,6 +41,9 @@ namespace Installers
             Container.Bind<PlayerInputMover>().AsSingle();
             Container.Bind<CameraToPlayerMover>().AsSingle();
             
+            Container.Bind<EnemyPrefabProvider>().AsSingle();
+            Container.Bind<EnemyFactory>().AsSingle();
+            
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             

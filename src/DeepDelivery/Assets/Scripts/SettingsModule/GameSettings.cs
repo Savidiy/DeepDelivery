@@ -24,6 +24,14 @@ namespace SettingsModule
         
         [FoldoutGroup(SOUND)] public float DefaultMusicVolume = 0.3f;
         [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
+        public EnemyPrefabData[] EnemyPrefabs;
+    }
+
+    [Serializable]
+    public class EnemyPrefabData
+    {
+        public EnemyType EnemyType;
+        public EnemyBehaviour EnemyBehaviour;
     }
 
     [Serializable]
