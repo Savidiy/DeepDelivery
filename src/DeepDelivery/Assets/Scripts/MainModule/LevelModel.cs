@@ -10,6 +10,8 @@ namespace MainModule
         private readonly LevelBehaviour _levelBehaviour;
         private readonly List<Enemy> _enemies;
 
+        public IReadOnlyList<Enemy> Enemies => _enemies;
+
         public LevelModel(LevelBehaviour levelBehaviour, List<Enemy> enemies)
         {
             _levelBehaviour = levelBehaviour;

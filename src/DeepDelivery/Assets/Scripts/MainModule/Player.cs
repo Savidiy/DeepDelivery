@@ -9,6 +9,7 @@ namespace MainModule
         private readonly PlayerBehaviour _playerBehaviour;
 
         public Vector3 Position => _playerBehaviour.transform.position;
+        public Collider2D Collider => _playerBehaviour.Collider2D;
 
         public Player(PlayerBehaviour playerBehaviour)
         {
