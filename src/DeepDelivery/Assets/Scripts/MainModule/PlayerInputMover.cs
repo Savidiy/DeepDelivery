@@ -19,13 +19,18 @@ namespace MainModule
 
         public void ActivatePlayerControls()
         {
-            _tickInvoker.Updated -= OnUpdated;
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.FixedUpdated -= OnUpdated;
+            _tickInvoker.FixedUpdated += OnUpdated;
         }
 
         public void DeactivatePlayerControls()
         {
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.FixedUpdated -= OnUpdated;
+        }
+
+        private float GetDeltaTime()
+        {
+            return _tickInvoker.FixedDeltaTime;
         }
 
         private void OnUpdated()
@@ -39,7 +44,7 @@ namespace MainModule
         {
             Vector2 inputDirection = GetInputDirection();
             
-            float deltaTime = _tickInvoker.DeltaTime;
+            float deltaTime = GetDeltaTime();
             Vector2 shift = inputDirection * deltaTime;
             shift.x *= _gameSettings.PlayerSpeedX;
             shift.y *= _gameSettings.PlayerSpeedY;

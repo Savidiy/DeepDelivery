@@ -1,20 +1,14 @@
-using Savidiy.Utils;
 using SettingsModule;
+using UnityEngine;
 
 namespace LevelWindowModule
 {
     public sealed class LevelModelFactory
     {
-        private readonly TickInvoker _tickInvoker;
-
-        public LevelModelFactory(TickInvoker tickInvoker)
-        {
-            _tickInvoker = tickInvoker;
-        }
-
         public LevelModel Create(LevelData levelData)
         {
-            var levelModel = new LevelModel();
+            LevelBehaviour levelBehaviour = Object.Instantiate(levelData.LevelBehaviour);
+            var levelModel = new LevelModel(levelBehaviour);
             return levelModel;
         }
     }

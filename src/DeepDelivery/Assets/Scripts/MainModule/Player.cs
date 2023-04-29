@@ -20,5 +20,10 @@ namespace MainModule
             position.y += shift.y;
             _playerBehaviour.Rigidbody.MovePosition(position);
         }
+
+        public void SetPosition(Vector3 position)
+        {
+            _playerBehaviour.transform.position = position;
+        }
     }
 }

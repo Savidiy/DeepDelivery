@@ -29,5 +29,6 @@ namespace SettingsModule
     [Serializable]
     public class LevelData
     {
+        public LevelBehaviour LevelBehaviour;
     }
 }

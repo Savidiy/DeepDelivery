@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd5c385daf443239c5f38f86f3174a8, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  Levels: []
+  Levels:
+  - LevelBehaviour: {fileID: 7519213052599762912, guid: 09e0eb754c9510f40a47c2bedb36ee40, type: 3}
   RightKeys: 640000001301000006010000
   LeftKeys: 610000001401000004010000
   UpKeys: 770000001101000008010000
