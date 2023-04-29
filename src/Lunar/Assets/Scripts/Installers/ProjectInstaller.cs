@@ -39,6 +39,8 @@ namespace Installers
             Container.Bind<PlayerHolder>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
             Container.Bind<PlayerInputMover>().AsSingle();
+            Container.Bind<CameraToPlayerMover>().AsSingle();
+            
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             

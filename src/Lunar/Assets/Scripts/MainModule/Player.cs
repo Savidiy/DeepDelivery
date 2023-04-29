@@ -6,6 +6,8 @@ namespace MainModule
     {
         private readonly PlayerBehaviour _playerBehaviour;
 
+        public Vector3 Position => _playerBehaviour.transform.position;
+
         public Player(PlayerBehaviour playerBehaviour)
         {
             _playerBehaviour = playerBehaviour;
