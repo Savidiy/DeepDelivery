@@ -42,7 +42,6 @@ namespace ProgressModule
         private Progress CreateDefaultProgress()
         {
             var progress = new Progress(_gameStaticData.StartProgress);
-            SaveProgress(progress);
             return progress;
         }
 

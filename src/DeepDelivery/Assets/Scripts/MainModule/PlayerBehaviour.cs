@@ -7,5 +7,8 @@ namespace MainModule
         public Rigidbody2D Rigidbody;
         public Collider2D Collider2D;
         public SpriteRenderer SpriteRenderer;
+        public GunBehaviour TopGun;
+        public GunBehaviour BottomGun;
+        public GunBehaviour ForwardGun;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MvvmModule;
+using Savidiy.Utils;
 using SettingsModule;
 using UnityEngine;
 
@@ -31,6 +32,25 @@ namespace MainModule
                 enemy.Dispose();
 
             _enemies.Clear();
+        }
+
+        public bool HasCollisionWithWalls(Collider2D collider)
+        {
+            foreach (Collider2D wall in _levelBehaviour.Walls)
+            {
+                if (wall.HasCollisionWith(collider))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void RemoveEnemyAt(int index)
+        {
+            _enemies[index].Dispose();
+            _enemies.RemoveAt(index);
         }
     }
 }

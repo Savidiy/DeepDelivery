@@ -24,18 +24,21 @@ namespace SettingsModule
         
         [FoldoutGroup(SOUND)] public float DefaultMusicVolume = 0.3f;
         [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
-        public EnemyPrefabData[] EnemyPrefabs;
+        public EnemyStaticData[] EnemyPrefabs;
 
         public Progress StartProgress;
         public float HitInvulDuration = 2;
         public float BlinkPeriod = 0.2f;
+        public float ShootCooldown = 0.5f;
+        public float PlayerBulletSpeed = 8f;
     }
 
     [Serializable]
-    public class EnemyPrefabData
+    public class EnemyStaticData
     {
         public EnemyType EnemyType;
         public EnemyBehaviour EnemyBehaviour;
+        public int HealthPoints;
     }
 
     [Serializable]

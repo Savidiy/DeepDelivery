@@ -1,4 +1,3 @@
-using LevelWindowModule;
 using LevelWindowModule.Contracts;
 using Savidiy.Utils.StateMachine;
 
@@ -9,15 +8,18 @@ namespace MainModule
         private readonly ILevelWindowPresenter _levelWindowPresenter;
         private readonly CollisionWithEnemyChecker _collisionWithEnemyChecker;
         private readonly PlayerInputMover _playerInputMover;
+        private readonly PlayerInputShooter _playerInputShooter;
         private readonly CameraToPlayerMover _cameraToPlayerMover;
         private readonly LevelRestarter _levelRestarter;
 
         public LevelPlayMainState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
-            PlayerInputMover playerInputMover, CameraToPlayerMover cameraToPlayerMover, LevelRestarter levelRestarter)
+            PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, CameraToPlayerMover cameraToPlayerMover,
+            LevelRestarter levelRestarter)
         {
             _levelWindowPresenter = levelWindowPresenter;
             _collisionWithEnemyChecker = collisionWithEnemyChecker;
             _playerInputMover = playerInputMover;
+            _playerInputShooter = playerInputShooter;
             _cameraToPlayerMover = cameraToPlayerMover;
             _levelRestarter = levelRestarter;
         }
@@ -26,6 +28,7 @@ namespace MainModule
         {
             _levelRestarter.RestartLevel();
             _playerInputMover.ActivatePlayerControls();
+            _playerInputShooter.ActivatePlayerControls();
             _collisionWithEnemyChecker.Activate();
             _cameraToPlayerMover.Activate();
             _levelWindowPresenter.ShowWindow();
@@ -35,6 +38,7 @@ namespace MainModule
         {
             _levelWindowPresenter.HideWindow();
             _playerInputMover.DeactivatePlayerControls();
+            _playerInputShooter.DeactivatePlayerControls();
             _cameraToPlayerMover.Deactivate();
             _collisionWithEnemyChecker.Deactivate();
         }

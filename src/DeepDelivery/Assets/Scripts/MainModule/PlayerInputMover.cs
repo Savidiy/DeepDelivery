@@ -55,25 +55,14 @@ namespace MainModule
         {
             Vector2 direction = Vector2.zero;
 
-            if (IsAnyKeyPressed(_gameStaticData.DownKeys)) direction.y -= 1;
-            if (IsAnyKeyPressed(_gameStaticData.UpKeys)) direction.y += 1;
-            if (IsAnyKeyPressed(_gameStaticData.LeftKeys)) direction.x -= 1;
-            if (IsAnyKeyPressed(_gameStaticData.RightKeys)) direction.x += 1;
+            if (_gameStaticData.DownKeys.IsAnyKeyPressed()) direction.y -= 1;
+            if (_gameStaticData.UpKeys.IsAnyKeyPressed()) direction.y += 1;
+            if (_gameStaticData.LeftKeys.IsAnyKeyPressed()) direction.x -= 1;
+            if (_gameStaticData.RightKeys.IsAnyKeyPressed()) direction.x += 1;
 
             direction.Normalize();
 
             return direction;
-        }
-
-        private bool IsAnyKeyPressed(KeyCode[] keyCodes)
-        {
-            foreach (KeyCode keyCode in keyCodes)
-            {
-                if (Input.GetKey(keyCode))
-                    return true;
-            }
-
-            return false;
         }
     }
 }

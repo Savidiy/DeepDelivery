@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 namespace Savidiy.Utils
 {
@@ -37,6 +38,17 @@ namespace Savidiy.Utils
             }
 
             return Builder.ToString();
+        }
+        
+        public static bool IsAnyKeyPressed(this KeyCode[] keyCodes)
+        {
+            foreach (KeyCode keyCode in keyCodes)
+            {
+                if (Input.GetKey(keyCode))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

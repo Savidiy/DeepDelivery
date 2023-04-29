@@ -5,21 +5,21 @@ namespace MainModule
 {
     public class EnemyFactory
     {
-        private readonly EnemyPrefabProvider _enemyPrefabProvider;
+        private readonly EnemyStaticDataProvider _enemyStaticDataProvider;
 
-        public EnemyFactory(EnemyPrefabProvider enemyPrefabProvider)
+        public EnemyFactory(EnemyStaticDataProvider enemyStaticDataProvider)
         {
-            _enemyPrefabProvider = enemyPrefabProvider;
+            _enemyStaticDataProvider = enemyStaticDataProvider;
         }
-        
+
         public Enemy CreateEnemy(EnemySpawnPointBehaviour enemySpawnPoint)
         {
             EnemyType enemyType = enemySpawnPoint.EnemyType;
-            EnemyBehaviour prefab = _enemyPrefabProvider.GetEnemyPrefab(enemyType);
-            EnemyBehaviour enemyBehaviour = Object.Instantiate(prefab);
-            enemyBehaviour.name = enemyType.ToString();
+            EnemyStaticData enemyData = _enemyStaticDataProvider.GetEnemyData(enemyType);
+            EnemyBehaviour enemyBehaviour = Object.Instantiate(enemyData.EnemyBehaviour);
             enemyBehaviour.transform.position = enemySpawnPoint.transform.position;
-            return new Enemy(enemyBehaviour);
+
+            return new Enemy(enemyBehaviour, enemyData);
         }
     }
 }

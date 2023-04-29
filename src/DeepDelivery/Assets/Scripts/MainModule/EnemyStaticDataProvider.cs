@@ -3,21 +3,21 @@ using SettingsModule;
 
 namespace MainModule
 {
-    public sealed class EnemyPrefabProvider
+    public sealed class EnemyStaticDataProvider
     {
         private readonly GameStaticData _gameStaticData;
 
-        public EnemyPrefabProvider(GameStaticData gameStaticData)
+        public EnemyStaticDataProvider(GameStaticData gameStaticData)
         {
             _gameStaticData = gameStaticData;
         }
 
-        public EnemyBehaviour GetEnemyPrefab(EnemyType enemyType)
+        public EnemyStaticData GetEnemyData(EnemyType enemyType)
         {
-            foreach (EnemyPrefabData enemyPrefabData in _gameStaticData.EnemyPrefabs)
+            foreach (EnemyStaticData enemyPrefabData in _gameStaticData.EnemyPrefabs)
             {
                 if (enemyPrefabData.EnemyType == enemyType)
-                    return enemyPrefabData.EnemyBehaviour;
+                    return enemyPrefabData;
             }
 
             throw new Exception($"Can't find prefab for enemy type '{enemyType}'");

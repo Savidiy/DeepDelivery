@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ProgressModule;
 using SettingsModule;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace MainModule
         public int CurrentHp { get; private set; }
         public int MaxHp { get; private set; }
         public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
+        public List<GunType> ActiveGuns { get; set; }
 
         public Player(PlayerBehaviour playerBehaviour, ProgressProvider progressProvider,
             PlayerInvulnerability playerInvulnerability)
@@ -26,6 +28,16 @@ namespace MainModule
             Progress progress = progressProvider.Progress;
             CurrentHp = progress.CurrentHp;
             MaxHp = progress.MaxHp;
+            ActiveGuns = new List<GunType>(progress.ActiveGuns);
+
+            UpdateGunVisibility();
+        }
+
+        private void UpdateGunVisibility()
+        {
+            _playerBehaviour.TopGun.SetActive(ActiveGuns.Contains(GunType.TopGun));
+            _playerBehaviour.BottomGun.SetActive(ActiveGuns.Contains(GunType.BottomGun));
+            _playerBehaviour.ForwardGun.SetActive(ActiveGuns.Contains(GunType.ForwardGun));
         }
 
         public void Move(Vector2 shift)
@@ -50,6 +62,20 @@ namespace MainModule
         public void Dispose()
         {
             Object.Destroy(_playerBehaviour.gameObject);
+        }
+
+        public Vector3 GetGunPosition(GunType gunType) => GetGun(gunType).BulletSpawnPoint.position;
+        public Vector3 GetGunDirection(GunType gunType) => GetGun(gunType).ShootDirection;
+
+        private GunBehaviour GetGun(GunType gunType)
+        {
+            return gunType switch
+            {
+                GunType.TopGun => _playerBehaviour.TopGun,
+                GunType.BottomGun => _playerBehaviour.BottomGun,
+                GunType.ForwardGun => _playerBehaviour.ForwardGun,
+                _ => throw new ArgumentOutOfRangeException(nameof(gunType), gunType, null)
+            };
         }
     }
 }
