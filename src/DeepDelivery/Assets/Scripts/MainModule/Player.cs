@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MainModule
 {
-    public class Player
+    public class Player : IDisposable
     {
         private readonly PlayerBehaviour _playerBehaviour;
 
@@ -24,6 +26,11 @@ namespace MainModule
         public void SetPosition(Vector3 position)
         {
             _playerBehaviour.transform.position = position;
+        }
+
+        public void Dispose()
+        {
+            Object.Destroy(_playerBehaviour.gameObject);
         }
     }
 }

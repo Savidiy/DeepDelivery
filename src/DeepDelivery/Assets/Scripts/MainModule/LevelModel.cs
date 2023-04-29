@@ -3,7 +3,7 @@ using MvvmModule;
 using SettingsModule;
 using UnityEngine;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public sealed class LevelModel : DisposableCollector
     {
@@ -19,6 +19,16 @@ namespace LevelWindowModule
         public Vector3 GetPlayerStartPosition()
         {
             return _levelBehaviour.StartPoint.position;
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            Object.Destroy(_levelBehaviour.gameObject);
+            foreach (Enemy enemy in _enemies)
+                enemy.Dispose();
+
+            _enemies.Clear();
         }
     }
 }

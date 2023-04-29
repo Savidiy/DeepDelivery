@@ -1,7 +1,7 @@
 using Progress;
 using SettingsModule;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public sealed class LevelHolder
     {

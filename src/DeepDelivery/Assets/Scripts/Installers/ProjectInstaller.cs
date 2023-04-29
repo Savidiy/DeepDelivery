@@ -44,6 +44,7 @@ namespace Installers
             Container.Bind<EnemyPrefabProvider>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
             
+            Container.Bind<LevelRestarter>().AsSingle();
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             

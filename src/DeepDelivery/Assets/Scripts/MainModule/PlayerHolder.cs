@@ -17,6 +17,8 @@ namespace MainModule
         
         public void CreatePlayer()
         {
+            Player?.Dispose();
+            
             Player = _playerFactory.CreatePlayer();
             Vector3 position = _levelHolder.LevelModel.GetPlayerStartPosition();
             Player.SetPosition(position);

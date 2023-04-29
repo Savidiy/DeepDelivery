@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SettingsModule;
 using Object = UnityEngine.Object;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public sealed class LevelModelFactory
     {

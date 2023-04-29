@@ -1,7 +1,6 @@
-using LevelWindowModule.Contracts;
 using UnityEngine;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public class CameraProvider : ICameraProvider
     {

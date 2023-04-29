@@ -1,7 +1,7 @@
 ﻿using SettingsModule;
 using UnityEngine;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public class EnemyFactory
     {

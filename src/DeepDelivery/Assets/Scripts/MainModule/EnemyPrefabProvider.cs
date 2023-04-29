@@ -1,7 +1,7 @@
 ﻿using System;
 using SettingsModule;
 
-namespace LevelWindowModule
+namespace MainModule
 {
     public sealed class EnemyPrefabProvider
     {
