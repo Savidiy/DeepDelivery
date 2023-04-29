@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace SettingsModule
 {
-    [CreateAssetMenu(fileName = "GameSettings", menuName = "GameSettings", order = 0)]
-    public class GameSettings : AutoSaveScriptableObject
+    [CreateAssetMenu(fileName = "GameStaticData", menuName = "GameStaticData", order = 0)]
+    public class GameStaticData : AutoSaveScriptableObject
     {
         private const string INPUT = "Input";
         private const string SOUND = "Sound";
@@ -25,6 +25,10 @@ namespace SettingsModule
         [FoldoutGroup(SOUND)] public float DefaultMusicVolume = 0.3f;
         [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
         public EnemyPrefabData[] EnemyPrefabs;
+
+        public Progress StartProgress;
+        public float HitInvulDuration = 2;
+        public float BlinkPeriod = 0.2f;
     }
 
     [Serializable]

@@ -3,7 +3,7 @@ guid: fd9cceddb46e9774abdac08c93c3c9d6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -320,10 +321,10 @@ TextureImporter:
       name: sprites_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 232
-        width: 40
-        height: 40
+        x: 12
+        y: 253
+        width: 20
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,7 +368,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -388,7 +389,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,7 +410,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -430,7 +431,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -451,7 +452,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -474,22 +475,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprites_12: 1618930372
+      back: 352305824
+      empty: 1763236762
+      gear: 1807688038
+      sprites_0: -571919888
       sprites_1: -549141281
       sprites_10: 1231038384
       sprites_11: -55303483
-      sprites_0: -571919888
-      sprites_9: 1472301387
+      sprites_12: 1618930372
       sprites_2: 1532433205
-      sprites_5: -1311197523
-      back: 352305824
       sprites_3: 345106245
+      sprites_4: -454041634
+      sprites_5: -1311197523
+      sprites_6: -2043994017
       sprites_7: -1345196337
       sprites_8: -849712648
-      gear: 1807688038
-      sprites_6: -2043994017
-      empty: 1763236762
-      sprites_4: -454041634
+      sprites_9: 1472301387
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

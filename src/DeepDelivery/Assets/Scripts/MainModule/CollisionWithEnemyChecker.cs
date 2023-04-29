@@ -34,10 +34,11 @@ namespace MainModule
             
             foreach (Enemy enemy in _levelHolder.LevelModel.Enemies)
             {
+                if (player.IsInvulnerable)
+                    break;
+                
                 if (enemy.HasCollisionWith(playerCollider))
-                {
-                    Debug.Log("Has collision!");
-                }
+                    player.GetHit();
             }
         }
     }

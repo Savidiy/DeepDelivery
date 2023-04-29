@@ -5,16 +5,16 @@ namespace MainModule
 {
     public sealed class EnemyPrefabProvider
     {
-        private readonly GameSettings _gameSettings;
+        private readonly GameStaticData _gameStaticData;
 
-        public EnemyPrefabProvider(GameSettings gameSettings)
+        public EnemyPrefabProvider(GameStaticData gameStaticData)
         {
-            _gameSettings = gameSettings;
+            _gameStaticData = gameStaticData;
         }
 
         public EnemyBehaviour GetEnemyPrefab(EnemyType enemyType)
         {
-            foreach (EnemyPrefabData enemyPrefabData in _gameSettings.EnemyPrefabs)
+            foreach (EnemyPrefabData enemyPrefabData in _gameStaticData.EnemyPrefabs)
             {
                 if (enemyPrefabData.EnemyType == enemyType)
                     return enemyPrefabData.EnemyBehaviour;

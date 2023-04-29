@@ -15,10 +15,10 @@ namespace AudioModule
         public IReadOnlyReactiveProperty<float> MusicVolume => _musicVolume;
         public IReadOnlyReactiveProperty<float> SoundVolume => _soundVolume;
 
-        public AudioSettings(GameSettings gameSettings)
+        public AudioSettings(GameStaticData gameStaticData)
         {
-            _musicVolume.Value = PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, gameSettings.DefaultMusicVolume);
-            _soundVolume.Value = PlayerPrefs.GetFloat(SOUND_VOLUME_KEY, gameSettings.DefaultSoundVolume);
+            _musicVolume.Value = PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, gameStaticData.DefaultMusicVolume);
+            _soundVolume.Value = PlayerPrefs.GetFloat(SOUND_VOLUME_KEY, gameStaticData.DefaultSoundVolume);
         }
 
         public void SetMusicVolume(float volume)

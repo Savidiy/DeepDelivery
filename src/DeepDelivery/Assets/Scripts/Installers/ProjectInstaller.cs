@@ -3,7 +3,7 @@ using Bootstrap;
 using LevelWindowModule;
 using MainModule;
 using MvvmModule;
-using Progress;
+using ProgressModule;
 using Savidiy.Utils;
 using SettingsModule;
 using SettingsWindowModule;
@@ -15,7 +15,7 @@ namespace Installers
 {
     public class ProjectInstaller : MonoInstaller
     {
-        public GameSettings GameSettings;
+        public GameStaticData _gameStaticData;
         public AudioLibrary AudioLibrary;
 
         public override void InstallBindings()
@@ -40,6 +40,7 @@ namespace Installers
             Container.Bind<PlayerFactory>().AsSingle();
             Container.Bind<PlayerInputMover>().AsSingle();
             Container.Bind<CameraToPlayerMover>().AsSingle();
+            Container.Bind<PlayerInvulnerability>().AsSingle();
             
             Container.Bind<EnemyPrefabProvider>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
@@ -50,7 +51,6 @@ namespace Installers
             Container.Bind<LevelModelFactory>().AsSingle();
             
             Container.Bind<ProgressProvider>().AsSingle();
-            Container.Bind<ProgressSaver>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();
             
@@ -58,7 +58,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<AudioSettings>().AsSingle();
             Container.BindInterfacesAndSelfTo<MusicVolumeController>().AsSingle();
 
-            Container.Bind<GameSettings>().FromInstance(GameSettings);
+            Container.Bind<GameStaticData>().FromInstance(_gameStaticData);
             Container.Bind<AudioLibrary>().FromInstance(AudioLibrary);
         }
     }

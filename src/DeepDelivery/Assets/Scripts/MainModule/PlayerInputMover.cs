@@ -8,13 +8,13 @@ namespace MainModule
     {
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
-        private readonly GameSettings _gameSettings;
+        private readonly GameStaticData _gameStaticData;
 
-        public PlayerInputMover(TickInvoker tickInvoker, PlayerHolder playerHolder, GameSettings gameSettings)
+        public PlayerInputMover(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
-            _gameSettings = gameSettings;
+            _gameStaticData = gameStaticData;
         }
 
         public void ActivatePlayerControls()
@@ -46,8 +46,8 @@ namespace MainModule
             
             float deltaTime = GetDeltaTime();
             Vector2 shift = inputDirection * deltaTime;
-            shift.x *= _gameSettings.PlayerSpeedX;
-            shift.y *= _gameSettings.PlayerSpeedY;
+            shift.x *= _gameStaticData.PlayerSpeedX;
+            shift.y *= _gameStaticData.PlayerSpeedY;
             return shift;
         }
 
@@ -55,10 +55,10 @@ namespace MainModule
         {
             Vector2 direction = Vector2.zero;
 
-            if (IsAnyKeyPressed(_gameSettings.DownKeys)) direction.y -= 1;
-            if (IsAnyKeyPressed(_gameSettings.UpKeys)) direction.y += 1;
-            if (IsAnyKeyPressed(_gameSettings.LeftKeys)) direction.x -= 1;
-            if (IsAnyKeyPressed(_gameSettings.RightKeys)) direction.x += 1;
+            if (IsAnyKeyPressed(_gameStaticData.DownKeys)) direction.y -= 1;
+            if (IsAnyKeyPressed(_gameStaticData.UpKeys)) direction.y += 1;
+            if (IsAnyKeyPressed(_gameStaticData.LeftKeys)) direction.x -= 1;
+            if (IsAnyKeyPressed(_gameStaticData.RightKeys)) direction.x += 1;
 
             direction.Normalize();
 

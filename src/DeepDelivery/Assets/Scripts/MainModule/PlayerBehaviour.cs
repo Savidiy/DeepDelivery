@@ -6,5 +6,6 @@ namespace MainModule
     {
         public Rigidbody2D Rigidbody;
         public Collider2D Collider2D;
+        public SpriteRenderer SpriteRenderer;
     }
 }

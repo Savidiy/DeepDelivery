@@ -1,21 +1,27 @@
 ﻿using MvvmModule;
+using ProgressModule;
 
 namespace MainModule
 {
     public sealed class PlayerFactory
     {
         private readonly IPrefabFactory _prefabFactory;
+        private readonly ProgressProvider _progressProvider;
+        private readonly PlayerInvulnerability _playerInvulnerability;
 
-        public PlayerFactory(IPrefabFactory prefabFactory)
+        public PlayerFactory(IPrefabFactory prefabFactory, ProgressProvider progressProvider,
+            PlayerInvulnerability playerInvulnerability)
         {
             _prefabFactory = prefabFactory;
+            _progressProvider = progressProvider;
+            _playerInvulnerability = playerInvulnerability;
         }
-        
+
         public Player CreatePlayer()
         {
             var playerBehaviour = _prefabFactory.Instantiate<PlayerBehaviour>("Player", parent: null);
-
-            var player = new Player(playerBehaviour);
+            _playerInvulnerability.SetSpriteRenderer(playerBehaviour.SpriteRenderer);
+            var player = new Player(playerBehaviour, _progressProvider, _playerInvulnerability);
             return player;
         }
     }

@@ -1,4 +1,4 @@
-namespace Progress
+namespace SettingsModule
 {
     public enum EControlType
     {

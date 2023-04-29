@@ -7,5 +7,7 @@ namespace LevelWindowModule.View
     {
         public Button SettingsButton;
         public Button RestartLevelButton;
+        public HeartHierarchy HeartPrefab;
+        public Transform HeartRoot;
     }
 }

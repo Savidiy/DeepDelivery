@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 2263351704429123229}
   Collider2D: {fileID: 2351399195192481868}
+  SpriteRenderer: {fileID: 6801097606989726463}
 --- !u!50 &2263351704429123229
 Rigidbody2D:
   serializedVersion: 4

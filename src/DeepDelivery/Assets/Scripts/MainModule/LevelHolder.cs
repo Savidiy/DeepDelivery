@@ -1,19 +1,19 @@
-using Progress;
+using ProgressModule;
 using SettingsModule;
 
 namespace MainModule
 {
     public sealed class LevelHolder
     {
-        private readonly GameSettings _gameSettings;
+        private readonly GameStaticData _gameStaticData;
         private readonly ProgressProvider _progressProvider;
         private readonly LevelModelFactory _levelModelFactory;
 
         public LevelModel LevelModel { get; private set; }
 
-        public LevelHolder(GameSettings gameSettings, ProgressProvider progressProvider, LevelModelFactory levelModelFactory)
+        public LevelHolder(GameStaticData gameStaticData, ProgressProvider progressProvider, LevelModelFactory levelModelFactory)
         {
-            _gameSettings = gameSettings;
+            _gameStaticData = gameStaticData;
             _progressProvider = progressProvider;
             _levelModelFactory = levelModelFactory;
         }
@@ -22,8 +22,8 @@ namespace MainModule
         {
             LevelModel?.Dispose();
 
-            int currentLevel = _progressProvider.CurrentLevel;
-            LevelData levelData = _gameSettings.Levels[currentLevel];
+            int levelIndex = _progressProvider.Progress.LevelIndex;
+            LevelData levelData = _gameStaticData.Levels[levelIndex];
             LevelModel = _levelModelFactory.Create(levelData);
         }
     }
