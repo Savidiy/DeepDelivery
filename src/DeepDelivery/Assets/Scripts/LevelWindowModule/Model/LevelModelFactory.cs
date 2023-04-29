@@ -1,39 +1,21 @@
-using System.Collections.Generic;
+using Savidiy.Utils;
 using SettingsModule;
-using Object = UnityEngine.Object;
 
 namespace LevelWindowModule
 {
     public sealed class LevelModelFactory
     {
-        private readonly EnemyFactory _enemyFactory;
+        private readonly TickInvoker _tickInvoker;
 
-        public LevelModelFactory(EnemyFactory enemyFactory)
+        public LevelModelFactory(TickInvoker tickInvoker)
         {
-            _enemyFactory = enemyFactory;
+            _tickInvoker = tickInvoker;
         }
-        
+
         public LevelModel Create(LevelData levelData)
         {
-            LevelBehaviour levelBehaviour = Object.Instantiate(levelData.LevelBehaviour);
-
-            List<Enemy> enemies = CreateEnemies(levelBehaviour.EnemySpawnPoints);
-
-            var levelModel = new LevelModel(levelBehaviour, enemies);
+            var levelModel = new LevelModel();
             return levelModel;
-        }
-
-        private List<Enemy> CreateEnemies(List<EnemySpawnPointBehaviour> enemySpawnPoints)
-        {
-            var enemies = new List<Enemy>();
-            
-            foreach (EnemySpawnPointBehaviour enemySpawnPoint in enemySpawnPoints)
-            {
-                Enemy enemy = _enemyFactory.CreateEnemy(enemySpawnPoint);
-                enemies.Add(enemy);
-            }
-
-            return enemies;
         }
     }
 }
