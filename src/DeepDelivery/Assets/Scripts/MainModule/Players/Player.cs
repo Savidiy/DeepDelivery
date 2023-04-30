@@ -11,7 +11,7 @@ namespace MainModule
         private readonly PlayerInvulnerability _playerInvulnerability;
 
         private bool _isFlipToLeft;
-        
+
         public Vector3 Position => _playerBehaviour.transform.position;
         public Collider2D Collider => _playerBehaviour.Collider2D;
 
@@ -19,7 +19,7 @@ namespace MainModule
         public int MaxHp { get; private set; }
         public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
         public List<GunType> ActiveGuns { get; set; }
-        public Dictionary<ItemType, int> ItemsCount => new();
+        public Dictionary<ItemType, int> ItemsCount { get; } = new();
 
         public Player(PlayerBehaviour playerBehaviour, ProgressProvider progressProvider,
             PlayerInvulnerability playerInvulnerability)
@@ -84,11 +84,13 @@ namespace MainModule
         }
 
         public Vector3 GetGunPosition(GunType gunType) => GetGun(gunType).BulletSpawnPoint.position;
+
         public Vector3 GetGunDirection(GunType gunType)
         {
             Vector3 direction = GetGun(gunType).ShootDirection;
             if (_isFlipToLeft)
                 direction.x = -direction.x;
+
             return direction;
         }
 
@@ -105,7 +107,10 @@ namespace MainModule
 
         public void AddItem(ItemType itemType)
         {
-            
+            if (ItemsCount.TryGetValue(itemType, out var count))
+                ItemsCount[itemType] = count + 1;
+            else
+                ItemsCount.Add(itemType, 1);
         }
     }
 }

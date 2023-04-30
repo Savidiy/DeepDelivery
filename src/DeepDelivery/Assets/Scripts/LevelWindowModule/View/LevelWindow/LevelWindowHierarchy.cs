@@ -1,3 +1,4 @@
+using MvvmModule;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,5 +10,6 @@ namespace LevelWindowModule.View
         public Button RestartLevelButton;
         public HeartHierarchy HeartPrefab;
         public Transform HeartRoot;
+        public ItemsHierarchy ItemsHierarchy;
     }
 }

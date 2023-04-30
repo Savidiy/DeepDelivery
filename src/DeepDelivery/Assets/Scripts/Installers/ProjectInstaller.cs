@@ -13,6 +13,7 @@ namespace Installers
     public class ProjectInstaller : MonoInstaller
     {
         public GameStaticData GameStaticData;
+        public ItemSpriteProvider ItemSpriteProvider;
         public AudioLibrary AudioLibrary;
 
         public override void InstallBindings()
@@ -66,6 +67,7 @@ namespace Installers
 
             Container.Bind<InputSettings>().AsSingle();
             Container.Bind<GameStaticData>().FromInstance(GameStaticData);
+            Container.Bind<ItemSpriteProvider>().FromInstance(ItemSpriteProvider);
             Container.Bind<AudioLibrary>().FromInstance(AudioLibrary);
         }
     }

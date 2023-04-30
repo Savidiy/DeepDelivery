@@ -7,9 +7,11 @@ namespace LevelWindowModule.View
     public sealed class LevelWindowView : View<LevelWindowHierarchy, ILevelWindowViewModel>
     {
         private readonly List<HeartHierarchy> _hearts = new();
-        
+        private readonly ItemsView _itemsView;
+
         public LevelWindowView(LevelWindowHierarchy hierarchy, IViewFactory viewFactory) : base(hierarchy, viewFactory)
         {
+            _itemsView = CreateView<ItemsView, ItemsHierarchy>(hierarchy.ItemsHierarchy);
 #if !UNITY_EDITOR
             hierarchy.RestartLevelButton.gameObject.SetActive(false);
 #endif
@@ -19,8 +21,14 @@ namespace LevelWindowModule.View
         {
             BindClick(Hierarchy.SettingsButton, OnSettingsClick);
             BindClick(Hierarchy.RestartLevelButton, OnRestartLevelClick);
-            
+
             Bind(viewModel.HeartCount, OnHeartCountChange);
+            Bind(viewModel.Items, OnItemsChange);
+        }
+
+        private void OnItemsChange(IItemsViewModel itemsViewModel)
+        {
+            _itemsView.Initialize(itemsViewModel);
         }
 
         private void OnHeartCountChange(int heartCount)
