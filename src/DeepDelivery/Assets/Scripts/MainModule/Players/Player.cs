@@ -94,6 +94,25 @@ namespace MainModule
             return direction;
         }
 
+        public void AddItem(ItemType itemType)
+        {
+            if (ItemsCount.TryGetValue(itemType, out var count))
+                ItemsCount[itemType] = count + 1;
+            else
+                ItemsCount.Add(itemType, 1);
+        }
+
+        public void RemoveItems(ItemType itemType, int count)
+        {
+            ItemsCount[itemType] -= count;
+        }
+
+        public void AddGun(GunType gunType)
+        {
+            ActiveGuns.Add(gunType);
+            UpdateGunVisibility();
+        }
+
         private GunBehaviour GetGun(GunType gunType)
         {
             return gunType switch
@@ -103,14 +122,6 @@ namespace MainModule
                 GunType.ForwardGun => _playerBehaviour.ForwardGun,
                 _ => throw new ArgumentOutOfRangeException(nameof(gunType), gunType, null)
             };
-        }
-
-        public void AddItem(ItemType itemType)
-        {
-            if (ItemsCount.TryGetValue(itemType, out var count))
-                ItemsCount[itemType] = count + 1;
-            else
-                ItemsCount.Add(itemType, 1);
         }
     }
 }

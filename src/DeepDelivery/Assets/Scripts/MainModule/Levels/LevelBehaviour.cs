@@ -10,6 +10,7 @@ namespace MainModule
         public List<EnemySpawnPointBehaviour> EnemySpawnPoints = new();
         public List<ItemSpawnPointBehaviour> ItemSpawnPoints = new();
         public List<Collider2D> Walls = new();
+        public List<ShopBehaviour> Shops = new();
 
         private void OnValidate()
         {
@@ -22,6 +23,7 @@ namespace MainModule
             CollectAllComponents(EnemySpawnPoints);
             CollectAllComponents(ItemSpawnPoints);
             CollectAllComponents(Walls);
+            CollectAllComponents(Shops);
         }
 
         private void CollectAllComponents<T>(List<T> collection) where T : Behaviour

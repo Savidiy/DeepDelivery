@@ -27,15 +27,18 @@ MonoBehaviour:
   - EnemyType: 1
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 0d98448415a005040b80c64e4ff4b1c5, type: 3}
     HealthPoints: 2
+    MoveSpeed: 1
   - EnemyType: 2
     EnemyBehaviour: {fileID: 3019363166943306336, guid: 7cc0012081de70a4bb8b01f87338d79d, type: 3}
     HealthPoints: 3
+    MoveSpeed: 1
   StartProgress:
     LevelIndex: 0
     MaxHp: 3
     CurrentHp: 3
-    ActiveGuns: 03000000
+    ActiveGuns: 
   HitInvulDuration: 2
   BlinkPeriod: 0.2
   ShootCooldown: 0.5
   PlayerBulletSpeed: 8
+  DefaultEnemySpawnCooldown: 5

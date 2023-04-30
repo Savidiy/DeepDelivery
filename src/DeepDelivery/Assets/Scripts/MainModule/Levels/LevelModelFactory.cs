@@ -8,13 +8,15 @@ namespace MainModule
         private readonly EnemySpawnPointFactory _enemySpawnPointFactory;
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
         private readonly ItemFactory _itemFactory;
+        private readonly ShopFactory _shopFactory;
 
         public LevelModelFactory(EnemySpawnPointFactory enemySpawnPointFactory, EnemySpawnUpdater enemySpawnUpdater,
-            ItemFactory itemFactory)
+            ItemFactory itemFactory, ShopFactory shopFactory)
         {
             _enemySpawnPointFactory = enemySpawnPointFactory;
             _enemySpawnUpdater = enemySpawnUpdater;
             _itemFactory = itemFactory;
+            _shopFactory = shopFactory;
         }
 
         public LevelModel Create(LevelData levelData)
@@ -24,9 +26,23 @@ namespace MainModule
             EnemySpawnUpdater enemySpawnUpdater = ResetEnemySpawnUpdater(levelBehaviour.EnemySpawnPoints);
 
             List<Item> items = CreateItems(levelBehaviour.ItemSpawnPoints);
+            List<Shop> shops = CreateShops(levelBehaviour.Shops);
 
-            var levelModel = new LevelModel(levelBehaviour, enemySpawnUpdater, items);
+            var levelModel = new LevelModel(levelBehaviour, enemySpawnUpdater, items, shops);
             return levelModel;
+        }
+
+        private List<Shop> CreateShops(List<ShopBehaviour> shopBehaviours)
+        {
+            List<Shop> shops = new();
+            
+            foreach (ShopBehaviour shopBehaviour in shopBehaviours)
+            {
+                Shop shop = _shopFactory.Create(shopBehaviour);
+                shops.Add(shop);
+            }
+            
+            return shops;
         }
 
         private List<Item> CreateItems(List<ItemSpawnPointBehaviour> itemSpawnPoints)

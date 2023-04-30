@@ -50,6 +50,8 @@ namespace Installers
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<CollisionWithEnemyChecker>().AsSingle();
             
+            Container.Bind<ShopFactory>().AsSingle();
+            Container.Bind<UseShopChecker>().AsSingle();
             Container.Bind<ItemFactory>().AsSingle();
             Container.Bind<CollisionWithItemsChecker>().AsSingle();
             

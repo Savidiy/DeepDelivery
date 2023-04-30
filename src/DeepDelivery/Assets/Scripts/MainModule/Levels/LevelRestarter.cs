@@ -6,14 +6,16 @@
         private readonly LevelHolder _levelHolder;
         private readonly ProgressProvider _progressProvider;
         private readonly BulletHolder _bulletHolder;
+        private readonly PlayerInvulnerability _playerInvulnerability;
 
         public LevelRestarter(PlayerHolder playerHolder, LevelHolder levelHolder, ProgressProvider progressProvider,
-            BulletHolder bulletHolder)
+            BulletHolder bulletHolder, PlayerInvulnerability playerInvulnerability)
         {
             _playerHolder = playerHolder;
             _levelHolder = levelHolder;
             _progressProvider = progressProvider;
             _bulletHolder = bulletHolder;
+            _playerInvulnerability = playerInvulnerability;
         }
 
         public void RestartLevel()
@@ -22,6 +24,7 @@
             _levelHolder.LoadCurrentLevel();
             _playerHolder.CreatePlayer();
             _bulletHolder.ClearBullets();
+            _playerInvulnerability.StartInvulnerableTimer();
         }
     }
 }
