@@ -20,6 +20,7 @@ namespace MainModule
             
             Vector3 playerPosition = player.Position;
             Vector3 shopPosition = _shopBehaviour.transform.position;
+            shopPosition.z = playerPosition.z;
 
             float distance = Vector3.Distance(playerPosition, shopPosition);
             float interactRadius = _shopBehaviour.InteractRadius;

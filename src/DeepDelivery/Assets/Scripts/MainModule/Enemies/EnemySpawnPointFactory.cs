@@ -1,6 +1,6 @@
 ﻿namespace MainModule
 {
-    public class EnemySpawnPointFactory
+    public class EnemySpawnPointFactory : IFactory<EnemySpawnPoint, EnemySpawnPointBehaviour>
     {
         private readonly EnemyFactory _enemyFactory;
         private readonly GameStaticData _gameStaticData;

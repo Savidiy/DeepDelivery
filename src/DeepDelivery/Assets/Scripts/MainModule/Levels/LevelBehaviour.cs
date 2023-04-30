@@ -11,6 +11,8 @@ namespace MainModule
         public List<ItemSpawnPointBehaviour> ItemSpawnPoints = new();
         public List<Collider2D> Walls = new();
         public List<ShopBehaviour> Shops = new();
+        public List<QuestTakeBehaviour> TakeQuests = new();
+        public List<QuestGiveBehaviour> GiveQuests = new();
 
         private void OnValidate()
         {
@@ -24,6 +26,8 @@ namespace MainModule
             CollectAllComponents(ItemSpawnPoints);
             CollectAllComponents(Walls);
             CollectAllComponents(Shops);
+            CollectAllComponents(TakeQuests);
+            CollectAllComponents(GiveQuests);
         }
 
         private void CollectAllComponents<T>(List<T> collection) where T : Behaviour

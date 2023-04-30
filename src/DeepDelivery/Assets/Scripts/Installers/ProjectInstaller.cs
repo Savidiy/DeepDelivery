@@ -59,6 +59,9 @@ namespace Installers
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             
+            Container.Bind<QuestChecker>().AsSingle();
+            Container.Bind<QuestFactory>().AsSingle();
+            
             Container.Bind<ProgressProvider>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();

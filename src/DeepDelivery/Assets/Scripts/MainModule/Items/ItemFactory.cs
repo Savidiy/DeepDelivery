@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MainModule
 {
-    public class ItemFactory
+    public class ItemFactory : IFactory<Item, ItemSpawnPointBehaviour>
     {
         private readonly IPrefabFactory _prefabFactory;
         private readonly Transform _root;

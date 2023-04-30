@@ -18,6 +18,7 @@ namespace MainModule
         public int CurrentHp { get; private set; }
         public int MaxHp { get; private set; }
         public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
+        public List<Quest> Quests { get; } = new();
         public List<GunType> ActiveGuns { get; set; }
         public Dictionary<ItemType, int> ItemsCount { get; } = new();
 
@@ -122,6 +123,18 @@ namespace MainModule
                 GunType.ForwardGun => _playerBehaviour.ForwardGun,
                 _ => throw new ArgumentOutOfRangeException(nameof(gunType), gunType, null)
             };
+        }
+
+        public void AddQuest(Quest quest)
+        {
+            Quests.Add(quest);
+            Debug.Log($"Took quest. Quest count = {Quests.Count}");
+        }
+
+        public void RemoveQuest(Quest quest)
+        {
+            Quests.Remove(quest);
+            Debug.Log($"Complete quest. Quest count = {Quests.Count}");
         }
     }
 }

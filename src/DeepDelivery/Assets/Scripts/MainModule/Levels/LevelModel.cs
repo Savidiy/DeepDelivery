@@ -13,12 +13,17 @@ namespace MainModule
 
         public IReadOnlyList<Item> Items => _items;
         public IReadOnlyList<Enemy> Enemies => _enemySpawnUpdater.Enemies;
-        public IReadOnlyList<Shop> Shops { get;}
+        public IReadOnlyList<Shop> Shops { get; }
+        public IReadOnlyList<QuestGiver> QuestGivers { get; }
+        public IReadOnlyList<QuestTaker> QuestTakers { get; }
 
-        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<Item> items, List<Shop> shops)
+        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<Item> items, List<Shop> shops,
+            List<QuestGiver> questGivers, List<QuestTaker> questTakers)
         {
             _items = items;
             Shops = shops;
+            QuestGivers = questGivers;
+            QuestTakers = questTakers;
             _levelBehaviour = levelBehaviour;
             _enemySpawnUpdater = enemySpawnUpdater;
         }

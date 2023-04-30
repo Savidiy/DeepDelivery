@@ -1,6 +1,6 @@
 ﻿namespace MainModule
 {
-    public class ShopFactory
+    public class ShopFactory : IFactory<Shop, ShopBehaviour>
     {
         public Shop Create(ShopBehaviour shopBehaviour)
         {
