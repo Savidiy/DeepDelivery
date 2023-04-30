@@ -6,6 +6,7 @@ namespace MainModule
     {
         public QuestTakeBehaviour QuestTakeBehaviour;
         public float InteractRadius;
+        public GameObject OrderLabel;
 
         private void OnDrawGizmos()
         {

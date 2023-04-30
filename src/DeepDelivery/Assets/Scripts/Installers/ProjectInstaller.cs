@@ -14,7 +14,7 @@ namespace Installers
     {
         public GameStaticData GameStaticData;
         public EnemyStaticDataProvider EnemyStaticDataProvider;
-        public ItemSpriteProvider ItemSpriteProvider;
+        public ItemStaticDataProvider ItemStaticDataProvider;
         public AudioLibrary AudioLibrary;
 
         public override void InstallBindings()
@@ -74,7 +74,7 @@ namespace Installers
             Container.Bind<InputSettings>().AsSingle();
             Container.Bind<GameStaticData>().FromInstance(GameStaticData);
             Container.Bind<EnemyStaticDataProvider>().FromInstance(EnemyStaticDataProvider);
-            Container.Bind<ItemSpriteProvider>().FromInstance(ItemSpriteProvider);
+            Container.Bind<ItemStaticDataProvider>().FromInstance(ItemStaticDataProvider);
             Container.Bind<AudioLibrary>().FromInstance(AudioLibrary);
         }
     }

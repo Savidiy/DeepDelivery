@@ -20,5 +20,10 @@ namespace MainModule
         {
             return _questGiver.GetTargetPosition();
         }
+
+        public void SetQuestCompleted()
+        {
+            _questGiver.SetQuestCompleted();
+        }
     }
 }

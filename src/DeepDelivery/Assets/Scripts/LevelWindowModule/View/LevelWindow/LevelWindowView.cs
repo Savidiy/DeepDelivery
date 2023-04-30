@@ -7,11 +7,15 @@ namespace LevelWindowModule.View
     public sealed class LevelWindowView : View<LevelWindowHierarchy, ILevelWindowViewModel>
     {
         private readonly List<HeartHierarchy> _hearts = new();
+        private readonly List<QuestStatusView> _questStatusViews = new();
         private readonly ItemsView _itemsView;
+
+        private const string PREFAB_NAME = "QuestStatus";
 
         public LevelWindowView(LevelWindowHierarchy hierarchy, IViewFactory viewFactory) : base(hierarchy, viewFactory)
         {
             _itemsView = CreateView<ItemsView, ItemsHierarchy>(hierarchy.ItemsHierarchy);
+
 #if !UNITY_EDITOR
             hierarchy.RestartLevelButton.gameObject.SetActive(false);
 #endif
@@ -24,6 +28,23 @@ namespace LevelWindowModule.View
 
             Bind(viewModel.HeartCount, OnHeartCountChange);
             Bind(viewModel.Items, OnItemsChange);
+
+            UpdateQuestsViews(viewModel);
+        }
+
+        private void UpdateQuestsViews(ILevelWindowViewModel viewModel)
+        {
+            foreach (QuestStatusView questStatusView in _questStatusViews)
+                questStatusView.Dispose();
+
+            _questStatusViews.Clear();
+
+            foreach (IQuestStatusViewModel questStatusViewModel in viewModel.Quests)
+            {
+                var questStatus = CreateView<QuestStatusView, QuestStatusHierarchy>(PREFAB_NAME, Hierarchy.QuestsRoot);
+                questStatus.Initialize(questStatusViewModel);
+                _questStatusViews.Add(questStatus);
+            }
         }
 
         private void OnItemsChange(IItemsViewModel itemsViewModel)

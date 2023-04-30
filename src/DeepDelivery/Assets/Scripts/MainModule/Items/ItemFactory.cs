@@ -1,40 +1,27 @@
-﻿using System;
-using MvvmModule;
-using UnityEngine;
+﻿using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MainModule
 {
     public class ItemFactory : IFactory<Item, ItemSpawnPointBehaviour>
     {
-        private readonly IPrefabFactory _prefabFactory;
+        private readonly ItemStaticDataProvider _itemStaticDataProvider;
         private readonly Transform _root;
 
-        public ItemFactory(IPrefabFactory prefabFactory)
+        public ItemFactory(ItemStaticDataProvider itemStaticDataProvider)
         {
-            _prefabFactory = prefabFactory;
+            _itemStaticDataProvider = itemStaticDataProvider;
             _root = new GameObject("ItemsRoot").transform;
         }
         
         public Item Create(ItemSpawnPointBehaviour itemSpawnPointBehaviour)
         {
             ItemType itemType = itemSpawnPointBehaviour.ItemType;
-            string prefabName = GetPrefabName(itemType);
-            var itemBehaviour = _prefabFactory.Instantiate<ItemBehaviour>(prefabName, _root);
+            ItemBehaviour prefab = _itemStaticDataProvider.GetData(itemType).Prefab;
+            ItemBehaviour itemBehaviour = Object.Instantiate(prefab, _root);
             itemBehaviour.transform.position = itemSpawnPointBehaviour.transform.position;
             var item = new Item(itemBehaviour, itemType);
             return item;
-        }
-
-        private static string GetPrefabName(ItemType itemType)
-        {
-            string prefabName = itemType switch
-            {
-                ItemType.Chest => "ItemChest",
-                ItemType.Diamond => "ItemDiamond",
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            return prefabName;
         }
     }
 }

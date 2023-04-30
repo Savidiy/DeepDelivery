@@ -1,4 +1,6 @@
-﻿namespace MainModule
+﻿using LevelWindowModule.Contracts;
+
+namespace MainModule
 {
     public sealed class LevelRestarter
     {
@@ -7,10 +9,12 @@
         private readonly ProgressProvider _progressProvider;
         private readonly BulletHolder _bulletHolder;
         private readonly PlayerInvulnerability _playerInvulnerability;
+        private readonly ILevelWindowPresenter _levelWindowPresenter;
 
         public LevelRestarter(PlayerHolder playerHolder, LevelHolder levelHolder, ProgressProvider progressProvider,
-            BulletHolder bulletHolder, PlayerInvulnerability playerInvulnerability)
+            BulletHolder bulletHolder, PlayerInvulnerability playerInvulnerability, ILevelWindowPresenter levelWindowPresenter)
         {
+            _levelWindowPresenter = levelWindowPresenter;
             _playerHolder = playerHolder;
             _levelHolder = levelHolder;
             _progressProvider = progressProvider;
@@ -25,6 +29,8 @@
             _playerHolder.CreatePlayer();
             _bulletHolder.ClearBullets();
             _playerInvulnerability.StartInvulnerableTimer();
+            _levelWindowPresenter.HideWindow();
+            _levelWindowPresenter.ShowWindow();
         }
     }
 }

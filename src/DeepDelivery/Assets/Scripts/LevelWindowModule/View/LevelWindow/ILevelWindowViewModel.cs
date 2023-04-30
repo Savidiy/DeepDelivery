@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MvvmModule;
 using UniRx;
 
@@ -7,6 +8,7 @@ namespace LevelWindowModule.View
     {
         IReadOnlyReactiveProperty<int> HeartCount { get; }
         IReadOnlyReactiveProperty<IItemsViewModel> Items { get; }
+        IReadOnlyList<IQuestStatusViewModel> Quests { get; }
 
         void SettingsClickFromView();
         void RestartLevelClickFromView();

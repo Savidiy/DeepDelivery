@@ -11,5 +11,6 @@ namespace LevelWindowModule.View
         public HeartHierarchy HeartPrefab;
         public Transform HeartRoot;
         public ItemsHierarchy ItemsHierarchy;
+        public Transform QuestsRoot;
     }
 }

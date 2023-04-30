@@ -97,6 +97,13 @@ namespace MainModule
 
         public void AddItem(ItemType itemType)
         {
+            if (itemType == ItemType.Heart)
+            {
+                CurrentHp++;
+                MaxHp++;
+                return;
+            }
+            
             if (ItemsCount.TryGetValue(itemType, out var count))
                 ItemsCount[itemType] = count + 1;
             else
@@ -134,6 +141,7 @@ namespace MainModule
         public void RemoveQuest(Quest quest)
         {
             Quests.Remove(quest);
+            CurrentHp = MaxHp;
             Debug.Log($"Complete quest. Quest count = {Quests.Count}");
         }
     }

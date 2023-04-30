@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UniRx;
+using UnityEngine;
 
 namespace MainModule
 {
@@ -7,7 +9,9 @@ namespace MainModule
         private readonly QuestGiveBehaviour _data;
         private readonly QuestFactory _questFactory;
 
-        private bool _isQuestGave;
+        public bool IsQuestGave { get; private set; }
+        public bool IsQuestComplete { get; private set; }
+        public event Action StatusUpdated;
 
         public QuestGiver(QuestGiveBehaviour data, QuestFactory questFactory)
         {
@@ -17,7 +21,7 @@ namespace MainModule
 
         public bool CanGiveQuest(Player player)
         {
-            if (_isQuestGave)
+            if (IsQuestGave)
                 return false;
 
             Vector3 playerPosition = player.Position;
@@ -34,9 +38,11 @@ namespace MainModule
 
         public void GiveQuest(Player player)
         {
-            _isQuestGave = true;
+            IsQuestGave = true;
+            _data.OrderLabel.SetActive(false);
             Quest quest = _questFactory.Create(this);
             player.AddQuest(quest);
+            StatusUpdated?.Invoke();
         }
 
         public bool IsQuestDestination(QuestTakeBehaviour questTakeBehaviour)
@@ -47,6 +53,12 @@ namespace MainModule
         public Vector3 GetTargetPosition()
         {
             return _data.QuestTakeBehaviour.transform.position;
+        }
+
+        public void SetQuestCompleted()
+        {
+            IsQuestComplete = true;
+            StatusUpdated?.Invoke();
         }
     }
 }

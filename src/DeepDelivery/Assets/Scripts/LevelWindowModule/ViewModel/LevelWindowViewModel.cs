@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LevelWindowModule.View;
 using MainModule;
 using MvvmModule;
@@ -15,19 +16,36 @@ namespace LevelWindowModule
         private readonly ReactiveProperty<int> _heartCount = new();
         private readonly ReactiveProperty<IItemsViewModel> _items = new();
         private int _itemsCount = int.MinValue;
-        
+
         public IReadOnlyReactiveProperty<int> HeartCount => _heartCount;
         public IReadOnlyReactiveProperty<IItemsViewModel> Items => _items;
+        public IReadOnlyList<IQuestStatusViewModel> Quests { get; }
 
         public LevelWindowViewModel(IViewModelFactory viewModelFactory, ISettingsWindowPresenter settingsWindowPresenter,
-            LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder) : base(viewModelFactory)
+            LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder) : base(
+            viewModelFactory)
         {
             _settingsWindowPresenter = settingsWindowPresenter;
             _playerRestarter = playerRestarter;
             _playerHolder = playerHolder;
 
+            Quests = CreateQuestStatusViewModels(levelHolder);
+
             tickInvoker.Updated += OnUpdated;
             OnUpdated();
+        }
+
+        private List<QuestStatusViewModel> CreateQuestStatusViewModels(LevelHolder levelHolder)
+        {
+            List<QuestStatusViewModel> questStatusViewModels = new();
+            foreach (QuestGiver questGiver in levelHolder.LevelModel.QuestGivers)
+            {
+                var args = new QuestStatusArgs(questGiver);
+                var viewModel = CreateViewModel<QuestStatusViewModel, QuestStatusArgs>(args);
+                questStatusViewModels.Add(viewModel);
+            }
+
+            return questStatusViewModels;
         }
 
         private void OnUpdated()

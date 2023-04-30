@@ -629,7 +629,7 @@ TextureImporter:
         width: 93
         height: 112
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -637,6 +637,90 @@ TextureImporter:
       bones: []
       spriteID: 2299edf0c77dfcb4bb969463fe56e00d
       internalID: 116497758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_25
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 1384
+        width: 289
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dee755b07d7dc2f4bb4293cbc5710497
+      internalID: -1145334907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_26
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 1170
+        width: 333
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e51bd65b03713c549a51b338548a73df
+      internalID: 729780270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_27
+      rect:
+        serializedVersion: 2
+        x: 1357
+        y: 1536
+        width: 109
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a37d199f3900fcf499444278a42e3944
+      internalID: 19010094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_28
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 1537
+        width: 107
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f710b37d28be614bbbefe5b9c969e6e
+      internalID: 2054289493
       vertices: []
       indices: 
       edges: []
@@ -670,6 +754,10 @@ TextureImporter:
       deep-sprites_22: -1579088246
       deep-sprites_23: 772397443
       deep-sprites_24: 116497758
+      deep-sprites_25: -1145334907
+      deep-sprites_26: 729780270
+      deep-sprites_27: 19010094
+      deep-sprites_28: 2054289493
       deep-sprites_3: -2132135640
       deep-sprites_4: -1626710843
       deep-sprites_5: -503857208

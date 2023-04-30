@@ -39,6 +39,7 @@ namespace MainModule
                 if (!quest.IsQuestDestination(_data))
                     continue;
                 
+                quest.SetQuestCompleted();
                 player.RemoveQuest(quest);
             }
         }
