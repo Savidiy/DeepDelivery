@@ -1,5 +1,7 @@
-﻿using SettingsModule;
+﻿using System;
+using SettingsModule;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MainModule
 {
@@ -21,7 +23,21 @@ namespace MainModule
             EnemyBehaviour enemyBehaviour = Object.Instantiate(enemyData.EnemyBehaviour, _root);
             enemyBehaviour.transform.position = enemySpawnPoint.transform.position;
 
-            return new Enemy(enemyBehaviour, enemyData);
+            IEnemyMover mover = CreateMover(enemyBehaviour, enemySpawnPoint, enemyData);
+            return new Enemy(enemyBehaviour, enemyData, mover);
+        }
+
+        private IEnemyMover CreateMover(EnemyBehaviour enemyBehaviour, EnemySpawnPointBehaviour enemySpawnPoint,
+            EnemyStaticData enemyStaticData)
+        {
+            return enemySpawnPoint.MoveType switch
+            {
+                MoveType.None => new NoneMover(),
+                MoveType.Circle => new CircleMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
+                MoveType.PingPong => new PingPongMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
+                MoveType.Teleport => new TeleportMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

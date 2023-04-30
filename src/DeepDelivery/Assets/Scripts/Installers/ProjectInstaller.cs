@@ -45,6 +45,7 @@ namespace Installers
             Container.Bind<CameraToPlayerMover>().AsSingle();
             Container.Bind<PlayerInvulnerability>().AsSingle();
             
+            Container.BindInterfacesAndSelfTo<EnemyMoveUpdater>().AsSingle();
             Container.Bind<EnemySpawnUpdater>().AsSingle();
             Container.Bind<EnemySpawnPointFactory>().AsSingle();
             Container.Bind<EnemyStaticDataProvider>().AsSingle();

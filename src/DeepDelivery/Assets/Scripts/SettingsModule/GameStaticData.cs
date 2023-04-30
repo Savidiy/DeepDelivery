@@ -39,7 +39,8 @@ namespace SettingsModule
     {
         public EnemyType EnemyType;
         public EnemyBehaviour EnemyBehaviour;
-        public int HealthPoints;
+        public int HealthPoints = 1;
+        public float MoveSpeed = 1f;
     }
 
     [Serializable]

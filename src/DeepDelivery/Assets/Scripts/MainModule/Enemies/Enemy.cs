@@ -12,9 +12,11 @@ namespace MainModule
         private readonly EnemyStaticData _enemyStaticData;
 
         public int Hp { get; private set; }
+        public IEnemyMover EnemyMover { get; }
 
-        public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData)
+        public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData, IEnemyMover enemyMover)
         {
+            EnemyMover = enemyMover;
             _enemyStaticData = enemyStaticData;
             _enemyBehaviour = enemyBehaviour;
             Hp = enemyStaticData.HealthPoints;
@@ -46,5 +48,10 @@ namespace MainModule
         {
             
         }
+    }
+
+    public interface IEnemyMover
+    {
+        void UpdatePosition(float deltaTime);
     }
 }

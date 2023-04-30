@@ -10,6 +10,12 @@ namespace SettingsModule
         public List<EnemySpawnPointBehaviour> EnemySpawnPoints = new();
         public List<Collider2D> Walls = new();
 
+        private void OnValidate()
+        {
+            CollectAllEnemySpawnPoints();
+            CollectAllWallsColliders();
+        }
+
         [Button]
         private void CollectAllEnemySpawnPoints()
         {
