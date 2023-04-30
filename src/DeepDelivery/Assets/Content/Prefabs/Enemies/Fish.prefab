@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2815050515786224398}
   - component: {fileID: 5072163958564056271}
-  - component: {fileID: 8473565112123516944}
+  - component: {fileID: 3537555587952734675}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1196428452313082896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7693791534197965977}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3160377, g: 0.69858885, b: 1, a: 1}
+  m_Sprite: {fileID: -1518485643, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8473565112123516944
-BoxCollider2D:
+--- !u!60 &3537555587952734675
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,15 +102,24 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.61, y: 1.99}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.147195, y: 0.7223972}
+      - {x: 0.76433957, y: 0.49079037}
+      - {x: 0.5762741, y: 0.8183499}
+      - {x: -0.8791687, y: 0.8057404}
+      - {x: -1.1857779, y: 0.4138217}
+      - {x: -0.88438755, y: -0.7013558}
+      - {x: -0.7110731, y: -0.8571548}
+      - {x: 0.031669974, y: -0.8395081}
+      - {x: 0.7551975, y: -0.031079441}
+      - {x: 1.1781374, y: -0.28892156}
 --- !u!1 &7283139735511083259
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6abf8056ac24446b11d8579edb033e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitCollider: {fileID: 8473565112123516944}
+  HitCollider: {fileID: 3537555587952734675}

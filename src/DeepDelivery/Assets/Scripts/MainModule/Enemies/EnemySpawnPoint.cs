@@ -8,20 +8,20 @@ namespace MainModule
     {
         private readonly EnemySpawnPointBehaviour _behaviour;
         private readonly EnemyFactory _enemyFactory;
-        private readonly GameStaticData _gameStaticData;
         private readonly ICameraProvider _cameraProvider;
+        private readonly EnemyStaticDataProvider _enemyStaticDataProvider;
 
         private float _timer;
         private bool _enemyWasCreated;
         [CanBeNull] private Enemy _enemy;
 
-        public EnemySpawnPoint(EnemySpawnPointBehaviour behaviour, EnemyFactory enemyFactory, GameStaticData gameStaticData,
-            ICameraProvider cameraProvider)
+        public EnemySpawnPoint(EnemySpawnPointBehaviour behaviour, EnemyFactory enemyFactory,
+            ICameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
         {
             _behaviour = behaviour;
             _enemyFactory = enemyFactory;
-            _gameStaticData = gameStaticData;
             _cameraProvider = cameraProvider;
+            _enemyStaticDataProvider = enemyStaticDataProvider;
         }
 
         public void UpdateTime(float deltaTime)
@@ -127,7 +127,7 @@ namespace MainModule
 
             _timer = _behaviour.UseCustomTimerDuration
                 ? _behaviour.CustomTimerDuration
-                : _gameStaticData.DefaultEnemySpawnCooldown;
+                : _enemyStaticDataProvider.DefaultEnemySpawnCooldown;
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Installers
     public class ProjectInstaller : MonoInstaller
     {
         public GameStaticData GameStaticData;
+        public EnemyStaticDataProvider EnemyStaticDataProvider;
         public ItemSpriteProvider ItemSpriteProvider;
         public AudioLibrary AudioLibrary;
 
@@ -46,7 +47,6 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<EnemyMoveUpdater>().AsSingle();
             Container.Bind<EnemySpawnUpdater>().AsSingle();
             Container.Bind<EnemySpawnPointFactory>().AsSingle();
-            Container.Bind<EnemyStaticDataProvider>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<CollisionWithEnemyChecker>().AsSingle();
             
@@ -73,6 +73,7 @@ namespace Installers
 
             Container.Bind<InputSettings>().AsSingle();
             Container.Bind<GameStaticData>().FromInstance(GameStaticData);
+            Container.Bind<EnemyStaticDataProvider>().FromInstance(EnemyStaticDataProvider);
             Container.Bind<ItemSpriteProvider>().FromInstance(ItemSpriteProvider);
             Container.Bind<AudioLibrary>().FromInstance(AudioLibrary);
         }

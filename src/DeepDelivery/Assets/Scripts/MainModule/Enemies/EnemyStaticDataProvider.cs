@@ -1,19 +1,18 @@
 ﻿using System;
+using Savidiy.Utils;
+using UnityEngine;
 
 namespace MainModule
 {
-    public sealed class EnemyStaticDataProvider
+    [CreateAssetMenu(fileName = "EnemyStaticDataProvider", menuName = "EnemyStaticDataProvider", order = 0)]
+    public class EnemyStaticDataProvider : AutoSaveScriptableObject
     {
-        private readonly GameStaticData _gameStaticData;
-
-        public EnemyStaticDataProvider(GameStaticData gameStaticData)
-        {
-            _gameStaticData = gameStaticData;
-        }
-
+        public EnemyStaticData[] EnemiesData;
+        public float DefaultEnemySpawnCooldown = 5f;
+        
         public EnemyStaticData GetEnemyData(EnemyType enemyType)
         {
-            foreach (EnemyStaticData enemyPrefabData in _gameStaticData.EnemyPrefabs)
+            foreach (EnemyStaticData enemyPrefabData in EnemiesData)
             {
                 if (enemyPrefabData.EnemyType == enemyType)
                     return enemyPrefabData;
@@ -21,5 +20,14 @@ namespace MainModule
 
             throw new Exception($"Can't find prefab for enemy type '{enemyType}'");
         }
+    }
+
+    [Serializable]
+    public class EnemyStaticData
+    {
+        public EnemyType EnemyType;
+        public EnemyBehaviour EnemyBehaviour;
+        public int HealthPoints = 1;
+        public float MoveSpeed = 1f;
     }
 }
