@@ -31,6 +31,7 @@ namespace SettingsModule
         public float BlinkPeriod = 0.2f;
         public float ShootCooldown = 0.5f;
         public float PlayerBulletSpeed = 8f;
+        public float DefaultEnemySpawnCooldown = 5f;
     }
 
     [Serializable]

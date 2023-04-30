@@ -6,34 +6,45 @@ namespace MainModule
 {
     public sealed class LevelModelFactory
     {
-        private readonly EnemyFactory _enemyFactory;
+        private readonly EnemySpawnPointFactory _enemySpawnPointFactory;
+        private readonly EnemySpawnUpdater _enemySpawnUpdater;
 
-        public LevelModelFactory(EnemyFactory enemyFactory)
+        public LevelModelFactory(EnemySpawnPointFactory enemySpawnPointFactory, EnemySpawnUpdater enemySpawnUpdater)
         {
-            _enemyFactory = enemyFactory;
+            _enemySpawnPointFactory = enemySpawnPointFactory;
+            _enemySpawnUpdater = enemySpawnUpdater;
         }
-        
+
         public LevelModel Create(LevelData levelData)
         {
             LevelBehaviour levelBehaviour = Object.Instantiate(levelData.LevelBehaviour);
 
-            List<Enemy> enemies = CreateEnemies(levelBehaviour.EnemySpawnPoints);
+            EnemySpawnUpdater enemySpawnUpdater = ResetEnemySpawnUpdater(levelBehaviour);
 
-            var levelModel = new LevelModel(levelBehaviour, enemies);
+            var levelModel = new LevelModel(levelBehaviour, enemySpawnUpdater);
             return levelModel;
         }
 
-        private List<Enemy> CreateEnemies(List<EnemySpawnPointBehaviour> enemySpawnPoints)
+        private List<EnemySpawnPoint> CreateEnemySpawnPoints(List<EnemySpawnPointBehaviour> enemySpawnPoints)
         {
-            var enemies = new List<Enemy>();
-            
+            var enemies = new List<EnemySpawnPoint>();
+
             foreach (EnemySpawnPointBehaviour enemySpawnPoint in enemySpawnPoints)
             {
-                Enemy enemy = _enemyFactory.CreateEnemy(enemySpawnPoint);
+                EnemySpawnPoint enemy = _enemySpawnPointFactory.Create(enemySpawnPoint);
                 enemies.Add(enemy);
             }
 
             return enemies;
+        }
+
+        private EnemySpawnUpdater ResetEnemySpawnUpdater(LevelBehaviour levelBehaviour)
+        {
+            List<EnemySpawnPoint> enemySpawnPoints = CreateEnemySpawnPoints(levelBehaviour.EnemySpawnPoints);
+            _enemySpawnUpdater.ClearSpawnPoints();
+            _enemySpawnUpdater.AddSpawnPoints(enemySpawnPoints);
+            _enemySpawnUpdater.SpawnEnemies();
+            return _enemySpawnUpdater;
         }
     }
 }

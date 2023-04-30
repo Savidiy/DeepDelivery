@@ -1,6 +1,5 @@
 using System;
 using ProgressModule;
-using Savidiy.Utils;
 using SettingsModule;
 
 namespace MainModule
@@ -10,19 +9,14 @@ namespace MainModule
         private readonly GameStaticData _gameStaticData;
         private readonly ProgressProvider _progressProvider;
         private readonly LevelModelFactory _levelModelFactory;
-        private readonly TickInvoker _tickInvoker;
 
         public LevelModel LevelModel { get; private set; }
 
-        public LevelHolder(GameStaticData gameStaticData, ProgressProvider progressProvider, LevelModelFactory levelModelFactory,
-            TickInvoker tickInvoker)
+        public LevelHolder(GameStaticData gameStaticData, ProgressProvider progressProvider, LevelModelFactory levelModelFactory)
         {
             _gameStaticData = gameStaticData;
             _progressProvider = progressProvider;
             _levelModelFactory = levelModelFactory;
-            _tickInvoker = tickInvoker;
-            
-            _tickInvoker.Updated += OnUpdated;
         }
 
         public void LoadCurrentLevel()
@@ -37,16 +31,6 @@ namespace MainModule
         public void Dispose()
         {
             LevelModel?.Dispose();
-        }
-
-        private void OnUpdated()
-        {
-            for (int index = LevelModel.Enemies.Count - 1; index >= 0; index--)
-            {
-                Enemy enemy = LevelModel.Enemies[index];
-                if (enemy.Hp <= 0)
-                    LevelModel.RemoveEnemyAt(index);
-            }
         }
     }
 }

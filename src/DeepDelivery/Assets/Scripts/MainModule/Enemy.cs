@@ -41,5 +41,10 @@ namespace MainModule
         {
             _enemyBehaviour.name = $"{_enemyStaticData.EnemyType} HP={Hp}";
         }
+
+        public void Clear()
+        {
+            
+        }
     }
 }

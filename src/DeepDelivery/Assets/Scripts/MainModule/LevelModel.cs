@@ -9,29 +9,19 @@ namespace MainModule
     public sealed class LevelModel : DisposableCollector
     {
         private readonly LevelBehaviour _levelBehaviour;
-        private readonly List<Enemy> _enemies;
+        private readonly EnemySpawnUpdater _enemySpawnUpdater;
 
-        public IReadOnlyList<Enemy> Enemies => _enemies;
+        public IReadOnlyList<Enemy> Enemies => _enemySpawnUpdater.Enemies;
 
-        public LevelModel(LevelBehaviour levelBehaviour, List<Enemy> enemies)
+        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater)
         {
             _levelBehaviour = levelBehaviour;
-            _enemies = enemies;
+            _enemySpawnUpdater = enemySpawnUpdater;
         }
 
         public Vector3 GetPlayerStartPosition()
         {
             return _levelBehaviour.StartPoint.position;
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            Object.Destroy(_levelBehaviour.gameObject);
-            foreach (Enemy enemy in _enemies)
-                enemy.Dispose();
-
-            _enemies.Clear();
         }
 
         public bool HasCollisionWithWalls(Collider2D collider)
@@ -47,10 +37,10 @@ namespace MainModule
             return false;
         }
 
-        public void RemoveEnemyAt(int index)
+        public override void Dispose()
         {
-            _enemies[index].Dispose();
-            _enemies.RemoveAt(index);
+            base.Dispose();
+            Object.Destroy(_levelBehaviour.gameObject);
         }
     }
 }
