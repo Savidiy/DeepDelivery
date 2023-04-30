@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using ProgressModule;
 using SettingsModule;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace MainModule
         private readonly PlayerBehaviour _playerBehaviour;
         private readonly PlayerInvulnerability _playerInvulnerability;
 
+        private bool _isFlipToLeft;
+        
         public Vector3 Position => _playerBehaviour.transform.position;
         public Collider2D Collider => _playerBehaviour.Collider2D;
 
@@ -42,10 +45,28 @@ namespace MainModule
 
         public void Move(Vector2 shift)
         {
+            MoveBehaviour(shift);
+            FlipBehaviour(shift);
+        }
+
+        private void MoveBehaviour(Vector2 shift)
+        {
             Vector3 position = _playerBehaviour.transform.position;
             position.x += shift.x;
             position.y += shift.y;
             _playerBehaviour.Rigidbody.MovePosition(position);
+        }
+
+        private void FlipBehaviour(Vector2 shift)
+        {
+            if (shift.x < 0)
+                _isFlipToLeft = true;
+            else if (shift.x > 0)
+                _isFlipToLeft = false;
+
+            Vector3 scale = _playerBehaviour.FlipRoot.localScale;
+            scale.x = Math.Abs(scale.x) * (_isFlipToLeft ? -1 : 1);
+            _playerBehaviour.FlipRoot.localScale = scale;
         }
 
         public void SetPosition(Vector3 position)
@@ -65,7 +86,13 @@ namespace MainModule
         }
 
         public Vector3 GetGunPosition(GunType gunType) => GetGun(gunType).BulletSpawnPoint.position;
-        public Vector3 GetGunDirection(GunType gunType) => GetGun(gunType).ShootDirection;
+        public Vector3 GetGunDirection(GunType gunType)
+        {
+            Vector3 direction = GetGun(gunType).ShootDirection;
+            if (_isFlipToLeft)
+                direction.x = -direction.x;
+            return direction;
+        }
 
         private GunBehaviour GetGun(GunType gunType)
         {
