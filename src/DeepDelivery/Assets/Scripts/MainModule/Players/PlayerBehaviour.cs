@@ -7,7 +7,7 @@ namespace MainModule
         public Transform FlipRoot;
         public Rigidbody2D Rigidbody;
         public Collider2D Collider2D;
-        public SpriteRenderer SpriteRenderer;
+        public SpriteRenderer[] BlinkSpriteRenderers;
         public GunBehaviour TopGun;
         public GunBehaviour BottomGun;
         public GunBehaviour ForwardGun;

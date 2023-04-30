@@ -209,7 +209,7 @@ TextureImporter:
         width: 158
         height: 261
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +230,7 @@ TextureImporter:
         width: 138
         height: 328
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,7 +251,7 @@ TextureImporter:
         width: 152
         height: 246
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -272,7 +272,7 @@ TextureImporter:
         width: 301
         height: 229
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -293,7 +293,7 @@ TextureImporter:
         width: 261
         height: 199
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -314,7 +314,7 @@ TextureImporter:
         width: 196
         height: 360
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -335,7 +335,7 @@ TextureImporter:
         width: 50
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -351,12 +351,12 @@ TextureImporter:
       name: deep-sprites_11
       rect:
         serializedVersion: 2
-        x: 49
-        y: 1858
-        width: 174
-        height: 151
+        x: 48
+        y: 1831
+        width: 175
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -372,12 +372,12 @@ TextureImporter:
       name: deep-sprites_12
       rect:
         serializedVersion: 2
-        x: 53
-        y: 1678
-        width: 140
-        height: 135
+        x: 65
+        y: 1656
+        width: 142
+        height: 168
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -398,7 +398,7 @@ TextureImporter:
         width: 179
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,6 +406,237 @@ TextureImporter:
       bones: []
       spriteID: 53edb9f2f798216429dee22a10cf1da7
       internalID: 1668910869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_14
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 993
+        width: 438
+        height: 317
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9dc8abb0d7dc864ca6922ba02e1ac69
+      internalID: -2122173154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_15
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1214
+        width: 288
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa7e397251ffcc4b81bfd1ebf104501
+      internalID: 518146870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_16
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1125
+        width: 51
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bac1448a14a96d498caf58ee9b2e233
+      internalID: 1613664556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_17
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 1103
+        width: 101
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6fc7ab67a4b22e40acea4e132c15a91
+      internalID: 1969700890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_18
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 1112
+        width: 62
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16bcd19ba9ba50948b79330fcf81d809
+      internalID: 1774327659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_19
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 996
+        width: 63
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38dd0813c37eda146ac3c6a6f3e74b31
+      internalID: -1805604454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_20
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1008
+        width: 64
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1fdc3a9777f04f4a8b2dad71ddb0947
+      internalID: -1094973184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_21
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1008
+        width: 54
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f64f9b4027870442ab453be1fef5663
+      internalID: 243949540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_22
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 1122
+        width: 185
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd5dca6799d5b14093ca24a0e1339f6
+      internalID: -1579088246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_23
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 1002
+        width: 154
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e343926aece1bb42a6996953a33db78
+      internalID: 772397443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_24
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 1526
+        width: 93
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2299edf0c77dfcb4bb969463fe56e00d
+      internalID: 116497758
       vertices: []
       indices: 
       edges: []
@@ -427,7 +658,18 @@ TextureImporter:
       deep-sprites_11: -190211825
       deep-sprites_12: 116993128
       deep-sprites_13: 1668910869
+      deep-sprites_14: -2122173154
+      deep-sprites_15: 518146870
+      deep-sprites_16: 1613664556
+      deep-sprites_17: 1969700890
+      deep-sprites_18: 1774327659
+      deep-sprites_19: -1805604454
       deep-sprites_2: -1370941237
+      deep-sprites_20: -1094973184
+      deep-sprites_21: 243949540
+      deep-sprites_22: -1579088246
+      deep-sprites_23: 772397443
+      deep-sprites_24: 116497758
       deep-sprites_3: -2132135640
       deep-sprites_4: -1626710843
       deep-sprites_5: -503857208

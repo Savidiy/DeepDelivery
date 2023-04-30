@@ -10,7 +10,7 @@ namespace MainModule
         public Shop(ShopBehaviour shopBehaviour)
         {
             _shopBehaviour = shopBehaviour;
-            _shopBehaviour.SoldOutLabel.SetActive(false);
+            _shopBehaviour.SetHasItem(true);
         }
 
         public bool CanPlayerBuy(Player player)
@@ -42,7 +42,7 @@ namespace MainModule
             player.RemoveItems(_shopBehaviour.PriceItemType, _shopBehaviour.PriceCount);
             player.AddGun(_shopBehaviour.SellingGunType);
             _isSoldOut = true;
-            _shopBehaviour.SoldOutLabel.SetActive(true);
+            _shopBehaviour.SetHasItem(false);
         }
     }
 }

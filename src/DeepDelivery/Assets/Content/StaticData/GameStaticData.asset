@@ -32,4 +32,4 @@ MonoBehaviour:
   BlinkPeriod: 0.2
   ShootCooldown: 0.5
   PlayerBulletSpeed: 8
-  CompassDrawDistance: 0.7
+  CompassDrawDistance: 3.21

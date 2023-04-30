@@ -19,7 +19,7 @@ namespace MainModule
         public Player CreatePlayer()
         {
             var playerBehaviour = _prefabFactory.Instantiate<PlayerBehaviour>("Player", parent: null);
-            _playerInvulnerability.SetSpriteRenderer(playerBehaviour.SpriteRenderer);
+            _playerInvulnerability.SetSpriteRenderers(playerBehaviour.BlinkSpriteRenderers);
             var player = new Player(playerBehaviour, _progressProvider, _playerInvulnerability);
             return player;
         }
