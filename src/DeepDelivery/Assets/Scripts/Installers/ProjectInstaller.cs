@@ -12,7 +12,7 @@ namespace Installers
 {
     public class ProjectInstaller : MonoInstaller
     {
-        public GameStaticData _gameStaticData;
+        public GameStaticData GameStaticData;
         public AudioLibrary AudioLibrary;
 
         public override void InstallBindings()
@@ -49,6 +49,9 @@ namespace Installers
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<CollisionWithEnemyChecker>().AsSingle();
             
+            Container.Bind<ItemFactory>().AsSingle();
+            Container.Bind<CollisionWithItemsChecker>().AsSingle();
+            
             Container.Bind<LevelRestarter>().AsSingle();
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
@@ -62,7 +65,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<MusicVolumeController>().AsSingle();
 
             Container.Bind<InputSettings>().AsSingle();
-            Container.Bind<GameStaticData>().FromInstance(_gameStaticData);
+            Container.Bind<GameStaticData>().FromInstance(GameStaticData);
             Container.Bind<AudioLibrary>().FromInstance(AudioLibrary);
         }
     }

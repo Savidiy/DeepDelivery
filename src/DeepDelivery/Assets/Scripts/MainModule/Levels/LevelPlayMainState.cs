@@ -11,11 +11,13 @@ namespace MainModule
         private readonly PlayerInputShooter _playerInputShooter;
         private readonly CameraToPlayerMover _cameraToPlayerMover;
         private readonly LevelRestarter _levelRestarter;
+        private readonly CollisionWithItemsChecker _collisionWithItemsChecker;
 
         public LevelPlayMainState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
             PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, CameraToPlayerMover cameraToPlayerMover,
-            LevelRestarter levelRestarter)
+            LevelRestarter levelRestarter, CollisionWithItemsChecker collisionWithItemsChecker)
         {
+            _collisionWithItemsChecker = collisionWithItemsChecker;
             _levelWindowPresenter = levelWindowPresenter;
             _collisionWithEnemyChecker = collisionWithEnemyChecker;
             _playerInputMover = playerInputMover;
@@ -30,6 +32,7 @@ namespace MainModule
             _playerInputMover.ActivatePlayerControls();
             _playerInputShooter.ActivatePlayerControls();
             _collisionWithEnemyChecker.Activate();
+            _collisionWithItemsChecker.Activate();
             _cameraToPlayerMover.Activate();
             _levelWindowPresenter.ShowWindow();
         }
@@ -41,6 +44,7 @@ namespace MainModule
             _playerInputShooter.DeactivatePlayerControls();
             _cameraToPlayerMover.Deactivate();
             _collisionWithEnemyChecker.Deactivate();
+            _collisionWithItemsChecker.Deactivate();
         }
     }
 }

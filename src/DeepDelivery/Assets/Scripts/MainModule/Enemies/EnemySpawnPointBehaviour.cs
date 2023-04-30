@@ -35,7 +35,7 @@ namespace MainModule
 
         private void OnValidate()
         {
-            name = $"SpawnPoint - {EnemyType}";
+            name = $"Enemy Spawn - {EnemyType}";
 
             if (RespawnType == ByTimer)
                 name += UseCustomTimerDuration

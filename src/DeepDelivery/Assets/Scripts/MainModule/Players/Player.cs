@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -20,6 +19,7 @@ namespace MainModule
         public int MaxHp { get; private set; }
         public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
         public List<GunType> ActiveGuns { get; set; }
+        public Dictionary<ItemType, int> ItemsCount => new();
 
         public Player(PlayerBehaviour playerBehaviour, ProgressProvider progressProvider,
             PlayerInvulnerability playerInvulnerability)
@@ -101,6 +101,11 @@ namespace MainModule
                 GunType.ForwardGun => _playerBehaviour.ForwardGun,
                 _ => throw new ArgumentOutOfRangeException(nameof(gunType), gunType, null)
             };
+        }
+
+        public void AddItem(ItemType itemType)
+        {
+            
         }
     }
 }

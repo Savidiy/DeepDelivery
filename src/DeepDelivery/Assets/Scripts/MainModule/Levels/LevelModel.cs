@@ -9,11 +9,14 @@ namespace MainModule
     {
         private readonly LevelBehaviour _levelBehaviour;
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
+        private readonly List<Item> _items;
 
+        public IReadOnlyList<Item> Items => _items;
         public IReadOnlyList<Enemy> Enemies => _enemySpawnUpdater.Enemies;
 
-        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater)
+        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<Item> items)
         {
+            _items = items;
             _levelBehaviour = levelBehaviour;
             _enemySpawnUpdater = enemySpawnUpdater;
         }
@@ -40,6 +43,12 @@ namespace MainModule
         {
             base.Dispose();
             Object.Destroy(_levelBehaviour.gameObject);
+        }
+
+        public void RemoveItem(Item item)
+        {
+            _items.Remove(item);
+            item.Dispose();
         }
     }
 }

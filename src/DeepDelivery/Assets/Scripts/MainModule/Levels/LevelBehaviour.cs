@@ -8,47 +8,33 @@ namespace MainModule
     {
         public Transform StartPoint;
         public List<EnemySpawnPointBehaviour> EnemySpawnPoints = new();
+        public List<ItemSpawnPointBehaviour> ItemSpawnPoints = new();
         public List<Collider2D> Walls = new();
 
         private void OnValidate()
         {
-            CollectAllEnemySpawnPoints();
-            CollectAllWallsColliders();
+            CollectAllData();
         }
 
         [Button]
-        private void CollectAllEnemySpawnPoints()
+        public void CollectAllData()
         {
-            EnemySpawnPoints.Clear();
+            CollectAllComponents(EnemySpawnPoints);
+            CollectAllComponents(ItemSpawnPoints);
+            CollectAllComponents(Walls);
+        }
+
+        private void CollectAllComponents<T>(List<T> collection) where T : Behaviour
+        {
+            collection.Clear();
 
             var targets = new List<Transform>() {transform};
 
             for (var index = 0; index < targets.Count; index++)
             {
                 Transform parentTransform = targets[index];
-                if (parentTransform.TryGetComponent(out EnemySpawnPointBehaviour spawnPointBehaviour))
-                    EnemySpawnPoints.Add(spawnPointBehaviour);
-
-                int childCount = parentTransform.childCount;
-                for (int j = 0; j < childCount; j++)
-                {
-                    targets.Add(parentTransform.GetChild(j));
-                }
-            }
-        }
-        
-        [Button]
-        private void CollectAllWallsColliders()
-        {
-            Walls.Clear();
-
-            var targets = new List<Transform>() {transform};
-
-            for (var index = 0; index < targets.Count; index++)
-            {
-                Transform parentTransform = targets[index];
-                if (parentTransform.TryGetComponent(out Collider2D col))
-                    Walls.Add(col);
+                if (parentTransform.TryGetComponent(out T col))
+                    collection.Add(col);
 
                 int childCount = parentTransform.childCount;
                 for (int j = 0; j < childCount; j++)
