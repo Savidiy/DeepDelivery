@@ -32,6 +32,10 @@ MonoBehaviour:
     EnemyBehaviour: {fileID: 3019363166943306336, guid: 7cc0012081de70a4bb8b01f87338d79d, type: 3}
     HealthPoints: 3
     MoveSpeed: 1
+  - EnemyType: 3
+    EnemyBehaviour: {fileID: 3019363166943306336, guid: c671f631ff0c46c4cb803e10c07c47dc, type: 3}
+    HealthPoints: 3
+    MoveSpeed: 1
   StartProgress:
     LevelIndex: 0
     MaxHp: 3
