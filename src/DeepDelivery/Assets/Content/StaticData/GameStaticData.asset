@@ -19,17 +19,17 @@ MonoBehaviour:
   UpKeys: 770000001101000008010000
   DownKeys: 730000001201000002010000
   ShootKeys: 200000000501000032010000310100000f0100000d000000650000006600000071000000
-  PlayerSpeedX: 7
-  PlayerSpeedY: 7
+  PlayerSpeedX: 10
+  PlayerSpeedY: 10
   DefaultMusicVolume: 0.3
   DefaultSoundVolume: 0.5
   StartProgress:
     LevelIndex: 0
-    MaxHp: 3
-    CurrentHp: 3
+    MaxHp: 1
+    CurrentHp: 1
     ActiveGuns: 
   HitInvulDuration: 2
   BlinkPeriod: 0.2
   ShootCooldown: 0.5
-  PlayerBulletSpeed: 8
+  PlayerBulletSpeed: 18
   CompassDrawDistance: 3.21

@@ -692,7 +692,7 @@ TextureImporter:
         width: 109
         height: 106
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -713,7 +713,7 @@ TextureImporter:
         width: 107
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -721,6 +721,27 @@ TextureImporter:
       bones: []
       spriteID: 6f710b37d28be614bbbefe5b9c969e6e
       internalID: 2054289493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_29
+      rect:
+        serializedVersion: 2
+        x: 1526
+        y: 1669
+        width: 496
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ff4b24323d02c6478f78537b236dae6
+      internalID: -1804416233
       vertices: []
       indices: 
       edges: []
@@ -758,6 +779,7 @@ TextureImporter:
       deep-sprites_26: 729780270
       deep-sprites_27: 19010094
       deep-sprites_28: 2054289493
+      deep-sprites_29: -1804416233
       deep-sprites_3: -2132135640
       deep-sprites_4: -1626710843
       deep-sprites_5: -503857208

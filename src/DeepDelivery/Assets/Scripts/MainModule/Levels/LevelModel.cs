@@ -50,6 +50,11 @@ namespace MainModule
         {
             base.Dispose();
             Object.Destroy(_levelBehaviour.gameObject);
+
+            foreach (Item item in _items)
+                item.Dispose();
+
+            _items.Clear();
         }
 
         public void RemoveItem(Item item)

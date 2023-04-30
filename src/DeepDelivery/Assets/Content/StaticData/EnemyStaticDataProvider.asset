@@ -41,4 +41,4 @@ MonoBehaviour:
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 5fc5eb866a459874d94b34cd88a0029c, type: 3}
     HealthPoints: 1
     MoveSpeed: 5.1
-  DefaultEnemySpawnCooldown: 5
+  DefaultEnemySpawnCooldown: 1

@@ -29,7 +29,8 @@ namespace LevelWindowModule.View
         public override void Dispose()
         {
             base.Dispose();
-            Object.Destroy(Hierarchy.gameObject);
+            if (Hierarchy != null)
+                Object.Destroy(Hierarchy.gameObject);
         }
     }
 }
