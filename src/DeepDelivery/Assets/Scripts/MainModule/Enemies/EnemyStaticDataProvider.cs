@@ -1,5 +1,4 @@
 ﻿using System;
-using SettingsModule;
 
 namespace MainModule
 {

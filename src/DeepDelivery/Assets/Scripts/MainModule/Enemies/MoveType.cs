@@ -1,4 +1,4 @@
-﻿namespace SettingsModule
+﻿namespace MainModule
 {
     public enum MoveType
     {

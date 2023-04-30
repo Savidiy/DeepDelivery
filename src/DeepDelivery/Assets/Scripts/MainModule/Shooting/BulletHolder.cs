@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Savidiy.Utils;
-using SettingsModule;
 
 namespace MainModule
 {

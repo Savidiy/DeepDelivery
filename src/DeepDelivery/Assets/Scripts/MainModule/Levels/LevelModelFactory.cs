@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using SettingsModule;
 using Object = UnityEngine.Object;
 
 namespace MainModule

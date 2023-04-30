@@ -1,5 +1,4 @@
 ﻿using System;
-using SettingsModule;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

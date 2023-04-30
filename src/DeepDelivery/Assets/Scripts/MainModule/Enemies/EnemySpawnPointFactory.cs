@@ -1,6 +1,4 @@
-﻿using SettingsModule;
-
-namespace MainModule
+﻿namespace MainModule
 {
     public class EnemySpawnPointFactory
     {

@@ -3,8 +3,6 @@ using AudioModule;
 using AudioModule.Contracts;
 using MainModule;
 using MvvmModule;
-using ProgressModule;
-using SettingsModule;
 using SettingsWindowModule.View;
 
 namespace SettingsWindowModule

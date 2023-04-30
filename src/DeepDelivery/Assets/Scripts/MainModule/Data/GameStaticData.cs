@@ -4,7 +4,7 @@ using Savidiy.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SettingsModule
+namespace MainModule
 {
     [CreateAssetMenu(fileName = "GameStaticData", menuName = "GameStaticData", order = 0)]
     public class GameStaticData : AutoSaveScriptableObject

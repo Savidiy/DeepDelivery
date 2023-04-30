@@ -1,6 +1,4 @@
 using System;
-using ProgressModule;
-using SettingsModule;
 
 namespace MainModule
 {

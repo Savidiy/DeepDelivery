@@ -1,8 +1,7 @@
 using Savidiy.Utils;
-using SettingsModule;
 using UnityEngine;
 
-namespace ProgressModule
+namespace MainModule
 {
     public class ProgressProvider
     {

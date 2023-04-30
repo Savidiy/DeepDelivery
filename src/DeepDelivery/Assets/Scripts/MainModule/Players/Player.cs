@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using ProgressModule;
-using SettingsModule;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

@@ -1,13 +1,13 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+#endif
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 using UnityEngine;
-using static SettingsModule.RespawnType;
+using static MainModule.RespawnType;
 
-namespace SettingsModule
+namespace MainModule
 {
     public class EnemySpawnPointBehaviour : MonoBehaviour
     {

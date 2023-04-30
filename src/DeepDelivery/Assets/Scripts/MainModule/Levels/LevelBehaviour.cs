@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SettingsModule
+namespace MainModule
 {
     public class LevelBehaviour : MonoBehaviour
     {

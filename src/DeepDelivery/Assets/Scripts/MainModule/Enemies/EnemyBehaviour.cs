@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SettingsModule
+namespace MainModule
 {
     public class EnemyBehaviour : MonoBehaviour
     {

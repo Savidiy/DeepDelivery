@@ -1,7 +1,6 @@
-using MainModule;
 using Zenject;
 
-namespace Bootstrap
+namespace MainModule
 {
     public sealed class Bootstrapper : IInitializable
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using Savidiy.Utils;
-using SettingsModule;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

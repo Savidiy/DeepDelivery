@@ -1,6 +1,5 @@
 ﻿using System;
 using JetBrains.Annotations;
-using SettingsModule;
 using UnityEngine;
 
 namespace MainModule

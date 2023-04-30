@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SettingsModule
+namespace MainModule
 {
     [Serializable]
     public class Progress

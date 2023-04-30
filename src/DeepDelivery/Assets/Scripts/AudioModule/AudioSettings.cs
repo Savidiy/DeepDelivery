@@ -1,4 +1,4 @@
-﻿using SettingsModule;
+﻿using MainModule;
 using UniRx;
 using UnityEngine;
 

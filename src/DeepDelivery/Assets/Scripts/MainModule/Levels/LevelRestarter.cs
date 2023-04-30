@@ -1,6 +1,4 @@
-﻿using ProgressModule;
-
-namespace MainModule
+﻿namespace MainModule
 {
     public sealed class LevelRestarter
     {

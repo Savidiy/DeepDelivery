@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace SettingsModule
+namespace MainModule
 {
     public sealed class InputSettings
     {

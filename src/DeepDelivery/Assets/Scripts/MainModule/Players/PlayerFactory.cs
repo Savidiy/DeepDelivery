@@ -1,5 +1,4 @@
 ﻿using MvvmModule;
-using ProgressModule;
 
 namespace MainModule
 {
