@@ -32,6 +32,7 @@ namespace MainModule
         public float ShootCooldown = 0.5f;
         public float PlayerBulletSpeed = 8f;
         public float DefaultEnemySpawnCooldown = 5f;
+        public float CompassDrawDistance = 1f;
     }
 
     [Serializable]

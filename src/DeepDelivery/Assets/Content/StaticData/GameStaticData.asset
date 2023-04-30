@@ -42,3 +42,4 @@ MonoBehaviour:
   ShootCooldown: 0.5
   PlayerBulletSpeed: 8
   DefaultEnemySpawnCooldown: 5
+  CompassDrawDistance: 0.7

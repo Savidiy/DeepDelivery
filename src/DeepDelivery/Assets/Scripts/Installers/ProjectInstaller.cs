@@ -61,6 +61,7 @@ namespace Installers
             
             Container.Bind<QuestChecker>().AsSingle();
             Container.Bind<QuestFactory>().AsSingle();
+            Container.Bind<QuestCompassUpdater>().AsSingle();
             
             Container.Bind<ProgressProvider>().AsSingle();
 

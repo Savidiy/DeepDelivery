@@ -43,5 +43,10 @@ namespace MainModule
         {
             return _data.QuestTakeBehaviour == questTakeBehaviour;
         }
+
+        public Vector3 GetTargetPosition()
+        {
+            return _data.QuestTakeBehaviour.transform.position;
+        }
     }
 }

@@ -34,9 +34,10 @@ namespace MainModule
             foreach (QuestGiver questGiver in levelModel.QuestGivers)
                 if (questGiver.CanGiveQuest(player))
                     questGiver.GiveQuest(player);
-        
+
             foreach (QuestTaker questTaker in levelModel.QuestTakers)
                 if (questTaker.CanTakeQuest(player))
-                    questTaker.TakeQuest(player);}
+                    questTaker.TakeQuest(player);
+        }
     }
 }

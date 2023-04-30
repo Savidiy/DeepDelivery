@@ -1,4 +1,6 @@
-﻿namespace MainModule
+﻿using UnityEngine;
+
+namespace MainModule
 {
     public class Quest
     {
@@ -12,6 +14,11 @@
         public bool IsQuestDestination(QuestTakeBehaviour questTakeBehaviour)
         {
             return _questGiver.IsQuestDestination(questTakeBehaviour);
+        }
+
+        public Vector3 GetTargetPosition()
+        {
+            return _questGiver.GetTargetPosition();
         }
     }
 }

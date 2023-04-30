@@ -14,15 +14,17 @@ namespace MainModule
         private readonly CollisionWithItemsChecker _collisionWithItemsChecker;
         private readonly UseShopChecker _useShopChecker;
         private readonly QuestChecker _questChecker;
+        private readonly QuestCompassUpdater _questCompassUpdater;
 
         public LevelPlayMainState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
             PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, CameraToPlayerMover cameraToPlayerMover,
             LevelRestarter levelRestarter, CollisionWithItemsChecker collisionWithItemsChecker, UseShopChecker useShopChecker,
-            QuestChecker questChecker)
+            QuestChecker questChecker, QuestCompassUpdater questCompassUpdater)
         {
             _collisionWithItemsChecker = collisionWithItemsChecker;
             _useShopChecker = useShopChecker;
             _questChecker = questChecker;
+            _questCompassUpdater = questCompassUpdater;
             _levelWindowPresenter = levelWindowPresenter;
             _collisionWithEnemyChecker = collisionWithEnemyChecker;
             _playerInputMover = playerInputMover;
@@ -41,6 +43,7 @@ namespace MainModule
             _cameraToPlayerMover.Activate();
             _useShopChecker.Activate();
             _questChecker.Activate();
+            _questCompassUpdater.Activate();
             _levelWindowPresenter.ShowWindow();
         }
 
@@ -54,6 +57,7 @@ namespace MainModule
             _collisionWithItemsChecker.Deactivate();
             _useShopChecker.Deactivate();
             _questChecker.Deactivate();
+            _questCompassUpdater.Deactivate();
         }
     }
 }
