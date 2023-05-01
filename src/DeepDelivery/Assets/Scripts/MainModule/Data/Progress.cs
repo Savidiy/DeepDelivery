@@ -7,26 +7,26 @@ namespace MainModule
     [Serializable]
     public class Progress
     {
-        public int LevelIndex = 0;
-        public int MaxHp;
-        public int CurrentHp;
-        public List<GunType> ActiveGuns;
+        public int LevelIndex;
 
         public string LastActiveCheckPointId = string.Empty;
         public PlayerProgress Player = new();
 
-        public Progress(StartProgress progress)
+        public Progress(StartProgress startProgress)
         {
-            LevelIndex = progress.LevelIndex;
-            MaxHp = progress.MaxHp;
-            CurrentHp = MaxHp;
-            ActiveGuns = new List<GunType>(progress.ActiveGuns);
+            LevelIndex = startProgress.LevelIndex;
+            Player.MaxHp = startProgress.MaxHp;
+            Player.CurrentHp = Player.MaxHp;
+            Player.ActiveGuns = new List<GunType>(startProgress.ActiveGuns);
         }
     }
 
     [Serializable]
     public class PlayerProgress
     {
+        public int MaxHp;
+        public int CurrentHp;
+        public List<GunType> ActiveGuns = new();
         public bool HasSavedPosition;
         public SerializableVector3 SavedPosition;
     }

@@ -19,20 +19,40 @@ namespace MainModule
         public int MaxHp { get; private set; }
         public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
         public List<Quest> Quests { get; } = new();
-        public List<GunType> ActiveGuns { get; set; }
+        public List<GunType> ActiveGuns { get; } = new();
         public Dictionary<ItemType, int> ItemsCount { get; } = new();
 
-        public Player(PlayerBehaviour playerBehaviour, ProgressProvider progressProvider,
+        public Player(PlayerBehaviour playerBehaviour,
             PlayerInvulnerability playerInvulnerability)
         {
             _playerBehaviour = playerBehaviour;
             _playerInvulnerability = playerInvulnerability;
-            Progress progress = progressProvider.Progress;
-            CurrentHp = progress.CurrentHp;
-            MaxHp = progress.MaxHp;
-            ActiveGuns = new List<GunType>(progress.ActiveGuns);
 
             UpdateGunVisibility();
+        }
+
+        public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
+        {
+            CurrentHp = progress.CurrentHp;
+            MaxHp = progress.MaxHp;
+            ActiveGuns.Clear();
+            ActiveGuns.AddRange(progress.ActiveGuns);
+            
+            Vector3 position = progress.HasSavedPosition
+                ? progress.SavedPosition.ToVector3()
+                : defaultPosition;
+
+            _playerBehaviour.transform.position = position;
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            progress.ActiveGuns.Clear();
+            progress.ActiveGuns.AddRange(ActiveGuns);
+            progress.MaxHp = MaxHp;
+            progress.CurrentHp = CurrentHp;
+            progress.HasSavedPosition = true;
+            progress.SavedPosition = new SerializableVector3(Position);
         }
 
         private void UpdateGunVisibility()
@@ -66,11 +86,6 @@ namespace MainModule
             Vector3 scale = _playerBehaviour.FlipRoot.localScale;
             scale.x = Math.Abs(scale.x) * (_isFlipToLeft ? -1 : 1);
             _playerBehaviour.FlipRoot.localScale = scale;
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            _playerBehaviour.transform.position = position;
         }
 
         public void GetHit()

@@ -4,37 +4,29 @@ namespace MainModule
 {
     public class PlayerHolder : IProgressWriter
     {
-        private readonly PlayerFactory _playerFactory;
         private readonly LevelHolder _levelHolder;
-        public Player Player { get; private set; }
+        public Player Player { get; }
 
         public PlayerHolder(PlayerFactory playerFactory, LevelHolder levelHolder, ProgressUpdater progressUpdater)
         {
             Debug.Log($"{GetType()} ctor");
-            _playerFactory = playerFactory;
             _levelHolder = levelHolder;
             progressUpdater.Register(this);
+
+            Player = playerFactory.CreatePlayer();
         }
 
         public void LoadProgress(Progress progress)
-        {            
+        {
             Debug.Log($"{GetType()} LoadProgress");
 
-            Player?.Dispose();
-
-            Player = _playerFactory.CreatePlayer();
-
-            Vector3 position = progress.Player.HasSavedPosition
-                ? progress.Player.SavedPosition.ToVector3()
-                : _levelHolder.LevelModel.GetPlayerStartPosition();
-
-            Player.SetPosition(position);
+            Vector3 defaultPosition = _levelHolder.LevelModel.GetPlayerStartPosition();
+            Player.LoadProgress(progress.Player, defaultPosition);
         }
 
         public void UpdateProgress(Progress progress)
         {
-            progress.Player.HasSavedPosition = true;
-            progress.Player.SavedPosition = new SerializableVector3(Player.Position);
+            Player.UpdateProgress(progress.Player);
         }
     }
 }
