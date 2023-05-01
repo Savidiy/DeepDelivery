@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Savidiy.Utils;
 
 namespace MainModule
 {
-    public class EnemySpawnUpdater : IDisposable, IProgressWriter
+    public class EnemySpawnUpdater : IProgressWriter
     {
         private readonly TickInvoker _tickInvoker;
         private readonly LevelHolder _levelHolder;
@@ -18,12 +17,17 @@ namespace MainModule
             _tickInvoker = tickInvoker;
             _levelHolder = levelHolder;
             _enemyHolder = enemyHolder;
-            _tickInvoker.Updated += OnUpdated;
 
             progressUpdater.Register(this);
         }
 
-        public void Dispose()
+        public void Activate()
+        {
+            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Updated += OnUpdated;
+        }
+
+        public void Deactivate()
         {
             _tickInvoker.Updated -= OnUpdated;
         }
