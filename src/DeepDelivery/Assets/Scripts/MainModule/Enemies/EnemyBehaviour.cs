@@ -13,6 +13,7 @@ namespace MainModule
         private Material _material;
         private float _whitePercent;
         private Sequence _sequence;
+        private LastMoveType _lastMoveType;
 
         public void Awake()
         {
@@ -45,6 +46,23 @@ namespace MainModule
                     0f,
                     enemyBlinkSettings.EndBlinkDuration)
                 .SetEase(enemyBlinkSettings.EndEase));
+        }
+
+        public void UpdateHeadDirection(LastMoveType lastMoveType)
+        {
+            if (_lastMoveType == lastMoveType)
+                return;
+
+            _lastMoveType = lastMoveType;
+            Vector3 localScale = transform.localScale;
+
+            if (lastMoveType == LastMoveType.ToRight)
+                localScale.x = Mathf.Abs(localScale.x);
+
+            if (lastMoveType == LastMoveType.ToLeft)
+                localScale.x = -Mathf.Abs(localScale.x);
+            
+            transform.localScale = localScale;
         }
     }
 }

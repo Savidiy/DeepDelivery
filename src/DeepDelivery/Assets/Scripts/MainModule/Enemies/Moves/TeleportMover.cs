@@ -18,8 +18,11 @@ namespace MainModule
             _enemyStaticData = enemyStaticData;
         }
 
+        public LastMoveType LastMoveType { get; private set; }
+
         public void UpdatePosition(float deltaTime)
         {
+            LastMoveType = LastMoveType.None;
             List<Transform> pathPoints = _enemySpawnPoint.PathPoints;
             if (pathPoints.Count == 0)
                 return;
@@ -31,6 +34,9 @@ namespace MainModule
             while (moveDistance > 0)
             {
                 Vector3 target = pathPoints[_targetIndex].position;
+                
+                UpdateLastMoveType(target - currentPosition);
+                
                 float distance = Vector3.Distance(target, currentPosition);
                 if (distance > moveDistance)
                 {
@@ -56,5 +62,13 @@ namespace MainModule
         public EnemyMoveProgress GetProgress() => new(_targetIndex);
 
         public void LoadProgress(EnemyMoveProgress progress) => _targetIndex = progress.TargetIndex;
-    }
+   
+        private void UpdateLastMoveType(Vector3 moveTowards)
+        {
+            if (moveTowards.x > 0)
+                LastMoveType = LastMoveType.ToRight;
+
+            if (moveTowards.x < 0)
+                LastMoveType = LastMoveType.ToLeft;
+        } }
 }

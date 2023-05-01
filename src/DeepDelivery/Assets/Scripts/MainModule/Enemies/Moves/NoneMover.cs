@@ -2,6 +2,8 @@
 {
     internal class NoneMover : IEnemyMover
     {
+        public LastMoveType LastMoveType { get; } = LastMoveType.None;
+
         public void UpdatePosition(float deltaTime)
         {
         }

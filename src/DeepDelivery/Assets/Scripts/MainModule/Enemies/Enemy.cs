@@ -53,5 +53,12 @@ namespace MainModule
             _enemyBehaviour.transform.position = progress.EnemyPosition.ToVector3();
             EnemyMover.LoadProgress(progress.EnemyMoveProgress);
         }
+
+        public void Move(float deltaTime)
+        {
+            EnemyMover.UpdatePosition(deltaTime);
+            LastMoveType lastMoveType = EnemyMover.LastMoveType;
+            _enemyBehaviour.UpdateHeadDirection(lastMoveType);
+        }
     }
 }

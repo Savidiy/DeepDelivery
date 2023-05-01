@@ -27,7 +27,7 @@ namespace MainModule
 
             foreach (Enemy enemy in _enemyHolder.Enemies)
             {
-                enemy.EnemyMover.UpdatePosition(deltaTime);
+                enemy.Move(deltaTime);
             }
         }
     }

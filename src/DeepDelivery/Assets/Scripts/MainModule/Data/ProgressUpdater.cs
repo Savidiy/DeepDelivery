@@ -25,7 +25,9 @@ namespace MainModule
 
         public void ResetProgress()
         {
-            _progressProvider.Progress = _progressSaveLoad.CreateDefaultProgress();
+            Progress progress = _progressSaveLoad.CreateDefaultProgress();
+            _progressProvider.Progress = progress;
+            _progressSaveLoad.SaveProgress(progress);
             Debug.Log($"Reset progress");
         }
 

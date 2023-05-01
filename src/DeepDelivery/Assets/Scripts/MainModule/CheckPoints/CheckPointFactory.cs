@@ -1,20 +1,17 @@
-﻿using Zenject;
-
-namespace MainModule
+﻿namespace MainModule
 {
     public class CheckPointFactory : IFactory<CheckPoint, CheckPointBehaviour>
     {
-        private readonly DiContainer _diContainer;
+        private readonly ProgressUpdater _progressUpdater;
 
-        public CheckPointFactory(DiContainer diContainer)
+        public CheckPointFactory(ProgressUpdater progressUpdater)
         {
-            _diContainer = diContainer;
+            _progressUpdater = progressUpdater;
         }
         
         public CheckPoint Create(CheckPointBehaviour data)
         {
-            var progressUpdater = _diContainer.Resolve<ProgressUpdater>();
-            return new CheckPoint(data, progressUpdater);
+            return new CheckPoint(data, _progressUpdater);
         }
     }
 }

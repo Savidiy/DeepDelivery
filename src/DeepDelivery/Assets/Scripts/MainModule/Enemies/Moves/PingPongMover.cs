@@ -11,6 +11,8 @@ namespace MainModule
         private int _targetIndex;
         private bool _isBackward;
 
+        public LastMoveType LastMoveType { get; private set; }
+
         public PingPongMover(EnemyBehaviour enemyBehaviour, EnemySpawnPointBehaviour enemySpawnPoint,
             EnemyStaticData enemyStaticData)
         {
@@ -21,6 +23,7 @@ namespace MainModule
 
         public void UpdatePosition(float deltaTime)
         {
+            LastMoveType = LastMoveType.None;
             List<Transform> pathPoints = _enemySpawnPoint.PathPoints;
             if (pathPoints.Count == 0)
                 return;
@@ -32,6 +35,9 @@ namespace MainModule
             while (moveDistance > 0)
             {
                 Vector3 target = GetTarget(pathPoints);
+              
+                UpdateLastMoveType(target - currentPosition);
+                
                 float distance = Vector3.Distance(target, currentPosition);
                 if (distance > moveDistance)
                 {
@@ -47,6 +53,15 @@ namespace MainModule
                     SelectNextTargetIndex(pathPoints);
                 }
             }
+        }
+
+        private void UpdateLastMoveType(Vector3 shift)
+        {
+            if (shift.x > 0)
+                LastMoveType = LastMoveType.ToRight;
+
+            if (shift.x < 0)
+                LastMoveType = LastMoveType.ToLeft;
         }
 
         public EnemyMoveProgress GetProgress()
