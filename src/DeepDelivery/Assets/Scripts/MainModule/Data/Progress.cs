@@ -29,6 +29,7 @@ namespace MainModule
         public List<GunType> ActiveGuns = new();
         public bool HasSavedPosition;
         public SerializableVector3 SavedPosition;
+        public List<ItemType> Items = new();
     }
 
     [Serializable]

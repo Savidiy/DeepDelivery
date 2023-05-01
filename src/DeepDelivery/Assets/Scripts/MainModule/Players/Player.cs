@@ -27,8 +27,6 @@ namespace MainModule
         {
             _playerBehaviour = playerBehaviour;
             _playerInvulnerability = playerInvulnerability;
-
-            UpdateGunVisibility();
         }
 
         public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
@@ -37,22 +35,38 @@ namespace MainModule
             MaxHp = progress.MaxHp;
             ActiveGuns.Clear();
             ActiveGuns.AddRange(progress.ActiveGuns);
-            
+
             Vector3 position = progress.HasSavedPosition
                 ? progress.SavedPosition.ToVector3()
                 : defaultPosition;
 
             _playerBehaviour.transform.position = position;
+
+            ItemsCount.Clear();
+            if (progress.Items != null)
+                foreach (ItemType itemType in progress.Items)
+                {
+                    ItemsCount.TryAdd(itemType, 0);
+                    ItemsCount[itemType] += 1;
+                }
+
+            Quests.Clear();
+
+            UpdateGunVisibility();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.ActiveGuns.Clear();
-            progress.ActiveGuns.AddRange(ActiveGuns);
+            progress.ActiveGuns = new List<GunType>(ActiveGuns);
             progress.MaxHp = MaxHp;
             progress.CurrentHp = CurrentHp;
             progress.HasSavedPosition = true;
             progress.SavedPosition = new SerializableVector3(Position);
+
+            progress.Items = new List<ItemType>();
+            foreach ((ItemType key, int count) in ItemsCount)
+                for (int i = 0; i < count; i++)
+                    progress.Items.Add(key);
         }
 
         private void UpdateGunVisibility()
@@ -118,7 +132,7 @@ namespace MainModule
                 MaxHp++;
                 return;
             }
-            
+
             if (ItemsCount.TryGetValue(itemType, out var count))
                 ItemsCount[itemType] = count + 1;
             else
