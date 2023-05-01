@@ -56,7 +56,7 @@ namespace LevelWindowModule.View
 
         private void OnHeartCountChange(int heartCount)
         {
-            for (int i = _hearts.Count - 1; i >= heartCount; i--)
+            for (int i = _hearts.Count - 1; i >= heartCount && i >= 0; i--)
             {
                 HeartHierarchy heartHierarchy = _hearts[i];
                 Object.Destroy(heartHierarchy.gameObject);

@@ -35,6 +35,7 @@ namespace MainModule
         public bool EnemyWasCreated;
         public float Timer;
         public SerializableVector3 EnemyPosition;
+        public SerializableVector3 EnemyRotation;
         public int EnemyHp;
         public EnemyMoveProgress EnemyMoveProgress;
 
@@ -43,14 +44,14 @@ namespace MainModule
         }
 
         public EnemySpawnPointProgress(string id, bool hasEnemy, bool enemyWasCreated, float timer, Vector3 enemyPosition,
-            int enemyHp,
-            EnemyMoveProgress enemyMoveProgress)
+            Quaternion enemyRotation, int enemyHp, EnemyMoveProgress enemyMoveProgress)
         {
             Id = id;
             HasEnemy = hasEnemy;
             EnemyWasCreated = enemyWasCreated;
             Timer = timer;
             EnemyPosition = new SerializableVector3(enemyPosition);
+            EnemyRotation = new SerializableVector3(enemyRotation.eulerAngles);
             EnemyHp = enemyHp;
             EnemyMoveProgress = enemyMoveProgress;
         }

@@ -21,6 +21,7 @@ namespace MainModule
             EnemyStaticData enemyData = _enemyStaticDataProvider.GetEnemyData(enemyType);
             EnemyBehaviour enemyBehaviour = Object.Instantiate(enemyData.EnemyBehaviour, _root);
             enemyBehaviour.transform.position = enemySpawnPoint.transform.position;
+            enemyBehaviour.transform.rotation = enemySpawnPoint.transform.rotation;
             EnemyBlinkSettings enemyBlinkSettings = _enemyStaticDataProvider.EnemyBlinkSettings;
 
             IEnemyMover mover = CreateMover(enemyBehaviour, enemySpawnPoint, enemyData);

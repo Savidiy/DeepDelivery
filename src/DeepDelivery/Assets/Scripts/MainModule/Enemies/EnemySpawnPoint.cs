@@ -144,11 +144,12 @@ namespace MainModule
 
             bool hasEnemy = _enemy != null;
             Vector3 enemyPosition = hasEnemy ? _enemy.Position : Vector3.zero;
+            Quaternion enemyRotation = hasEnemy ? _enemy.Rotation : Quaternion.identity;
             int enemyHp = hasEnemy ? _enemy.Hp : 0;
             EnemyMoveProgress enemyMoveProgress = hasEnemy ? _enemy.EnemyMover.GetProgress() : new EnemyMoveProgress();
 
-            var progress =
-                new EnemySpawnPointProgress(Id, hasEnemy, enemyWasCreated, timer, enemyPosition, enemyHp, enemyMoveProgress);
+            var progress = new EnemySpawnPointProgress(Id, hasEnemy, enemyWasCreated, timer, enemyPosition, enemyRotation, enemyHp,
+                enemyMoveProgress);
 
             return progress;
         }
