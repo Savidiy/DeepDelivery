@@ -1,5 +1,4 @@
 ﻿using Savidiy.Utils;
-using UnityEngine;
 
 namespace MainModule
 {
@@ -30,19 +29,12 @@ namespace MainModule
         private void OnUpdated()
         {
             Player player = _playerHolder.Player;
-            Collider2D playerCollider = player.Collider;
-
             LevelModel levelModel = _levelHolder.LevelModel;
 
-            for (int index = levelModel.Items.Count - 1; index >= 0; index--)
+            foreach (ItemSpawnPoint item in levelModel.Items)
             {
-                Item item = levelModel.Items[index];
-
-                if (playerCollider.HasCollisionWith(item.Collider))
-                {
-                    player.AddItem(item.ItemType);
-                    levelModel.RemoveItem(item);
-                }
+                if (item.CanBeCollect(player))
+                    item.Collect(player);
             }
         }
     }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8772257455423645857}
   - component: {fileID: 7766253216744440959}
+  - component: {fileID: 2373627563279792763}
   m_Layer: 0
   m_Name: Item Spawn
   m_TagString: Untagged
@@ -45,3 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 1
+  UniqueId: {fileID: 2373627563279792763}
+--- !u!114 &2373627563279792763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428335388385806625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0894623cb50d40db978b89cac607c67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: Item Spawn-840811a2-1ee2-420c-b78d-a6ecb0a607b2

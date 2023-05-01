@@ -7,17 +7,17 @@ namespace MainModule
     {
         private readonly EnemySpawnPointFactory _enemySpawnPointFactory;
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
-        private readonly ItemFactory _itemFactory;
+        private readonly ItemSpawnPointFactory _itemSpawnPointFactory;
         private readonly ShopFactory _shopFactory;
         private readonly QuestFactory _questFactory;
         private readonly CheckPointFactory _checkPointFactory;
 
         public LevelModelFactory(EnemySpawnPointFactory enemySpawnPointFactory, EnemySpawnUpdater enemySpawnUpdater,
-            ItemFactory itemFactory, ShopFactory shopFactory, QuestFactory questFactory, CheckPointFactory checkPointFactory)
+            ItemSpawnPointFactory itemSpawnPointFactory, ShopFactory shopFactory, QuestFactory questFactory, CheckPointFactory checkPointFactory)
         {
             _enemySpawnPointFactory = enemySpawnPointFactory;
             _enemySpawnUpdater = enemySpawnUpdater;
-            _itemFactory = itemFactory;
+            _itemSpawnPointFactory = itemSpawnPointFactory;
             _shopFactory = shopFactory;
             _questFactory = questFactory;
             _checkPointFactory = checkPointFactory;
@@ -29,7 +29,7 @@ namespace MainModule
 
             EnemySpawnUpdater enemySpawnUpdater = ResetEnemySpawnUpdater(levelBehaviour.EnemySpawnPoints);
 
-            List<Item> items = CreateData(_itemFactory, levelBehaviour.ItemSpawnPoints);
+            List<ItemSpawnPoint> items = CreateData(_itemSpawnPointFactory, levelBehaviour.ItemSpawnPoints);
             List<Shop> shops = CreateData(_shopFactory, levelBehaviour.Shops);
             List<CheckPoint> checkPoints = CreateData(_checkPointFactory, levelBehaviour.CheckPoints);
             List<QuestGiver> questGivers = CreateData<QuestGiver, QuestGiveBehaviour>(_questFactory, levelBehaviour.GiveQuests);

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using MvvmModule;
 using Savidiy.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MainModule
 {
@@ -9,21 +11,21 @@ namespace MainModule
     {
         private readonly LevelBehaviour _levelBehaviour;
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
-        private readonly List<Item> _items;
 
-        public IReadOnlyList<Item> Items => _items;
+        public IReadOnlyList<ItemSpawnPoint> Items { get; }
         public IReadOnlyList<Enemy> Enemies => _enemySpawnUpdater.Enemies;
         public IReadOnlyList<Shop> Shops { get; }
         public IReadOnlyList<QuestGiver> QuestGivers { get; }
         public IReadOnlyList<QuestTaker> QuestTakers { get; }
         public IReadOnlyList<CheckPoint> CheckPoints { get; }
 
-        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<Item> items, List<Shop> shops,
+        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<ItemSpawnPoint> items,
+            List<Shop> shops,
             List<QuestGiver> questGivers, List<QuestTaker> questTakers, List<CheckPoint> checkPoints)
         {
             _levelBehaviour = levelBehaviour;
             _enemySpawnUpdater = enemySpawnUpdater;
-            _items = items;
+            Items = items;
             Shops = shops;
             QuestGivers = questGivers;
             QuestTakers = questTakers;
@@ -32,7 +34,7 @@ namespace MainModule
 
         public void LoadProgress(Progress progress)
         {
-            LoadProgress(progress, _items);
+            LoadProgress(progress, Items);
             LoadProgress(progress, Shops);
             LoadProgress(progress, QuestGivers);
             LoadProgress(progress, QuestTakers);
@@ -41,7 +43,7 @@ namespace MainModule
 
         public void UpdateProgress(Progress progress)
         {
-            UpdateProgress(progress, _items);
+            UpdateProgress(progress, Items);
             UpdateProgress(progress, Shops);
             UpdateProgress(progress, QuestGivers);
             UpdateProgress(progress, QuestTakers);
@@ -88,16 +90,20 @@ namespace MainModule
             if (_levelBehaviour != null)
                 Object.Destroy(_levelBehaviour.gameObject);
 
-            foreach (Item item in _items)
-                item.Dispose();
-
-            _items.Clear();
+            DisposeList(Items);
+            DisposeList(Shops);
+            DisposeList(QuestGivers);
+            DisposeList(QuestTakers);
+            DisposeList(CheckPoints);
         }
 
-        public void RemoveItem(Item item)
+        private void DisposeList<T>(IReadOnlyList<T> items) where T : class
         {
-            _items.Remove(item);
-            item.Dispose();
+            foreach (T item in items)
+            {
+                if (item is IDisposable disposable)
+                    disposable.Dispose();
+            }
         }
     }
 }

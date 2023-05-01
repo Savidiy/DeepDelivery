@@ -52,7 +52,8 @@ namespace Installers
             
             Container.Bind<ShopFactory>().AsSingle();
             Container.Bind<UseShopChecker>().AsSingle();
-            Container.Bind<ItemFactory>().AsSingle();
+            Container.Bind<ItemSpawnPointFactory>().AsSingle();
+            Container.Bind<ItemBehaviourFactory>().AsSingle();
             Container.Bind<CollisionWithItemsChecker>().AsSingle();
             
             Container.Bind<LevelRestarter>().AsSingle();

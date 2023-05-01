@@ -11,6 +11,7 @@ namespace MainModule
 
         public string LastActiveCheckPointId = string.Empty;
         public PlayerProgress Player = new();
+        public List<string> CollectedItemId = new();
 
         public Progress(StartProgress startProgress)
         {
