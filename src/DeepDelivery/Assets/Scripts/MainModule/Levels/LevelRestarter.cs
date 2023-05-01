@@ -27,9 +27,9 @@ namespace MainModule
         public void LoadLevel()
         {
             _progressUpdater.PublishProgress();
+            _playerInvulnerability.StartInvulnerableTimer();
             
             _bulletHolder.ClearBullets();
-            _playerInvulnerability.StartInvulnerableTimer();
             _levelWindowPresenter.HideWindow();
             _levelWindowPresenter.ShowWindow();
         }

@@ -50,10 +50,16 @@ namespace MainModule
             }
         }
 
+        public EnemyMoveProgress GetProgress() =>
+            new(_targetIndex);
+
+        public void LoadProgress(EnemyMoveProgress progress) =>
+            _targetIndex = progress.TargetIndex;
+
         private Vector3 GetTarget(List<Transform> pathPoints)
         {
-            return _targetIndex < 0 
-                ? _enemySpawnPoint.transform.position 
+            return _targetIndex < 0
+                ? _enemySpawnPoint.transform.position
                 : pathPoints[_targetIndex].position;
         }
     }

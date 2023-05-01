@@ -10,26 +10,25 @@ namespace MainModule
     public sealed class LevelModel : DisposableCollector, IProgressWriter
     {
         private readonly LevelBehaviour _levelBehaviour;
-        private readonly EnemySpawnUpdater _enemySpawnUpdater;
 
         public IReadOnlyList<ItemSpawnPoint> Items { get; }
-        public IReadOnlyList<Enemy> Enemies => _enemySpawnUpdater.Enemies;
         public IReadOnlyList<Shop> Shops { get; }
         public IReadOnlyList<QuestGiver> QuestGivers { get; }
         public IReadOnlyList<QuestTaker> QuestTakers { get; }
         public IReadOnlyList<CheckPoint> CheckPoints { get; }
+        public IReadOnlyList<EnemySpawnPoint> EnemySpawnPoints { get; }
 
-        public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<ItemSpawnPoint> items,
-            List<Shop> shops,
-            List<QuestGiver> questGivers, List<QuestTaker> questTakers, List<CheckPoint> checkPoints)
+        public LevelModel(LevelBehaviour levelBehaviour, List<ItemSpawnPoint> items, List<Shop> shops,
+            List<QuestGiver> questGivers, List<QuestTaker> questTakers, List<CheckPoint> checkPoints,
+            List<EnemySpawnPoint> enemySpawnPoints)
         {
             _levelBehaviour = levelBehaviour;
-            _enemySpawnUpdater = enemySpawnUpdater;
             Items = items;
             Shops = shops;
             QuestGivers = questGivers;
             QuestTakers = questTakers;
             CheckPoints = checkPoints;
+            EnemySpawnPoints = enemySpawnPoints;
         }
 
         public void LoadProgress(Progress progress)
@@ -39,6 +38,7 @@ namespace MainModule
             LoadProgress(progress, QuestGivers);
             LoadProgress(progress, QuestTakers);
             LoadProgress(progress, CheckPoints);
+            LoadProgress(progress, EnemySpawnPoints);
         }
 
         public void UpdateProgress(Progress progress)
@@ -48,6 +48,7 @@ namespace MainModule
             UpdateProgress(progress, QuestGivers);
             UpdateProgress(progress, QuestTakers);
             UpdateProgress(progress, CheckPoints);
+            UpdateProgress(progress, EnemySpawnPoints);
         }
 
         private void LoadProgress<T>(Progress progress, IReadOnlyList<T> items) where T : class
@@ -95,6 +96,7 @@ namespace MainModule
             DisposeList(QuestGivers);
             DisposeList(QuestTakers);
             DisposeList(CheckPoints);
+            DisposeList(EnemySpawnPoints);
         }
 
         private void DisposeList<T>(IReadOnlyList<T> items) where T : class

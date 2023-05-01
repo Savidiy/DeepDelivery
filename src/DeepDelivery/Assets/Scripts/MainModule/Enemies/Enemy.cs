@@ -13,6 +13,7 @@ namespace MainModule
 
         public int Hp { get; private set; }
         public IEnemyMover EnemyMover { get; }
+        public Vector3 Position => _enemyBehaviour.transform.position;
 
         public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData, IEnemyMover enemyMover, EnemyBlinkSettings enemyBlinkSettings)
         {
@@ -44,6 +45,13 @@ namespace MainModule
         private void UpdateName()
         {
             _enemyBehaviour.name = $"{_enemyStaticData.EnemyType} HP={Hp}";
+        }
+
+        public void LoadProgress(EnemySpawnPointProgress progress)
+        {
+            Hp = progress.EnemyHp;
+            _enemyBehaviour.transform.position = progress.EnemyPosition.ToVector3();
+            EnemyMover.LoadProgress(progress.EnemyMoveProgress);
         }
     }
 }

@@ -6,12 +6,12 @@ namespace MainModule
     public class EnemyMoveUpdater : IDisposable
     {
         private readonly TickInvoker _tickInvoker;
-        private readonly LevelHolder _levelHolder;
+        private readonly EnemyHolder _enemyHolder;
 
-        public EnemyMoveUpdater(TickInvoker tickInvoker, LevelHolder levelHolder)
+        public EnemyMoveUpdater(TickInvoker tickInvoker, EnemyHolder enemyHolder)
         {
             _tickInvoker = tickInvoker;
-            _levelHolder = levelHolder;
+            _enemyHolder = enemyHolder;
             
             _tickInvoker.Updated += OnUpdated;
         }
@@ -25,7 +25,7 @@ namespace MainModule
         {
             float deltaTime = _tickInvoker.DeltaTime;
 
-            foreach (Enemy enemy in _levelHolder.LevelModel.Enemies)
+            foreach (Enemy enemy in _enemyHolder.Enemies)
             {
                 enemy.EnemyMover.UpdatePosition(deltaTime);
             }

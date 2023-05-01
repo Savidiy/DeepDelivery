@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Savidiy.Utils;
 using UnityEngine;
 
 namespace MainModule
@@ -15,6 +16,7 @@ namespace MainModule
         public List<string> TookQuestsId = new();
         public List<string> CompletedQuestsId = new();
         public List<string> SoldOutShopsId = new();
+        public List<EnemySpawnPointProgress> EnemySpawnPoints = new();
 
         public Progress(StartProgress startProgress)
         {
@@ -22,6 +24,48 @@ namespace MainModule
             Player.MaxHp = startProgress.MaxHp;
             Player.CurrentHp = Player.MaxHp;
             Player.ActiveGuns = new List<GunType>(startProgress.ActiveGuns);
+        }
+    }
+
+    [Serializable]
+    public class EnemySpawnPointProgress
+    {
+        public string Id;
+        public bool HasEnemy;
+        public bool EnemyWasCreated;
+        public float Timer;
+        public SerializableVector3 EnemyPosition;
+        public int EnemyHp;
+        public EnemyMoveProgress EnemyMoveProgress;
+
+        public EnemySpawnPointProgress()
+        {
+        }
+
+        public EnemySpawnPointProgress(string id, bool hasEnemy, bool enemyWasCreated, float timer, Vector3 enemyPosition,
+            int enemyHp,
+            EnemyMoveProgress enemyMoveProgress)
+        {
+            Id = id;
+            HasEnemy = hasEnemy;
+            EnemyWasCreated = enemyWasCreated;
+            Timer = timer;
+            EnemyPosition = new SerializableVector3(enemyPosition);
+            EnemyHp = enemyHp;
+            EnemyMoveProgress = enemyMoveProgress;
+        }
+    }
+
+    [Serializable]
+    public class EnemyMoveProgress
+    {
+        public int TargetIndex;
+        public bool IsBackward;
+
+        public EnemyMoveProgress(int targetIndex = 0, bool isBackward = false)
+        {
+            TargetIndex = targetIndex;
+            IsBackward = isBackward;
         }
     }
 
@@ -42,7 +86,7 @@ namespace MainModule
         public float X;
         public float Y;
         public float Z;
-        
+
         public SerializableVector3(Vector3 vector3)
         {
             X = vector3.x;

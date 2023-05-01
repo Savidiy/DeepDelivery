@@ -49,6 +49,17 @@ namespace MainModule
             }
         }
 
+        public EnemyMoveProgress GetProgress()
+        {
+            return new EnemyMoveProgress(_targetIndex, _isBackward);
+        }
+
+        public void LoadProgress(EnemyMoveProgress progress)
+        {
+            _targetIndex = progress.TargetIndex;
+            _isBackward = progress.IsBackward;
+        }
+
         private void SelectNextTargetIndex(List<Transform> pathPoints)
         {
             if (_isBackward)

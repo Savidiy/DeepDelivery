@@ -5,13 +5,13 @@ namespace MainModule
 {
     public class CollisionWithEnemyChecker
     {
-        private readonly LevelHolder _levelHolder;
+        private readonly EnemyHolder _enemyHolder;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
 
-        public CollisionWithEnemyChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder)
+        public CollisionWithEnemyChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, EnemyHolder enemyHolder)
         {
-            _levelHolder = levelHolder;
+            _enemyHolder = enemyHolder;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
         }
@@ -32,7 +32,7 @@ namespace MainModule
             Player player = _playerHolder.Player;
             Collider2D playerCollider = player.Collider;
             
-            foreach (Enemy enemy in _levelHolder.LevelModel.Enemies)
+            foreach (Enemy enemy in _enemyHolder.Enemies)
             {
                 if (player.IsInvulnerable)
                     break;

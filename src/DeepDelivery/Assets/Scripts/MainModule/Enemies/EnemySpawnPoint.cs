@@ -17,6 +17,8 @@ namespace MainModule
         [CanBeNull] private Enemy _enemy;
         [CanBeNull] private Sequence _destroyTween;
 
+        public string Id => _behaviour.UniqueId.Id;
+
         public EnemySpawnPoint(EnemySpawnPointBehaviour behaviour, EnemyFactory enemyFactory,
             ICameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
         {
@@ -99,7 +101,7 @@ namespace MainModule
             return _enemy.Hp <= 0;
         }
 
-        public Enemy DestroyEnemy()
+        public Enemy DestroyEnemyWithDelay()
         {
             if (_enemy == null)
                 throw new Exception("Can't destroy enemy! There is not enemy");
@@ -119,16 +121,9 @@ namespace MainModule
                 .AppendCallback(enemy.Dispose);
         }
 
-        public void Clear()
-        {
-            _enemy?.Dispose();
-            _enemy = null;
-            _destroyTween?.Kill(complete: true);
-        }
-
         public void Dispose()
         {
-            Clear();
+            _enemy?.Dispose();
             _destroyTween?.Kill();
         }
 
@@ -140,6 +135,40 @@ namespace MainModule
             _timer = _behaviour.UseCustomTimerDuration
                 ? _behaviour.CustomTimerDuration
                 : _enemyStaticDataProvider.DefaultEnemySpawnCooldown;
+        }
+
+        public EnemySpawnPointProgress CreateProgress()
+        {
+            bool enemyWasCreated = _enemyWasCreated;
+            float timer = _timer;
+
+            bool hasEnemy = _enemy != null;
+            Vector3 enemyPosition = hasEnemy ? _enemy.Position : Vector3.zero;
+            int enemyHp = hasEnemy ? _enemy.Hp : 0;
+            EnemyMoveProgress enemyMoveProgress = hasEnemy ? _enemy.EnemyMover.GetProgress() : new EnemyMoveProgress();
+
+            var progress =
+                new EnemySpawnPointProgress(Id, hasEnemy, enemyWasCreated, timer, enemyPosition, enemyHp, enemyMoveProgress);
+
+            return progress;
+        }
+
+        public bool LoadProgressWithSpawn(EnemySpawnPointProgress progress, out Enemy enemy)
+        {
+            _enemy?.Dispose();
+            _destroyTween?.Kill();
+            enemy = null;
+
+            _timer = progress.Timer;
+            _enemyWasCreated = progress.EnemyWasCreated;
+
+            if (!progress.HasEnemy)
+                return false;
+
+            enemy = SpawnEnemy();
+            enemy.LoadProgress(progress);
+            _enemy = enemy;
+            return true;
         }
     }
 }

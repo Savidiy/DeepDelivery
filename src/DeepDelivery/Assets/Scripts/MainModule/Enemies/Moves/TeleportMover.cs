@@ -52,5 +52,9 @@ namespace MainModule
                 }
             }
         }
+
+        public EnemyMoveProgress GetProgress() => new(_targetIndex);
+
+        public void LoadProgress(EnemyMoveProgress progress) => _targetIndex = progress.TargetIndex;
     }
 }

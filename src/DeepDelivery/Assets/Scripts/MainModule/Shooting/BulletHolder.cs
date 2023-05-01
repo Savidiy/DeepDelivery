@@ -7,17 +7,17 @@ namespace MainModule
     public class BulletHolder : IDisposable
     {
         private readonly TickInvoker _tickInvoker;
-        private readonly PlayerHolder _playerHolder;
+        private readonly EnemyHolder _enemyHolder;
         private readonly LevelHolder _levelHolder;
         private readonly GameStaticData _gameStaticData;
         private readonly List<Bullet> _bullets = new();
         private readonly List<Bullet> _needRemoveBullets = new();
 
-        public BulletHolder(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
+        public BulletHolder(TickInvoker tickInvoker, EnemyHolder enemyHolder, LevelHolder levelHolder,
             GameStaticData gameStaticData)
         {
             _tickInvoker = tickInvoker;
-            _playerHolder = playerHolder;
+            _enemyHolder = enemyHolder;
             _levelHolder = levelHolder;
             _gameStaticData = gameStaticData;
             _tickInvoker.Updated += OnUpdated;
@@ -54,7 +54,7 @@ namespace MainModule
             float speed = _gameStaticData.PlayerBulletSpeed;
             float deltaTime = _tickInvoker.DeltaTime;
             float delta = speed * deltaTime;
-            
+
             foreach (Bullet bullet in _bullets)
                 bullet.Move(delta);
         }
@@ -65,19 +65,12 @@ namespace MainModule
             {
                 if (bullet.IsPlayerBullet)
                     CheckCollisionWithEnemies(bullet);
-                else
-                    CheckCollisionWithPlayer(bullet);
             }
-        }
-
-        private void CheckCollisionWithPlayer(Bullet bullet)
-        {
-            throw new NotImplementedException();
         }
 
         private void CheckCollisionWithEnemies(Bullet bullet)
         {
-            IReadOnlyList<Enemy> enemies = _levelHolder.LevelModel.Enemies;
+            IReadOnlyList<Enemy> enemies = _enemyHolder.Enemies;
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.HasCollisionWith(bullet.Collider))

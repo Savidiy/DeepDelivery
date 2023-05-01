@@ -4,47 +4,84 @@ using Savidiy.Utils;
 
 namespace MainModule
 {
-    public class EnemySpawnUpdater : IDisposable
+    public class EnemySpawnUpdater : IDisposable, IProgressWriter
     {
         private readonly TickInvoker _tickInvoker;
-        private readonly List<Enemy> _enemies = new();
-        private readonly List<EnemySpawnPoint> _enemySpawnPoints = new();
+        private readonly LevelHolder _levelHolder;
+        private readonly EnemyHolder _enemyHolder;
 
-        public IReadOnlyList<Enemy> Enemies => _enemies;
+        private IReadOnlyList<EnemySpawnPoint> EnemySpawnPoints => _levelHolder.LevelModel.EnemySpawnPoints;
 
-        public EnemySpawnUpdater(TickInvoker tickInvoker)
+        public EnemySpawnUpdater(TickInvoker tickInvoker, ProgressUpdater progressUpdater, LevelHolder levelHolder,
+            EnemyHolder enemyHolder)
         {
             _tickInvoker = tickInvoker;
+            _levelHolder = levelHolder;
+            _enemyHolder = enemyHolder;
             _tickInvoker.Updated += OnUpdated;
+
+            progressUpdater.Register(this);
         }
 
         public void Dispose()
         {
             _tickInvoker.Updated -= OnUpdated;
-            ClearSpawnPoints();
         }
 
-        public void ClearSpawnPoints()
+        public void UpdateProgress(Progress progress)
         {
-            foreach (EnemySpawnPoint enemySpawnPoint in _enemySpawnPoints)
-                enemySpawnPoint.Clear();
+            progress.EnemySpawnPoints = new();
 
-            _enemySpawnPoints.Clear();
-            _enemies.Clear();
-        }
-
-        public void AddSpawnPoints(List<EnemySpawnPoint> enemySpawnPoints) =>
-            _enemySpawnPoints.AddRange(enemySpawnPoints);
-
-        public void SpawnEnemies()
-        {
-            foreach (EnemySpawnPoint enemySpawnPoint in _enemySpawnPoints)
+            foreach (EnemySpawnPoint spawnPoint in EnemySpawnPoints)
             {
-                if (enemySpawnPoint.NeedCreateEnemy())
+                EnemySpawnPointProgress spawnPointProgress = spawnPoint.CreateProgress();
+                progress.EnemySpawnPoints.Add(spawnPointProgress);
+            }
+        }
+
+        public void LoadProgress(Progress progress)
+        {
+            _enemyHolder.Clear();
+
+            foreach (EnemySpawnPoint spawnPoint in EnemySpawnPoints)
+            {
+                if (HasProgress(progress, spawnPoint, out EnemySpawnPointProgress spawnPointProgress))
                 {
-                    Enemy enemy = enemySpawnPoint.SpawnEnemy();
-                    _enemies.Add(enemy);
+                    if (spawnPoint.LoadProgressWithSpawn(spawnPointProgress, out Enemy enemy))
+                        _enemyHolder.Add(enemy);
                 }
+                else
+                {
+                    TrySpawnEnemy(spawnPoint);
+                }
+            }
+        }
+
+        private static bool HasProgress(Progress progress, EnemySpawnPoint spawnPoint,
+            out EnemySpawnPointProgress spawnPointProgress)
+        {
+            spawnPointProgress = null;
+            if (progress.EnemySpawnPoints == null)
+                return false;
+
+            foreach (EnemySpawnPointProgress pointProgress in progress.EnemySpawnPoints)
+            {
+                if (pointProgress.Id.Equals(spawnPoint.Id))
+                {
+                    spawnPointProgress = pointProgress;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void TrySpawnEnemy(EnemySpawnPoint enemySpawnPoint)
+        {
+            if (enemySpawnPoint.NeedCreateEnemy())
+            {
+                Enemy enemy = enemySpawnPoint.SpawnEnemy();
+                _enemyHolder.Add(enemy);
             }
         }
 
@@ -52,18 +89,18 @@ namespace MainModule
         {
             float deltaTime = _tickInvoker.DeltaTime;
 
-            foreach (EnemySpawnPoint enemySpawnPoint in _enemySpawnPoints)
+            foreach (EnemySpawnPoint enemySpawnPoint in EnemySpawnPoints)
             {
                 enemySpawnPoint.UpdateTime(deltaTime);
                 if (enemySpawnPoint.NeedCreateEnemy())
                 {
                     Enemy enemy = enemySpawnPoint.SpawnEnemy();
-                    _enemies.Add(enemy);
+                    _enemyHolder.Add(enemy);
                 }
                 else if (enemySpawnPoint.NeedDestroyEnemy())
                 {
-                    Enemy enemy = enemySpawnPoint.DestroyEnemy();
-                    _enemies.Remove(enemy);
+                    Enemy enemy = enemySpawnPoint.DestroyEnemyWithDelay();
+                    _enemyHolder.Remove(enemy);
                 }
             }
         }

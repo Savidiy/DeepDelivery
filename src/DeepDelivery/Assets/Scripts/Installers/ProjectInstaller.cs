@@ -45,7 +45,8 @@ namespace Installers
             Container.Bind<PlayerInvulnerability>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<EnemyMoveUpdater>().AsSingle();
-            Container.Bind<EnemySpawnUpdater>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemySpawnUpdater>().AsSingle();
+            Container.Bind<EnemyHolder>().AsSingle();
             Container.Bind<EnemySpawnPointFactory>().AsSingle();
             Container.Bind<EnemyFactory>().AsSingle();
             Container.Bind<CollisionWithEnemyChecker>().AsSingle();
