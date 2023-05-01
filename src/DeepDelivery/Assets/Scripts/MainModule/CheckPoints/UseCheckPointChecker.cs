@@ -10,11 +10,12 @@ namespace MainModule
         private readonly PlayerHolder _playerHolder;
         [CanBeNull] private CheckPoint _previousUsedCheckPoint;
 
-        public UseCheckPointChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder)
+        public UseCheckPointChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder, ProgressUpdater progressUpdater)
         {
             _levelHolder = levelHolder;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
+            progressUpdater.Register(this);
         }
 
         public void LoadProgress(Progress progress)

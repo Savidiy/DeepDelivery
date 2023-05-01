@@ -10,13 +10,17 @@ namespace MainModule
         private readonly ProgressSaveLoad _progressSaveLoad;
         private readonly ProgressProvider _progressProvider;
 
-        public ProgressUpdater(List<IProgressWriter> progressWriters, List<IProgressReader> progressReaders,
-            ProgressSaveLoad progressSaveLoad, ProgressProvider progressProvider)
+        public ProgressUpdater(ProgressSaveLoad progressSaveLoad, ProgressProvider progressProvider)
         {
             _progressSaveLoad = progressSaveLoad;
             _progressProvider = progressProvider;
-            _progressReaders.AddRange(progressReaders);
-            _progressWriters.AddRange(progressWriters);
+        }
+
+        public void Register(IProgressReader reader)
+        {
+            _progressReaders.Add(reader);
+            if (reader is IProgressWriter writer)
+                _progressWriters.Add(writer);
         }
 
         public void ResetProgress()
@@ -27,11 +31,8 @@ namespace MainModule
 
         public void PublishProgress()
         {
-            for (var index = 0; index < _progressReaders.Count; index++)
-            {
-                IProgressReader progressReader = _progressReaders[index];
+            foreach (IProgressReader progressReader in _progressReaders)
                 progressReader.LoadProgress(_progressProvider.Progress);
-            }
         }
 
         public void SaveProgress()
@@ -41,20 +42,5 @@ namespace MainModule
 
             _progressSaveLoad.SaveProgress(_progressProvider.Progress);
         }
-
-        public void AddProgressWriter(IProgressWriter progressWriter)
-        {
-            _progressWriters.Add(progressWriter);
-            _progressReaders.Add(progressWriter);
-        }
-
-        public void RemoveProgressWriter(IProgressWriter progressWriter)
-        {
-            _progressWriters.Remove(progressWriter);
-            _progressReaders.Remove(progressWriter);
-        }
-
-        public void AddProgressReader(IProgressReader progressReader) => _progressReaders.Add(progressReader);
-        public void RemoveProgressReader(IProgressReader progressReader) => _progressReaders.Remove(progressReader);
     }
 }
