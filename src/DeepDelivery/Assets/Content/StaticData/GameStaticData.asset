@@ -22,13 +22,13 @@ MonoBehaviour:
   PlayerSpeedX: 10
   PlayerSpeedY: 10
   DefaultMusicVolume: 0.3
-  DefaultSoundVolume: 0.5
+  DefaultSoundVolume: 0
   StartProgress:
     LevelIndex: 0
     MaxHp: 1
     ActiveGuns: 
   HitInvulDuration: 2
   BlinkPeriod: 0.2
-  ShootCooldown: 0.5
+  ShootCooldown: 0.3
   PlayerBulletSpeed: 18
   CompassDrawDistance: 3.21

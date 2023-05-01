@@ -128,8 +128,9 @@ namespace MainModule
         {
             if (itemType == ItemType.Heart)
             {
+                if (CurrentHp == MaxHp)
+                    MaxHp++;
                 CurrentHp++;
-                MaxHp++;
                 return;
             }
 
