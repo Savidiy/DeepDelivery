@@ -83,5 +83,10 @@ namespace LevelWindowModule
         {
             _playerRestarter.RestartLevel();
         }
+
+        public void LoadLevelClickFromView()
+        {
+            _playerRestarter.LoadLevel();
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Installers
             Container.Bind<StartMainState>().AsSingle();
             Container.Bind<LevelPlayMainState>().AsSingle();
 
-            Container.Bind<PlayerHolder>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerHolder>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
             Container.Bind<PlayerInputMover>().AsSingle();
             Container.Bind<PlayerInputShooter>().AsSingle();
@@ -56,14 +56,18 @@ namespace Installers
             Container.Bind<CollisionWithItemsChecker>().AsSingle();
             
             Container.Bind<LevelRestarter>().AsSingle();
-            Container.Bind<LevelHolder>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             
             Container.Bind<QuestChecker>().AsSingle();
             Container.Bind<QuestFactory>().AsSingle();
             Container.Bind<QuestCompassUpdater>().AsSingle();
             
+            Container.Bind<CheckPointFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UseCheckPointChecker>().AsSingle();
             Container.Bind<ProgressProvider>().AsSingle();
+            Container.Bind<ProgressUpdater>().AsSingle();
+            Container.Bind<ProgressSaveLoad>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();
             

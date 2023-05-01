@@ -18,6 +18,7 @@ namespace LevelWindowModule.View
 
 #if !UNITY_EDITOR
             hierarchy.RestartLevelButton.gameObject.SetActive(false);
+            hierarchy.LoadLevelButton.gameObject.SetActive(false);
 #endif
         }
 
@@ -25,6 +26,7 @@ namespace LevelWindowModule.View
         {
             BindClick(Hierarchy.SettingsButton, OnSettingsClick);
             BindClick(Hierarchy.RestartLevelButton, OnRestartLevelClick);
+            BindClick(Hierarchy.LoadLevelButton, OnLoadLevelClick);
 
             Bind(viewModel.HeartCount, OnHeartCountChange);
             Bind(viewModel.Items, OnItemsChange);
@@ -68,14 +70,8 @@ namespace LevelWindowModule.View
             }
         }
 
-        private void OnSettingsClick()
-        {
-            ViewModel.SettingsClickFromView();
-        }
-
-        private void OnRestartLevelClick()
-        {
-            ViewModel.RestartLevelClickFromView();
-        }
+        private void OnSettingsClick() => ViewModel.SettingsClickFromView();
+        private void OnRestartLevelClick() => ViewModel.RestartLevelClickFromView();
+        private void OnLoadLevelClick() => ViewModel.LoadLevelClickFromView();
     }
 }

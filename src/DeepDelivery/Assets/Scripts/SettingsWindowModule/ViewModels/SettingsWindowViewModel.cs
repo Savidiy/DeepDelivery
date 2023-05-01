@@ -10,7 +10,7 @@ namespace SettingsWindowModule
     public sealed class SettingsWindowViewModel : EmptyViewModel, ISettingsWindowViewModel
     {
         private readonly InputSettings _inputSettings;
-        private readonly ProgressProvider _progressProvider;
+        private readonly ProgressUpdater _progressUpdater;
         private readonly MainStateMachine _mainStateMachine;
         private readonly AudioSettings _audioSettings;
         private readonly IAudioPlayer _audioPlayer;
@@ -21,11 +21,11 @@ namespace SettingsWindowModule
         public float MusicVolume { get; }
 
         public SettingsWindowViewModel(IViewModelFactory viewModelFactory, InputSettings inputSettings,
-            ProgressProvider progressProvider, MainStateMachine mainStateMachine, AudioSettings audioSettings,
+            ProgressUpdater progressUpdater, MainStateMachine mainStateMachine, AudioSettings audioSettings,
             IAudioPlayer audioPlayer) : base(viewModelFactory)
         {
             _inputSettings = inputSettings;
-            _progressProvider = progressProvider;
+            _progressUpdater = progressUpdater;
             _mainStateMachine = mainStateMachine;
             _audioSettings = audioSettings;
             _audioPlayer = audioPlayer;
@@ -43,7 +43,7 @@ namespace SettingsWindowModule
         public void ResetClickFromView()
         {
             _audioPlayer.PlayClick();
-            _progressProvider.ResetProgress();
+            _progressUpdater.ResetProgress();
             NeedClose?.Invoke();
             _mainStateMachine.EnterToState<StartMainState>();
         }

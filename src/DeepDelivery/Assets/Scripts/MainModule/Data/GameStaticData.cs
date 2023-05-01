@@ -25,12 +25,20 @@ namespace MainModule
         [FoldoutGroup(SOUND)] public float DefaultMusicVolume = 0.3f;
         [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
 
-        public Progress StartProgress;
+        public StartProgress StartProgress;
         public float HitInvulDuration = 2;
         public float BlinkPeriod = 0.2f;
         public float ShootCooldown = 0.5f;
         public float PlayerBulletSpeed = 8f;
         public float CompassDrawDistance = 1f;
+    }
+    
+    [Serializable]
+    public class StartProgress
+    {
+        public int LevelIndex = 0;
+        public int MaxHp;
+        public List<GunType> ActiveGuns;
     }
 
     [Serializable]

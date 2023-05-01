@@ -13,6 +13,7 @@ namespace MainModule
         public List<ShopBehaviour> Shops = new();
         public List<QuestTakeBehaviour> TakeQuests = new();
         public List<QuestGiveBehaviour> GiveQuests = new();
+        public List<CheckPointBehaviour> CheckPoints = new();
 
         private void OnValidate()
         {
@@ -24,10 +25,30 @@ namespace MainModule
         {
             CollectAllComponents(EnemySpawnPoints);
             CollectAllComponents(ItemSpawnPoints);
-            CollectAllComponents(Walls);
             CollectAllComponents(Shops);
             CollectAllComponents(TakeQuests);
             CollectAllComponents(GiveQuests);
+            CollectAllComponents(CheckPoints);
+            CollectAllComponents(Walls);
+            RemoveWallsWithTrigger(Walls);
+
+            UpdateUniqueId();
+        }
+
+        private void UpdateUniqueId()
+        {
+            var uniqueIds = new List<UniqueId>();
+            CollectAllComponents(uniqueIds);
+            for (var index = 0; index < uniqueIds.Count; index++)
+            {
+                UniqueId checkedUniqueId = uniqueIds[index];
+                for (int prevIndex = 0; prevIndex < index; prevIndex++)
+                {
+                    UniqueId previousUniqueId = uniqueIds[prevIndex];
+                    if (checkedUniqueId.Id.Equals(previousUniqueId.Id))
+                        checkedUniqueId.GenerateId();
+                }
+            }
         }
 
         private void CollectAllComponents<T>(List<T> collection) where T : Behaviour
@@ -47,6 +68,16 @@ namespace MainModule
                 {
                     targets.Add(parentTransform.GetChild(j));
                 }
+            }
+        }
+
+        private void RemoveWallsWithTrigger(List<Collider2D> walls)
+        {
+            for (var index = walls.Count - 1; index >= 0; index--)
+            {
+                Collider2D wall = walls[index];
+                if (wall.isTrigger)
+                    walls.RemoveAt(index);
             }
         }
     }

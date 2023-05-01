@@ -15,16 +15,18 @@ namespace MainModule
         private readonly UseShopChecker _useShopChecker;
         private readonly QuestChecker _questChecker;
         private readonly QuestCompassUpdater _questCompassUpdater;
+        private readonly UseCheckPointChecker _useCheckPointChecker;
 
         public LevelPlayMainState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
             PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, CameraToPlayerMover cameraToPlayerMover,
             LevelRestarter levelRestarter, CollisionWithItemsChecker collisionWithItemsChecker, UseShopChecker useShopChecker,
-            QuestChecker questChecker, QuestCompassUpdater questCompassUpdater)
+            QuestChecker questChecker, QuestCompassUpdater questCompassUpdater, UseCheckPointChecker useCheckPointChecker)
         {
             _collisionWithItemsChecker = collisionWithItemsChecker;
             _useShopChecker = useShopChecker;
             _questChecker = questChecker;
             _questCompassUpdater = questCompassUpdater;
+            _useCheckPointChecker = useCheckPointChecker;
             _levelWindowPresenter = levelWindowPresenter;
             _collisionWithEnemyChecker = collisionWithEnemyChecker;
             _playerInputMover = playerInputMover;
@@ -35,7 +37,7 @@ namespace MainModule
 
         public void Enter()
         {
-            _levelRestarter.RestartLevel();
+            _levelRestarter.LoadLevel();
             _playerInputMover.ActivatePlayerControls();
             _playerInputShooter.ActivatePlayerControls();
             _collisionWithEnemyChecker.Activate();
@@ -44,6 +46,7 @@ namespace MainModule
             _useShopChecker.Activate();
             _questChecker.Activate();
             _questCompassUpdater.Activate();
+            _useCheckPointChecker.Activate();
             _levelWindowPresenter.ShowWindow();
         }
 
@@ -58,6 +61,7 @@ namespace MainModule
             _useShopChecker.Deactivate();
             _questChecker.Deactivate();
             _questCompassUpdater.Deactivate();
+            _useCheckPointChecker.Deactivate();
         }
     }
 }

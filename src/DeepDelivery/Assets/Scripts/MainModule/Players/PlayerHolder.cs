@@ -2,7 +2,7 @@
 
 namespace MainModule
 {
-    public class PlayerHolder
+    public class PlayerHolder : IProgressWriter
     {
         private readonly PlayerFactory _playerFactory;
         private readonly LevelHolder _levelHolder;
@@ -21,6 +21,14 @@ namespace MainModule
             Player = _playerFactory.CreatePlayer();
             Vector3 position = _levelHolder.LevelModel.GetPlayerStartPosition();
             Player.SetPosition(position);
+        }
+
+        public void LoadProgress(Progress progress)
+        {
+        }
+
+        public void UpdateProgress(Progress progress)
+        {
         }
     }
 }

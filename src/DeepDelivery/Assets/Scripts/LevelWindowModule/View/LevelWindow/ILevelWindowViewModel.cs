@@ -12,5 +12,6 @@ namespace LevelWindowModule.View
 
         void SettingsClickFromView();
         void RestartLevelClickFromView();
+        void LoadLevelClickFromView();
     }
 }

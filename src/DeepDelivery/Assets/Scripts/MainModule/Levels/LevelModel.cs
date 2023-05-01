@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MainModule
 {
-    public sealed class LevelModel : DisposableCollector
+    public sealed class LevelModel : DisposableCollector, IProgressWriter
     {
         private readonly LevelBehaviour _levelBehaviour;
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
@@ -16,16 +16,52 @@ namespace MainModule
         public IReadOnlyList<Shop> Shops { get; }
         public IReadOnlyList<QuestGiver> QuestGivers { get; }
         public IReadOnlyList<QuestTaker> QuestTakers { get; }
+        public IReadOnlyList<CheckPoint> CheckPoints { get; }
 
         public LevelModel(LevelBehaviour levelBehaviour, EnemySpawnUpdater enemySpawnUpdater, List<Item> items, List<Shop> shops,
-            List<QuestGiver> questGivers, List<QuestTaker> questTakers)
+            List<QuestGiver> questGivers, List<QuestTaker> questTakers, List<CheckPoint> checkPoints)
         {
+            _levelBehaviour = levelBehaviour;
+            _enemySpawnUpdater = enemySpawnUpdater;
             _items = items;
             Shops = shops;
             QuestGivers = questGivers;
             QuestTakers = questTakers;
-            _levelBehaviour = levelBehaviour;
-            _enemySpawnUpdater = enemySpawnUpdater;
+            CheckPoints = checkPoints;
+        }
+
+        public void LoadProgress(Progress progress)
+        {
+            LoadProgress(progress, _items);
+            LoadProgress(progress, Shops);
+            LoadProgress(progress, QuestGivers);
+            LoadProgress(progress, QuestTakers);
+            LoadProgress(progress, CheckPoints);
+        }
+
+        public void UpdateProgress(Progress progress)
+        {
+            UpdateProgress(progress, _items);
+            UpdateProgress(progress, Shops);
+            UpdateProgress(progress, QuestGivers);
+            UpdateProgress(progress, QuestTakers);
+            UpdateProgress(progress, CheckPoints);
+        }
+
+        private void LoadProgress<T>(Progress progress, IReadOnlyList<T> items) where T : class
+        {
+            foreach (T item in items)
+                if (item is IProgressReader progressReader)
+                    progressReader.LoadProgress(progress);
+        }
+
+        private void UpdateProgress<T>(Progress progress, IReadOnlyList<T> items) where T : class
+        {
+            foreach (T item in items)
+            {
+                if (item is IProgressWriter progressWriter)
+                    progressWriter.UpdateProgress(progress);
+            }
         }
 
         public Vector3 GetPlayerStartPosition()
@@ -49,7 +85,8 @@ namespace MainModule
         public override void Dispose()
         {
             base.Dispose();
-            Object.Destroy(_levelBehaviour.gameObject);
+            if (_levelBehaviour != null)
+                Object.Destroy(_levelBehaviour.gameObject);
 
             foreach (Item item in _items)
                 item.Dispose();

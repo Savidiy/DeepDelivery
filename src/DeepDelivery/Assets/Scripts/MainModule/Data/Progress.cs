@@ -11,11 +11,13 @@ namespace MainModule
         public int CurrentHp;
         public List<GunType> ActiveGuns;
 
-        public Progress(Progress progress)
+        public string LastActiveCheckPointId = string.Empty;
+
+        public Progress(StartProgress progress)
         {
             LevelIndex = progress.LevelIndex;
             MaxHp = progress.MaxHp;
-            CurrentHp = progress.CurrentHp;
+            CurrentHp = MaxHp;
             ActiveGuns = new List<GunType>(progress.ActiveGuns);
         }
     }

@@ -10,15 +10,17 @@ namespace MainModule
         private readonly ItemFactory _itemFactory;
         private readonly ShopFactory _shopFactory;
         private readonly QuestFactory _questFactory;
+        private readonly CheckPointFactory _checkPointFactory;
 
         public LevelModelFactory(EnemySpawnPointFactory enemySpawnPointFactory, EnemySpawnUpdater enemySpawnUpdater,
-            ItemFactory itemFactory, ShopFactory shopFactory, QuestFactory questFactory)
+            ItemFactory itemFactory, ShopFactory shopFactory, QuestFactory questFactory, CheckPointFactory checkPointFactory)
         {
             _enemySpawnPointFactory = enemySpawnPointFactory;
             _enemySpawnUpdater = enemySpawnUpdater;
             _itemFactory = itemFactory;
             _shopFactory = shopFactory;
             _questFactory = questFactory;
+            _checkPointFactory = checkPointFactory;
         }
 
         public LevelModel Create(LevelData levelData)
@@ -29,10 +31,13 @@ namespace MainModule
 
             List<Item> items = CreateData(_itemFactory, levelBehaviour.ItemSpawnPoints);
             List<Shop> shops = CreateData(_shopFactory, levelBehaviour.Shops);
+            List<CheckPoint> checkPoints = CreateData(_checkPointFactory, levelBehaviour.CheckPoints);
             List<QuestGiver> questGivers = CreateData<QuestGiver, QuestGiveBehaviour>(_questFactory, levelBehaviour.GiveQuests);
             List<QuestTaker> questTakers = CreateData<QuestTaker, QuestTakeBehaviour>(_questFactory, levelBehaviour.TakeQuests);
 
-            var levelModel = new LevelModel(levelBehaviour, enemySpawnUpdater, items, shops, questGivers, questTakers);
+            var levelModel = new LevelModel(levelBehaviour, enemySpawnUpdater, items, shops, questGivers, questTakers,
+                checkPoints);
+
             return levelModel;
         }
 
@@ -45,17 +50,18 @@ namespace MainModule
             return _enemySpawnUpdater;
         }
 
-        private List<T> CreateData<T, TK>(IFactory<T, TK> factory, List<TK> shopBehaviours)
+        private List<T> CreateData<T, TK>(IFactory<T, TK> factory, List<TK> behaviours)
+            where T : class
         {
-            List<T> shops = new();
-            
-            foreach (TK shopBehaviour in shopBehaviours)
+            List<T> data = new();
+
+            foreach (TK behaviour in behaviours)
             {
-                T shop = factory.Create(shopBehaviour);
-                shops.Add(shop);
+                T item = factory.Create(behaviour);
+                data.Add(item);
             }
-            
-            return shops;
+
+            return data;
         }
     }
 }
