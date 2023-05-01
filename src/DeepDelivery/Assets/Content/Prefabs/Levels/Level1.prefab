@@ -2492,6 +2492,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5389211008253431605}
     m_Modifications:
+    - target: {fileID: 837815828091487453, guid: c4742f238ed0dd84d877f82abab8e548, type: 3}
+      propertyPath: Id
+      value: Level1-3f572f95-b2c1-4fde-9eb4-65386393b0ab
+      objectReference: {fileID: 0}
     - target: {fileID: 1193011343068535784, guid: c4742f238ed0dd84d877f82abab8e548, type: 3}
       propertyPath: m_Name
       value: GiveQuest (1)

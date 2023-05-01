@@ -24,6 +24,7 @@ namespace LevelWindowModule
         public QuestStatusViewModel(QuestStatusArgs model, IViewModelFactory viewModelFactory) : base(model, viewModelFactory)
         {
             model.QuestGiver.StatusUpdated += OnStatusUpdated;
+            OnStatusUpdated();
         }
 
         private void OnStatusUpdated()
