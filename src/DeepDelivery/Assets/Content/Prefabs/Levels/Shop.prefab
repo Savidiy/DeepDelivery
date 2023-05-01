@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1379473222586822348}
   - component: {fileID: 2779701997408403282}
+  - component: {fileID: 8673480262418108617}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -227,6 +228,20 @@ MonoBehaviour:
   Number4: {fileID: 8181594697378913338}
   PriceDiamond: {fileID: 5582388704976418590}
   PriceChest: {fileID: 1841370764757324038}
+  UniqueId: {fileID: 8673480262418108617}
+--- !u!114 &8673480262418108617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665586153208281971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0894623cb50d40db978b89cac607c67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: Shop-8b706be5-8833-4cc1-bce7-65042bce31c7
 --- !u!1 &1841370764757324038
 GameObject:
   m_ObjectHideFlags: 0

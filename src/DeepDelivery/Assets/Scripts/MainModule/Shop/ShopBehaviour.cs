@@ -16,6 +16,7 @@ namespace MainModule
         public GameObject Number4;
         public GameObject PriceDiamond;
         public GameObject PriceChest;
+        public UniqueId UniqueId;
 
         public void SetHasItem(bool hasItem)
         {

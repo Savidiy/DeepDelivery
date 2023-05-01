@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465504547756269519}
   - component: {fileID: 5334196234985033412}
+  - component: {fileID: 1635133255979130127}
   m_Layer: 0
   m_Name: Enemy Spawn
   m_TagString: Untagged
@@ -50,3 +51,17 @@ MonoBehaviour:
   CustomTimerDuration: 0
   MoveType: 0
   PathPoints: []
+  UniqueId: {fileID: 1635133255979130127}
+--- !u!114 &1635133255979130127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702186910703813932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0894623cb50d40db978b89cac607c67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: Enemy Spawn-e629f13b-582a-4359-9245-3fd0a752c046

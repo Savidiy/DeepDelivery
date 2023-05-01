@@ -14,6 +14,7 @@ namespace MainModule
         public List<string> CollectedItemId = new();
         public List<string> TookQuestsId = new();
         public List<string> CompletedQuestsId = new();
+        public List<string> SoldOutShopsId = new();
 
         public Progress(StartProgress startProgress)
         {

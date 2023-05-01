@@ -25,6 +25,8 @@ namespace MainModule
         private bool NeedShowPathPoints => MoveType != MoveType.None;
         [ShowIf(nameof(NeedShowPathPoints))] public List<Transform> PathPoints = new();
 
+        public UniqueId UniqueId;
+
         public void SetTimerInfo(float timer)
         {
             Timer = timer;
@@ -89,7 +91,7 @@ namespace MainModule
             {
                 if (pathPoint == null)
                     continue;
-                
+
                 Vector3 to = pathPoint.position;
                 Gizmos.DrawLine(from, to);
                 from = to;
