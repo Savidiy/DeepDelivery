@@ -39,10 +39,12 @@ namespace Installers
             Container.Bind<PlayerFactory>().AsSingle();
             Container.Bind<PlayerInputMover>().AsSingle();
             Container.Bind<PlayerInputShooter>().AsSingle();
-            Container.Bind<BulletFactory>().AsSingle();
-            Container.Bind<BulletHolder>().AsSingle();
+            Container.Bind<PlayerDeathChecker>().AsSingle();
             Container.Bind<CameraToPlayerMover>().AsSingle();
             Container.Bind<PlayerInvulnerability>().AsSingle();
+            
+            Container.Bind<BulletFactory>().AsSingle();
+            Container.Bind<BulletHolder>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<EnemyMoveUpdater>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawnUpdater>().AsSingle();
@@ -71,7 +73,7 @@ namespace Installers
             Container.Bind<ProgressUpdater>().AsSingle();
             Container.Bind<ProgressSaveLoad>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<CameraProvider>().AsSingle();
+            Container.Bind<CameraProvider>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<AudioPlayer>().AsSingle();
             Container.BindInterfacesAndSelfTo<AudioSettings>().AsSingle();

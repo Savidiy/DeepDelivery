@@ -14,7 +14,7 @@ namespace AudioModule
         private readonly AudioLibrary _audioLibrary;
         private readonly AudioSettings _audioSettings;
 
-        public AudioPlayer(ICameraProvider cameraProvider, AudioSettings audioSettings, AudioLibrary audioLibrary)
+        public AudioPlayer(CameraProvider cameraProvider, AudioSettings audioSettings, AudioLibrary audioLibrary)
         {
             _audioSettings = audioSettings;
             _audioLibrary = audioLibrary;

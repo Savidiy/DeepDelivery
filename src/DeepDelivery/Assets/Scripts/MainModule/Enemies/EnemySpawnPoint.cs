@@ -9,7 +9,7 @@ namespace MainModule
     {
         private readonly EnemySpawnPointBehaviour _behaviour;
         private readonly EnemyFactory _enemyFactory;
-        private readonly ICameraProvider _cameraProvider;
+        private readonly CameraProvider _cameraProvider;
         private readonly EnemyStaticDataProvider _enemyStaticDataProvider;
 
         private float _timer;
@@ -20,7 +20,7 @@ namespace MainModule
         public string Id => _behaviour.UniqueId.Id;
 
         public EnemySpawnPoint(EnemySpawnPointBehaviour behaviour, EnemyFactory enemyFactory,
-            ICameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
+            CameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
         {
             _behaviour = behaviour;
             _enemyFactory = enemyFactory;

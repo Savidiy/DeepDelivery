@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MainModule
 {
-    public class CameraProvider : ICameraProvider
+    public class CameraProvider
     {
         public Camera Camera { get; }
         public float CameraPixelWidth => Camera.pixelWidth;

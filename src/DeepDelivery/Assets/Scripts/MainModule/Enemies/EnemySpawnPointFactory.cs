@@ -3,10 +3,10 @@
     public class EnemySpawnPointFactory : IFactory<EnemySpawnPoint, EnemySpawnPointBehaviour>
     {
         private readonly EnemyFactory _enemyFactory;
-        private readonly ICameraProvider _cameraProvider;
+        private readonly CameraProvider _cameraProvider;
         private readonly EnemyStaticDataProvider _enemyStaticDataProvider;
 
-        public EnemySpawnPointFactory(EnemyFactory enemyFactory, ICameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
+        public EnemySpawnPointFactory(EnemyFactory enemyFactory, CameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
         {
             _enemyFactory = enemyFactory;
             _cameraProvider = cameraProvider;

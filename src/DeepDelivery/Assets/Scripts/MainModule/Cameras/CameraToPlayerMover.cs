@@ -8,9 +8,9 @@ namespace MainModule
     {
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
-        private readonly ICameraProvider _cameraProvider;
+        private readonly CameraProvider _cameraProvider;
 
-        public CameraToPlayerMover(TickInvoker tickInvoker, PlayerHolder playerHolder, ICameraProvider cameraProvider)
+        public CameraToPlayerMover(TickInvoker tickInvoker, PlayerHolder playerHolder, CameraProvider cameraProvider)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;

@@ -11,7 +11,7 @@ namespace AudioModule
     {
         private readonly AudioSource _musicSource;
 
-        public MusicVolumeController(ICameraProvider cameraProvider, AudioSettings audioSettings, AudioLibrary audioLibrary)
+        public MusicVolumeController(CameraProvider cameraProvider, AudioSettings audioSettings, AudioLibrary audioLibrary)
         {
             _musicSource = cameraProvider.Camera.gameObject.AddComponent<AudioSource>();
             _musicSource.clip = audioLibrary.MusicClip;
