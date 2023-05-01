@@ -48,6 +48,7 @@ MonoBehaviour:
   EnemyType: 1
   RespawnType: 2
   UseCustomTimerDuration: 0
+  StartTimerValue: 0
   CustomTimerDuration: 0
   MoveType: 0
   PathPoints: []

@@ -16,6 +16,7 @@ namespace MainModule
 
         private bool ShowUseCustomTimerDuration => RespawnType is ByTimer or ByTimerWhenInvisible;
         [ShowIf(nameof(ShowUseCustomTimerDuration))] public bool UseCustomTimerDuration;
+        [ShowIf(nameof(ShowUseCustomTimerDuration))] public float StartTimerValue;
         private bool ShowCustomTimerDuration => RespawnType is ByTimer or ByTimerWhenInvisible && UseCustomTimerDuration;
         [ShowIf(nameof(ShowCustomTimerDuration))] public float CustomTimerDuration;
 

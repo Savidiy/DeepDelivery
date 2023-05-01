@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f300bc0dd914afd8747d6eb93e26a4c, type: 3}
   m_Name: EnemyStaticDataProvider
   m_EditorClassIdentifier: 
-  DefaultEnemySpawnCooldown: 1
+  DefaultEnemySpawnCooldown: 0.1
   EnemyBlinkSettings:
     StartBlinkDuration: 0.05
     StartEase: 1
@@ -21,15 +21,15 @@ MonoBehaviour:
   EnemiesData:
   - EnemyType: 1
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 0d98448415a005040b80c64e4ff4b1c5, type: 3}
-    HealthPoints: 2
+    HealthPoints: 4
     MoveSpeed: 5
   - EnemyType: 2
     EnemyBehaviour: {fileID: 3019363166943306336, guid: 7cc0012081de70a4bb8b01f87338d79d, type: 3}
-    HealthPoints: 3
+    HealthPoints: 5
     MoveSpeed: 2.5
   - EnemyType: 3
     EnemyBehaviour: {fileID: 3019363166943306336, guid: c671f631ff0c46c4cb803e10c07c47dc, type: 3}
-    HealthPoints: 3
+    HealthPoints: 7
     MoveSpeed: 1
   - EnemyType: 4
     EnemyBehaviour: {fileID: 8786441544911431102, guid: aee08d68d2bca494c8998729bf82d4dd, type: 3}
@@ -37,13 +37,13 @@ MonoBehaviour:
     MoveSpeed: 1
   - EnemyType: 5
     EnemyBehaviour: {fileID: 8786441544911431102, guid: b74ca56aa0cd3db4187504d9fae0cda3, type: 3}
-    HealthPoints: 1
-    MoveSpeed: 4.5
+    HealthPoints: 2
+    MoveSpeed: 8
   - EnemyType: 6
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 2774e9fd16291e042a8f0df41d2d161e, type: 3}
-    HealthPoints: 1
-    MoveSpeed: 6
+    HealthPoints: 2
+    MoveSpeed: 8
   - EnemyType: 7
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 5fc5eb866a459874d94b34cd88a0029c, type: 3}
-    HealthPoints: 1
-    MoveSpeed: 5.1
+    HealthPoints: 2
+    MoveSpeed: 8

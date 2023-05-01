@@ -9,7 +9,6 @@ namespace MainModule
 
         public PlayerHolder(PlayerFactory playerFactory, LevelHolder levelHolder, ProgressUpdater progressUpdater)
         {
-            Debug.Log($"{GetType()} ctor");
             _levelHolder = levelHolder;
             progressUpdater.Register(this);
 
@@ -18,8 +17,6 @@ namespace MainModule
 
         public void LoadProgress(Progress progress)
         {
-            Debug.Log($"{GetType()} LoadProgress");
-
             Vector3 defaultPosition = _levelHolder.LevelModel.GetPlayerStartPosition();
             Player.LoadProgress(progress.Player, defaultPosition);
         }

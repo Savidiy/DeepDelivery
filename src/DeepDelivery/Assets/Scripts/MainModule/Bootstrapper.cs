@@ -17,7 +17,7 @@ namespace MainModule
 
         public void Initialize()
         {
-            _mainStateMachine.EnterToState<LevelPlayMainState>();
+            _mainStateMachine.EnterToState<StartMainState>();
         }
     }
 }

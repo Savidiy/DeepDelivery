@@ -26,6 +26,7 @@ namespace MainModule
             _enemyFactory = enemyFactory;
             _cameraProvider = cameraProvider;
             _enemyStaticDataProvider = enemyStaticDataProvider;
+            _timer = _behaviour.StartTimerValue;
         }
 
         public void UpdateTime(float deltaTime)

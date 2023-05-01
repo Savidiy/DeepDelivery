@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace MainModule
 {
@@ -12,7 +11,6 @@ namespace MainModule
 
         public LevelHolder(GameStaticData gameStaticData, LevelModelFactory levelModelFactory, ProgressUpdater progressUpdater)
         {
-            Debug.Log($"{GetType()} ctor");
             _gameStaticData = gameStaticData;
             _levelModelFactory = levelModelFactory;
             progressUpdater.Register(this);
@@ -20,7 +18,6 @@ namespace MainModule
 
         public void LoadProgress(Progress progress)
         {
-            Debug.Log($"{GetType()} LoadProgress");
             LevelModel?.Dispose();
 
             int levelIndex = progress.LevelIndex;
