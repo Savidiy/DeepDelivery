@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace MainModule
         private float _timer;
         private bool _enemyWasCreated;
         [CanBeNull] private Enemy _enemy;
+        [CanBeNull] private Sequence _destroyTween;
 
         public EnemySpawnPoint(EnemySpawnPointBehaviour behaviour, EnemyFactory enemyFactory,
             ICameraProvider cameraProvider, EnemyStaticDataProvider enemyStaticDataProvider)
@@ -105,19 +107,29 @@ namespace MainModule
             Enemy enemy = _enemy;
             _enemy = null;
 
-            enemy.Dispose();
+            DestroyEnemyWithDelay(enemy);
             return enemy;
+        }
+
+        private void DestroyEnemyWithDelay(Enemy enemy)
+        {
+            _destroyTween?.Kill();
+            _destroyTween = DOTween.Sequence()
+                .AppendInterval(_enemyStaticDataProvider.DestroyEnemyCooldown)
+                .AppendCallback(enemy.Dispose);
         }
 
         public void Clear()
         {
             _enemy?.Dispose();
             _enemy = null;
+            _destroyTween?.Kill(complete: true);
         }
 
         public void Dispose()
         {
             Clear();
+            _destroyTween?.Kill();
         }
 
         private void RestartTimer()

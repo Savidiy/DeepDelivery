@@ -27,7 +27,7 @@ MonoBehaviour:
     LevelIndex: 0
     MaxHp: 1
     CurrentHp: 1
-    ActiveGuns: 
+    ActiveGuns: 03000000
   HitInvulDuration: 2
   BlinkPeriod: 0.2
   ShootCooldown: 0.5

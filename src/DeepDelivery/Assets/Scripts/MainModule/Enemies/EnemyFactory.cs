@@ -21,9 +21,10 @@ namespace MainModule
             EnemyStaticData enemyData = _enemyStaticDataProvider.GetEnemyData(enemyType);
             EnemyBehaviour enemyBehaviour = Object.Instantiate(enemyData.EnemyBehaviour, _root);
             enemyBehaviour.transform.position = enemySpawnPoint.transform.position;
+            EnemyBlinkSettings enemyBlinkSettings = _enemyStaticDataProvider.EnemyBlinkSettings;
 
             IEnemyMover mover = CreateMover(enemyBehaviour, enemySpawnPoint, enemyData);
-            return new Enemy(enemyBehaviour, enemyData, mover);
+            return new Enemy(enemyBehaviour, enemyData, mover, enemyBlinkSettings);
         }
 
         private IEnemyMover CreateMover(EnemyBehaviour enemyBehaviour, EnemySpawnPointBehaviour enemySpawnPoint,

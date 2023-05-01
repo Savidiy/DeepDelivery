@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Savidiy.Utils;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ namespace MainModule
     [CreateAssetMenu(fileName = "EnemyStaticDataProvider", menuName = "EnemyStaticDataProvider", order = 0)]
     public class EnemyStaticDataProvider : AutoSaveScriptableObject
     {
-        public EnemyStaticData[] EnemiesData;
         public float DefaultEnemySpawnCooldown = 5f;
+        public float DestroyEnemyCooldown => EnemyBlinkSettings.EndBlinkDuration + EnemyBlinkSettings.StartBlinkDuration;
+        public EnemyBlinkSettings EnemyBlinkSettings; 
+        public EnemyStaticData[] EnemiesData;
         
         public EnemyStaticData GetEnemyData(EnemyType enemyType)
         {
@@ -20,6 +23,15 @@ namespace MainModule
 
             throw new Exception($"Can't find prefab for enemy type '{enemyType}'");
         }
+    }
+
+    [Serializable]
+    public class EnemyBlinkSettings
+    {
+        public float StartBlinkDuration = 0.1f;
+        public Ease StartEase = Ease.Linear;
+        public float EndBlinkDuration = 0.1f;
+        public Ease EndEase = Ease.Linear;
     }
 
     [Serializable]

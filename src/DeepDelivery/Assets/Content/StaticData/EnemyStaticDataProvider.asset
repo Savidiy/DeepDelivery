@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f300bc0dd914afd8747d6eb93e26a4c, type: 3}
   m_Name: EnemyStaticDataProvider
   m_EditorClassIdentifier: 
+  DefaultEnemySpawnCooldown: 1
+  EnemyBlinkSettings:
+    StartBlinkDuration: 0.05
+    StartEase: 1
+    EndBlinkDuration: 0.1
+    EndEase: 1
   EnemiesData:
   - EnemyType: 1
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 0d98448415a005040b80c64e4ff4b1c5, type: 3}
@@ -41,4 +47,3 @@ MonoBehaviour:
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 5fc5eb866a459874d94b34cd88a0029c, type: 3}
     HealthPoints: 1
     MoveSpeed: 5.1
-  DefaultEnemySpawnCooldown: 1

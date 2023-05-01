@@ -9,14 +9,16 @@ namespace MainModule
     {
         private readonly EnemyBehaviour _enemyBehaviour;
         private readonly EnemyStaticData _enemyStaticData;
+        private readonly EnemyBlinkSettings _enemyBlinkSettings;
 
         public int Hp { get; private set; }
         public IEnemyMover EnemyMover { get; }
 
-        public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData, IEnemyMover enemyMover)
+        public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData, IEnemyMover enemyMover, EnemyBlinkSettings enemyBlinkSettings)
         {
             EnemyMover = enemyMover;
             _enemyStaticData = enemyStaticData;
+            _enemyBlinkSettings = enemyBlinkSettings;
             _enemyBehaviour = enemyBehaviour;
             Hp = enemyStaticData.HealthPoints;
             UpdateName();
@@ -36,21 +38,12 @@ namespace MainModule
         {
             Hp--;
             UpdateName();
+            _enemyBehaviour.Flash(_enemyBlinkSettings);
         }
 
         private void UpdateName()
         {
             _enemyBehaviour.name = $"{_enemyStaticData.EnemyType} HP={Hp}";
         }
-
-        public void Clear()
-        {
-            
-        }
-    }
-
-    public interface IEnemyMover
-    {
-        void UpdatePosition(float deltaTime);
     }
 }
