@@ -22,7 +22,7 @@ MonoBehaviour:
   PlayerSpeedX: 10
   PlayerSpeedY: 10
   DefaultMusicVolume: 0.3
-  DefaultSoundVolume: 0
+  DefaultSoundVolume: 0.6
   StartProgress:
     LevelIndex: 0
     MaxHp: 1
