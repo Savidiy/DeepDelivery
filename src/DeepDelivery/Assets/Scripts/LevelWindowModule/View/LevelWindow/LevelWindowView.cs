@@ -1,19 +1,22 @@
 using System.Collections.Generic;
 using MvvmModule;
+using Savidiy.Utils;
 using UnityEngine;
 
 namespace LevelWindowModule.View
 {
     public sealed class LevelWindowView : View<LevelWindowHierarchy, ILevelWindowViewModel>
     {
+        private readonly TickInvoker _tickInvoker;
         private readonly List<HeartHierarchy> _hearts = new();
         private readonly List<QuestStatusView> _questStatusViews = new();
         private readonly ItemsView _itemsView;
 
         private const string PREFAB_NAME = "QuestStatus";
 
-        public LevelWindowView(LevelWindowHierarchy hierarchy, IViewFactory viewFactory) : base(hierarchy, viewFactory)
+        public LevelWindowView(LevelWindowHierarchy hierarchy, IViewFactory viewFactory, TickInvoker tickInvoker) : base(hierarchy, viewFactory)
         {
+            _tickInvoker = tickInvoker;
             _itemsView = CreateView<ItemsView, ItemsHierarchy>(hierarchy.ItemsHierarchy);
 
 #if !UNITY_EDITOR
@@ -30,8 +33,27 @@ namespace LevelWindowModule.View
 
             Bind(viewModel.HeartCount, OnHeartCountChange);
             Bind(viewModel.Items, OnItemsChange);
+            Bind(viewModel.UseMobileInput, OnUseMobileInputChange);
 
             UpdateQuestsViews(viewModel);
+            
+            _tickInvoker.Updated += OnUpdated;
+        }
+
+        private void OnUseMobileInputChange(bool useMobileInput)
+        {
+            Hierarchy.MobileInput.SetActive(useMobileInput);
+        }
+
+        protected override void ReleaseViewModel()
+        {
+            base.ReleaseViewModel();
+            _tickInvoker.Updated -= OnUpdated;
+        }
+
+        private void OnUpdated()
+        {
+            ViewModel.SetMobileInputFromView(Hierarchy.MoveStick.InputDirection, Hierarchy.FireButton.IsPressed.Value);
         }
 
         private void UpdateQuestsViews(ILevelWindowViewModel viewModel)

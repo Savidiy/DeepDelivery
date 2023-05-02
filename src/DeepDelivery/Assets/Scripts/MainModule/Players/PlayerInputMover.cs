@@ -8,12 +8,15 @@ namespace MainModule
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
         private readonly GameStaticData _gameStaticData;
+        private readonly MobileInput _mobileInput;
 
-        public PlayerInputMover(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData)
+        public PlayerInputMover(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
+            MobileInput mobileInput)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
             _gameStaticData = gameStaticData;
+            _mobileInput = mobileInput;
         }
 
         public void ActivatePlayerControls()
@@ -42,7 +45,7 @@ namespace MainModule
         private Vector2 CalcMoveShift()
         {
             Vector2 inputDirection = GetInputDirection();
-            
+
             float deltaTime = GetDeltaTime();
             Vector2 shift = inputDirection * deltaTime;
             shift.x *= _gameStaticData.PlayerSpeedX;
@@ -59,7 +62,10 @@ namespace MainModule
             if (_gameStaticData.LeftKeys.IsAnyKeyPressed()) direction.x -= 1;
             if (_gameStaticData.RightKeys.IsAnyKeyPressed()) direction.x += 1;
 
-            direction.Normalize();
+            direction += _mobileInput.InputDirection;
+
+            if (direction.magnitude > 1)
+                direction.Normalize();
 
             return direction;
         }

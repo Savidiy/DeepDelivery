@@ -7,8 +7,7 @@ namespace SettingsWindowModule.View
     {
         public Button BackButton;
         public Button ResetButton;
-        public Button KeyboardButton;
-        public Button MobileButton;
+        public Toggle UseMobileInput;
         public Slider MusicVolume;
         public Slider SoundVolume;
     }

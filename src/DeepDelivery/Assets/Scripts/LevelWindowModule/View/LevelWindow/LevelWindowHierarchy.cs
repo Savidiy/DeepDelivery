@@ -1,3 +1,4 @@
+using UiModule;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,5 +13,8 @@ namespace LevelWindowModule.View
         public Transform HeartRoot;
         public ItemsHierarchy ItemsHierarchy;
         public Transform QuestsRoot;
+        public GameObject MobileInput;
+        public MoveStickBehaviour MoveStick;
+        public PressButton FireButton;
     }
 }

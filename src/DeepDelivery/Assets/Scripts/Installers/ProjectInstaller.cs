@@ -38,6 +38,7 @@ namespace Installers
             Container.Bind<PlayerHolder>().AsSingle();
             Container.Bind<PlayerFactory>().AsSingle();
             Container.Bind<PlayerInputMover>().AsSingle();
+            Container.Bind<MobileInput>().AsSingle();
             Container.Bind<PlayerInputShooter>().AsSingle();
             Container.Bind<PlayerDeathChecker>().AsSingle();
             Container.Bind<CameraToPlayerMover>().AsSingle();

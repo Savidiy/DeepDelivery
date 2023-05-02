@@ -7,8 +7,7 @@ namespace SettingsWindowModule.View
     {
         void BackClickFromView();
         void ResetClickFromView();
-        void SelectMobileFromView();
-        void SelectKeyboardFromView();
+        void UseMobileInputFromView(bool isUseMobileInput);
         void SetSoundVolumeFromView(float volume);
         void SetMusicVolumeFromView(float volume);
         float SoundVolume { get; }

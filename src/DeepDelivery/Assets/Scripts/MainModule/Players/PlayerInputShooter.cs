@@ -10,16 +10,18 @@ namespace MainModule
         private readonly GameStaticData _gameStaticData;
         private readonly BulletFactory _bulletFactory;
         private readonly BulletHolder _bulletHolder;
+        private readonly MobileInput _mobileInput;
         private float _cooldownTimer;
 
         public PlayerInputShooter(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
-            BulletFactory bulletFactory, BulletHolder bulletHolder)
+            BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
             _gameStaticData = gameStaticData;
             _bulletFactory = bulletFactory;
             _bulletHolder = bulletHolder;
+            _mobileInput = mobileInput;
         }
 
         public void ActivatePlayerControls()
@@ -54,8 +56,8 @@ namespace MainModule
 
         private bool CanShoot()
         {
-            return _cooldownTimer <= 0 &&
-                   _gameStaticData.ShootKeys.IsAnyKeyPressed();
+            bool isKeyPressed = _gameStaticData.ShootKeys.IsAnyKeyPressed() || _mobileInput.IsFirePressed;
+            return _cooldownTimer <= 0 && isKeyPressed;
         }
 
         private void CreateBullets()

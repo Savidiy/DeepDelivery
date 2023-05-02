@@ -48,16 +48,10 @@ namespace SettingsWindowModule
             _mainStateMachine.EnterToState<StartMainState>();
         }
 
-        public void SelectMobileFromView()
+        public void UseMobileInputFromView(bool isUseMobileInput)
         {
             _audioPlayer.PlayClick();
-            _inputSettings.SetControls(EControlType.Mobile);
-        }
-
-        public void SelectKeyboardFromView()
-        {
-            _audioPlayer.PlayClick();
-            _inputSettings.SetControls(EControlType.Keyboard);
+            _inputSettings.SetControls(isUseMobileInput ? EControlType.Mobile : EControlType.Keyboard);
         }
 
         public void SetSoundVolumeFromView(float volume)

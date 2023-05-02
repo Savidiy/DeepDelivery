@@ -14,6 +14,7 @@ namespace MvvmModule
         private readonly List<IDisposable> _bindDisposables = new();
         private readonly List<(Button button, UnityAction onClick)> _bindButtonDisposables = new();
         private readonly List<(Slider slider, UnityAction<float> onChange)> _bindSliderDisposables = new();
+        private readonly List<(Toggle toggle, UnityAction<bool> onChange)> _bindToggleDisposables = new();
 
         protected TViewModel ViewModel { get; private set; }
 
@@ -53,6 +54,14 @@ namespace MvvmModule
             }
 
             _bindSliderDisposables.Clear();
+            
+            for (var index = 0; index < _bindToggleDisposables.Count; index++)
+            {
+                (Toggle toggle, UnityAction<bool> onChange) = _bindToggleDisposables[index];
+                toggle.onValueChanged.RemoveListener(onChange);
+            }
+
+            _bindToggleDisposables.Clear();
         }
 
         public override void ClearViewModel()
@@ -108,10 +117,18 @@ namespace MvvmModule
             _bindButtonDisposables.Add((button, onClick));
         }
 
+        protected void BindToggle(Toggle toggle, UnityAction<bool> onChange)
+        {
+            toggle.onValueChanged.AddListener(onChange);
+            _bindToggleDisposables.Add((toggle, onChange));
+            onChange?.Invoke(toggle.isOn);
+        }
+
         protected void BindSlider(Slider slider, UnityAction<float> onChange)
         {
             slider.onValueChanged.AddListener(onChange);
             _bindSliderDisposables.Add((slider, onChange));
+            onChange?.Invoke(slider.value);
         }
     }
 

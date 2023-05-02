@@ -5,6 +5,7 @@ using MvvmModule;
 using Savidiy.Utils;
 using SettingsWindowModule.Contracts;
 using UniRx;
+using UnityEngine;
 
 namespace LevelWindowModule
 {
@@ -13,6 +14,7 @@ namespace LevelWindowModule
         private readonly ISettingsWindowPresenter _settingsWindowPresenter;
         private readonly LevelRestarter _playerRestarter;
         private readonly PlayerHolder _playerHolder;
+        private readonly MobileInput _mobileInput;
         private readonly ReactiveProperty<int> _heartCount = new();
         private readonly ReactiveProperty<IItemsViewModel> _items = new();
         private int _itemsCount = int.MinValue;
@@ -20,14 +22,23 @@ namespace LevelWindowModule
         public IReadOnlyReactiveProperty<int> HeartCount => _heartCount;
         public IReadOnlyReactiveProperty<IItemsViewModel> Items => _items;
         public IReadOnlyList<IQuestStatusViewModel> Quests { get; }
+        public IReadOnlyReactiveProperty<bool> UseMobileInput { get; }
 
         public LevelWindowViewModel(IViewModelFactory viewModelFactory, ISettingsWindowPresenter settingsWindowPresenter,
-            LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder) : base(
-            viewModelFactory)
+            LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
+            MobileInput mobileInput, InputSettings inputSettings)
+            : base(viewModelFactory)
         {
             _settingsWindowPresenter = settingsWindowPresenter;
             _playerRestarter = playerRestarter;
             _playerHolder = playerHolder;
+            _mobileInput = mobileInput;
+            _mobileInput.SetInputDirection(Vector2.zero, false);
+            
+            UseMobileInput = inputSettings
+                .SelectedControlType
+                .Select(a => a == EControlType.Mobile)
+                .ToReactiveProperty();
 
             Quests = CreateQuestStatusViewModels(levelHolder);
 
@@ -87,6 +98,11 @@ namespace LevelWindowModule
         public void LoadLevelClickFromView()
         {
             _playerRestarter.LoadLevel();
+        }
+
+        public void SetMobileInputFromView(Vector2 inputDirection, bool isFirePressed)
+        {
+            _mobileInput.SetInputDirection(inputDirection, isFirePressed);
         }
     }
 }

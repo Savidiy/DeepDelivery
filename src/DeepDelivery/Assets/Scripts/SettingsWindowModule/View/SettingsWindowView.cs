@@ -15,8 +15,7 @@ namespace SettingsWindowModule.View
                 
             BindClick(Hierarchy.ResetButton, OnResetButtonClick);
             BindClick(Hierarchy.BackButton, OnBackButtonClick);
-            BindClick(Hierarchy.KeyboardButton, OnKeyboardButtonClick);
-            BindClick(Hierarchy.MobileButton, OnMobileButtonClick);
+            BindToggle(Hierarchy.UseMobileInput, OnUseMobileInputChanged);
             BindSlider(Hierarchy.MusicVolume, OnMusicVolumeSet);
             BindSlider(Hierarchy.SoundVolume, OnSoundVolumeSet);
         }
@@ -29,8 +28,7 @@ namespace SettingsWindowModule.View
 
         private void OnResetButtonClick() => ViewModel.ResetClickFromView();
 
-        private void OnMobileButtonClick() => ViewModel.SelectMobileFromView();
+        private void OnUseMobileInputChanged(bool isUseMobileInput) => ViewModel.UseMobileInputFromView(isUseMobileInput);
 
-        private void OnKeyboardButtonClick() => ViewModel.SelectKeyboardFromView();
     }
 }
