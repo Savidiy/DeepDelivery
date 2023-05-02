@@ -65,11 +65,14 @@ namespace MainModule
 
         private void CreateBullets()
         {
+            _cooldownTimer = _gameStaticData.ShootCooldown;
+
             Player player = _playerHolder.Player;
             if (player.ActiveGuns.Count == 0)
+            {
+                _audioPlayer.PlayOnce(SoundId.PlayerEmptyFire);
                 return;
-
-            _cooldownTimer = _gameStaticData.ShootCooldown;
+            }
 
             foreach (GunType gunType in player.ActiveGuns)
             {
@@ -78,8 +81,8 @@ namespace MainModule
                 Bullet bullet = _bulletFactory.CreateBullet(gunPosition, gunDirection, true);
                 _bulletHolder.AddBullet(bullet);
             }
-            
-            _audioPlayer.PlayOnce(player.ActiveGuns.Count > 0 ? SoundId.PlayerFire : SoundId.PlayerEmptyFire);
+
+            _audioPlayer.PlayOnce(SoundId.PlayerFire);
         }
     }
 }
