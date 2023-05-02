@@ -12,6 +12,7 @@ namespace SettingsWindowModule.View
         {
             Hierarchy.SoundVolume.value = viewModel.SoundVolume;
             Hierarchy.MusicVolume.value = viewModel.MusicVolume;
+            Hierarchy.UseMobileInput.isOn = viewModel.IsUseMobileInput;
                 
             BindClick(Hierarchy.ResetButton, OnResetButtonClick);
             BindClick(Hierarchy.BackButton, OnBackButtonClick);

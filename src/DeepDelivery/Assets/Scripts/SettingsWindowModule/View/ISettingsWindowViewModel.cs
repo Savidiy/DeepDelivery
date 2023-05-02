@@ -12,5 +12,6 @@ namespace SettingsWindowModule.View
         void SetMusicVolumeFromView(float volume);
         float SoundVolume { get; }
         float MusicVolume { get; }
+        bool IsUseMobileInput { get; }
     }
 }

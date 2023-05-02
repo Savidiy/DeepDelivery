@@ -944,7 +944,7 @@ TextureImporter:
         width: 168
         height: 154
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -965,7 +965,7 @@ TextureImporter:
         width: 269
         height: 132
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 65, y: 47, z: 61, w: 55}
       outline: []
       physicsShape: []
@@ -973,6 +973,69 @@ TextureImporter:
       bones: []
       spriteID: f5f915a8bda3afc469df2da78d5baccb
       internalID: -650797122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_41
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 722
+        width: 264
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d59ea0838eddc74ab8125758b2990be
+      internalID: -1702984683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_42
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 806
+        width: 141
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f6aebb3ea696294f8d2a48e39f3a66b
+      internalID: -1829697562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deep-sprites_43
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 754
+        width: 197
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b241aca664026da4fa542dd11e11ce50
+      internalID: -143442861
       vertices: []
       indices: 
       edges: []
@@ -1024,6 +1087,9 @@ TextureImporter:
       deep-sprites_39: 1760305344
       deep-sprites_4: -1626710843
       deep-sprites_40: -650797122
+      deep-sprites_41: -1702984683
+      deep-sprites_42: -1829697562
+      deep-sprites_43: -143442861
       deep-sprites_5: -503857208
       deep-sprites_6: -892325121
       deep-sprites_7: -428915595

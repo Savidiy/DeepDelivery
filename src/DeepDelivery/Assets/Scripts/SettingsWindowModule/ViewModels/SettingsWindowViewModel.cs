@@ -19,6 +19,7 @@ namespace SettingsWindowModule
         public event Action NeedClose;
         public float SoundVolume { get; }
         public float MusicVolume { get; }
+        public bool IsUseMobileInput { get; }
 
         public SettingsWindowViewModel(IViewModelFactory viewModelFactory, InputSettings inputSettings,
             ProgressUpdater progressUpdater, MainStateMachine mainStateMachine, AudioSettings audioSettings,
@@ -29,6 +30,8 @@ namespace SettingsWindowModule
             _mainStateMachine = mainStateMachine;
             _audioSettings = audioSettings;
             _audioPlayer = audioPlayer;
+
+            IsUseMobileInput = _inputSettings.SelectedControlType.Value == EControlType.Mobile;
 
             SoundVolume = audioSettings.SoundVolume.Value;
             MusicVolume = audioSettings.MusicVolume.Value;

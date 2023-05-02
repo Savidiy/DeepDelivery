@@ -13,7 +13,7 @@ namespace MainModule
 
         public InputSettings()
         {
-            _selectedControlType.Value = (EControlType) PlayerPrefs.GetInt(CONTROLS_KEY, (int) EControlType.NotSelected);
+            _selectedControlType.Value = (EControlType) PlayerPrefs.GetInt(CONTROLS_KEY, (int) EControlType.Mobile);
         }
 
         public void SetControls(EControlType controlType)
