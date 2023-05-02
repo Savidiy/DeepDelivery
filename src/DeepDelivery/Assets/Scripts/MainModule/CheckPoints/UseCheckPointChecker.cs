@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using AudioModule.Contracts;
+using JetBrains.Annotations;
 using Savidiy.Utils;
 
 namespace MainModule
@@ -6,13 +7,16 @@ namespace MainModule
     public class UseCheckPointChecker : IProgressWriter
     {
         private readonly LevelHolder _levelHolder;
+        private readonly IAudioPlayer _audioPlayer;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
         [CanBeNull] private CheckPoint _previousUsedCheckPoint;
 
-        public UseCheckPointChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder, ProgressUpdater progressUpdater)
+        public UseCheckPointChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
+            ProgressUpdater progressUpdater, IAudioPlayer audioPlayer)
         {
             _levelHolder = levelHolder;
+            _audioPlayer = audioPlayer;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
             progressUpdater.Register(this);
@@ -69,6 +73,7 @@ namespace MainModule
             _previousUsedCheckPoint?.SetUnused();
             _previousUsedCheckPoint = checkPoint;
             checkPoint.UseCheckPoint();
+            _audioPlayer.PlayOnce(SoundId.Save);
         }
     }
 }

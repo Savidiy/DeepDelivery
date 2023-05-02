@@ -1,4 +1,5 @@
-﻿using Savidiy.Utils;
+﻿using AudioModule.Contracts;
+using Savidiy.Utils;
 using UnityEngine;
 
 namespace MainModule
@@ -11,10 +12,11 @@ namespace MainModule
         private readonly BulletFactory _bulletFactory;
         private readonly BulletHolder _bulletHolder;
         private readonly MobileInput _mobileInput;
+        private readonly IAudioPlayer _audioPlayer;
         private float _cooldownTimer;
 
         public PlayerInputShooter(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
-            BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput)
+            BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput, IAudioPlayer audioPlayer)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
@@ -22,6 +24,7 @@ namespace MainModule
             _bulletFactory = bulletFactory;
             _bulletHolder = bulletHolder;
             _mobileInput = mobileInput;
+            _audioPlayer = audioPlayer;
         }
 
         public void ActivatePlayerControls()
@@ -75,6 +78,8 @@ namespace MainModule
                 Bullet bullet = _bulletFactory.CreateBullet(gunPosition, gunDirection, true);
                 _bulletHolder.AddBullet(bullet);
             }
+            
+            _audioPlayer.PlayOnce(player.ActiveGuns.Count > 0 ? SoundId.PlayerFire : SoundId.PlayerEmptyFire);
         }
     }
 }

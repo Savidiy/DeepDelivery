@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AudioModule.Contracts;
 using Savidiy.Utils;
 
 namespace MainModule
@@ -8,10 +9,12 @@ namespace MainModule
         private readonly LevelHolder _levelHolder;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
+        private readonly IAudioPlayer _audioPlayer;
 
         public QuestChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
-            ProgressUpdater progressUpdater)
+            ProgressUpdater progressUpdater, IAudioPlayer audioPlayer)
         {
+            _audioPlayer = audioPlayer;
             _levelHolder = levelHolder;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
@@ -82,11 +85,23 @@ namespace MainModule
             LevelModel levelModel = _levelHolder.LevelModel;
             foreach (QuestGiver questGiver in levelModel.QuestGivers)
                 if (questGiver.CanGiveQuest(player))
-                    questGiver.GiveQuest(player);
+                    GiveQuest(questGiver, player);
 
             foreach (QuestTaker questTaker in levelModel.QuestTakers)
                 if (questTaker.CanTakeQuest(player))
-                    questTaker.TakeQuest(player);
+                    TakeQuest(questTaker, player);
+        }
+
+        private void TakeQuest(QuestTaker questTaker, Player player)
+        {
+            questTaker.TakeQuest(player);
+            _audioPlayer.PlayOnce(SoundId.TakeQuest);
+        }
+
+        private void GiveQuest(QuestGiver questGiver, Player player)
+        {
+            questGiver.GiveQuest(player);
+            _audioPlayer.PlayOnce(SoundId.GiveQuest);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AudioModule.Contracts;
 using Savidiy.Utils;
 
 namespace MainModule
@@ -10,16 +11,18 @@ namespace MainModule
         private readonly EnemyHolder _enemyHolder;
         private readonly LevelHolder _levelHolder;
         private readonly GameStaticData _gameStaticData;
+        private readonly IAudioPlayer _audioPlayer;
         private readonly List<Bullet> _bullets = new();
         private readonly List<Bullet> _needRemoveBullets = new();
 
         public BulletHolder(TickInvoker tickInvoker, EnemyHolder enemyHolder, LevelHolder levelHolder,
-            GameStaticData gameStaticData)
+            GameStaticData gameStaticData, IAudioPlayer audioPlayer)
         {
             _tickInvoker = tickInvoker;
             _enemyHolder = enemyHolder;
             _levelHolder = levelHolder;
             _gameStaticData = gameStaticData;
+            _audioPlayer = audioPlayer;
             _tickInvoker.Updated += OnUpdated;
         }
 
@@ -77,9 +80,27 @@ namespace MainModule
                 {
                     _needRemoveBullets.Add(bullet);
                     enemy.GetHit();
+                    PlayHitSound(enemy.EnemyType);
                     break;
                 }
             }
+        }
+
+        private void PlayHitSound(EnemyType enemyType)
+        {
+            SoundId soundId = enemyType switch
+            {
+                EnemyType.Fish => SoundId.HurtFish,
+                EnemyType.Octopus => SoundId.HurtOctopus,
+                EnemyType.Wall => SoundId.HurtStone,
+                EnemyType.Coral => SoundId.HurtCoral,
+                EnemyType.Stone1 => SoundId.HurtStone,
+                EnemyType.Stone2 =>  SoundId.HurtStone,
+                EnemyType.Stone3 =>  SoundId.HurtStone,
+                _ => SoundId.HurtStone
+            };
+            
+            _audioPlayer.PlayOnce(soundId);
         }
 
         private void CheckCollisionWithWalls()

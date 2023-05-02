@@ -15,6 +15,7 @@ namespace MainModule
         public IEnemyMover EnemyMover { get; }
         public Vector3 Position => _enemyBehaviour.transform.position;
         public Quaternion Rotation => _enemyBehaviour.transform.rotation;
+        public EnemyType EnemyType { get; }
 
         public Enemy(EnemyBehaviour enemyBehaviour, EnemyStaticData enemyStaticData, IEnemyMover enemyMover,
             EnemyBlinkSettings enemyBlinkSettings)
@@ -24,6 +25,7 @@ namespace MainModule
             _enemyBlinkSettings = enemyBlinkSettings;
             _enemyBehaviour = enemyBehaviour;
             Hp = enemyStaticData.HealthPoints;
+            EnemyType = enemyStaticData.EnemyType;
             UpdateName();
         }
 
