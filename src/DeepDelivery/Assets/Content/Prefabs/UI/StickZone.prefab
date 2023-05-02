@@ -114,7 +114,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 450.4365, y: 369.4631}
+  m_SizeDelta: {x: 562.1471, y: 436.7297}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &3377676006293240297
 MonoBehaviour:
@@ -128,8 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3813338ab100467dabefe2c385f0c6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPointerMoveDistance: 50
+  MaxPointerMoveDistance: 70
   MaxJoyMoveDistance: 50
+  MinPointerMoveDistance: 10
   StickBody: {fileID: 6888950131086390797}
   StickJoy: {fileID: 7603146433961136176}
 --- !u!222 &8807163433001423161

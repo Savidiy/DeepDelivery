@@ -7,6 +7,7 @@ namespace UiModule
     {
         [SerializeField] private float MaxPointerMoveDistance;
         [SerializeField] private float MaxJoyMoveDistance;
+        [SerializeField] private float MinPointerMoveDistance = 10;
         [SerializeField] private RectTransform StickBody;
         [SerializeField] private RectTransform StickJoy;
 
@@ -22,6 +23,7 @@ namespace UiModule
         public void OnPointerDown(PointerEventData eventData)
         {
             IsPressed = true;
+            _startMovePosition = eventData.position;
             UpdateJoy(eventData);
         }
 
@@ -47,18 +49,6 @@ namespace UiModule
             UpdateJoyPosition();
         }
 
-        private void UpdateJoyPosition()
-        {
-            StickJoy.anchoredPosition = InputDirection * MaxJoyMoveDistance;
-        }
-
-        private Vector2 CalcInput(Vector2 movePosition)
-        {
-            Vector2 delta = movePosition - _startMovePosition;
-            Vector2 maxPointerMoveDistance = delta / MaxPointerMoveDistance;
-            return maxPointerMoveDistance;
-        }
-
         private void MoveStartPointTo(Vector2 movePosition)
         {
             float distance = Vector2.Distance(movePosition, _startMovePosition);
@@ -68,6 +58,23 @@ namespace UiModule
             Vector2 delta = movePosition - _startMovePosition;
             Vector2 shift = delta * (distance - MaxPointerMoveDistance) / distance;
             _startMovePosition += shift;
+        }
+
+        private Vector2 CalcInput(Vector2 movePosition)
+        {
+            Vector2 delta = movePosition - _startMovePosition;
+            float magnitude = delta.magnitude;
+            if (magnitude < MinPointerMoveDistance)
+                return Vector2.zero;
+
+            delta.Normalize();
+            Vector2 input = delta * (magnitude - MinPointerMoveDistance) / MaxPointerMoveDistance;
+            return input;
+        }
+
+        private void UpdateJoyPosition()
+        {
+            StickJoy.anchoredPosition = InputDirection * MaxJoyMoveDistance;
         }
     }
 }
