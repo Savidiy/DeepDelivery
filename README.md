@@ -1,3 +1,3 @@
 # DeepDelivery
-End all delivery orders, buy guns and fight with danger deep water creatures!
+Complete all delivery orders, buy weapons and fight dangerous deep sea creatures!
 A adventure game made on Ludum Dare #53. 
