@@ -19,8 +19,6 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<Bootstrapper>().AsSingle();
-
             Container.BindInterfacesTo<PrefabFactory>().AsSingle();
             Container.BindInterfacesTo<ViewFactory>().AsSingle();
             Container.BindInterfacesTo<ViewModelFactory>().AsSingle();

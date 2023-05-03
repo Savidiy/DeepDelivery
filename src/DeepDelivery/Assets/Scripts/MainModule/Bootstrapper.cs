@@ -1,12 +1,14 @@
+using UnityEngine;
 using Zenject;
 
 namespace MainModule
 {
-    public sealed class Bootstrapper : IInitializable
+    public sealed class Bootstrapper : MonoBehaviour
     {
-        private readonly MainStateMachine _mainStateMachine;
+        private MainStateMachine _mainStateMachine;
 
-        public Bootstrapper(MainStateMachine mainStateMachine, StartMainState startMainState,
+        [Inject]
+        public void Construct(MainStateMachine mainStateMachine, StartMainState startMainState,
             LevelPlayMainState levelPlayMainState)
         {
             _mainStateMachine = mainStateMachine;
@@ -15,7 +17,7 @@ namespace MainModule
             _mainStateMachine.AddState(levelPlayMainState);
         }
 
-        public void Initialize()
+        public void Awake()
         {
             _mainStateMachine.EnterToState<StartMainState>();
         }
