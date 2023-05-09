@@ -28,6 +28,7 @@ namespace MainModule
         public StartProgress StartProgress;
         public float HitInvulDuration = 2;
         public float BlinkPeriod = 0.2f;
+        public float HurtPlayerDelay = 0.06f;
         public float ShootCooldown = 0.5f;
         public float PlayerBulletSpeed = 8f;
         public float CompassDrawDistance = 1f;

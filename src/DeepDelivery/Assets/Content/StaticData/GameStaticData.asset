@@ -29,6 +29,7 @@ MonoBehaviour:
     ActiveGuns: 
   HitInvulDuration: 2
   BlinkPeriod: 0.2
+  HurtPlayerDelay: 0.06
   ShootCooldown: 0.3
   PlayerBulletSpeed: 18
   CompassDrawDistance: 3.21
