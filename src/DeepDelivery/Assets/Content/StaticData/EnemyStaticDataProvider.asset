@@ -41,16 +41,16 @@ MonoBehaviour:
     PingPongReverseDelay: 0.3
   - EnemyType: 5
     EnemyBehaviour: {fileID: 8786441544911431102, guid: b74ca56aa0cd3db4187504d9fae0cda3, type: 3}
-    HealthPoints: 2
+    HealthPoints: 1
     MoveSpeed: 8
     PingPongReverseDelay: 0.3
   - EnemyType: 6
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 2774e9fd16291e042a8f0df41d2d161e, type: 3}
-    HealthPoints: 2
+    HealthPoints: 1
     MoveSpeed: 8
     PingPongReverseDelay: 0.3
   - EnemyType: 7
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 5fc5eb866a459874d94b34cd88a0029c, type: 3}
-    HealthPoints: 2
+    HealthPoints: 1
     MoveSpeed: 8
     PingPongReverseDelay: 0.3
