@@ -3,11 +3,12 @@ using UnityEngine.EventSystems;
 
 namespace UiModule
 {
-    public class MoveStickBehaviour : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
+    public class MoveStickBehaviour : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler,
+        IPointerExitHandler
     {
-        [SerializeField] private float MaxPointerMoveDistance;
-        [SerializeField] private float MaxJoyMoveDistance;
-        [SerializeField] private float MinPointerMoveDistance = 10;
+        [SerializeField] private float MaxVisualStickShiftDistance = 50;
+        [SerializeField] private float MaxPointerMoveDistance = 70;
+        [SerializeField] private float MinPointerMoveDistance = 15;
         [SerializeField] private RectTransform StickBody;
         [SerializeField] private RectTransform StickJoy;
 
@@ -29,8 +30,12 @@ namespace UiModule
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            IsPressed = false;
-            InputDirection = Vector2.zero;
+            StopMove(eventData);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            StopMove(eventData);
         }
 
         public void OnPointerMove(PointerEventData eventData)
@@ -38,6 +43,13 @@ namespace UiModule
             if (!IsPressed)
                 return;
 
+            UpdateJoy(eventData);
+        }
+
+        private void StopMove(PointerEventData eventData)
+        {
+            IsPressed = false;
+            _startMovePosition = eventData.position;
             UpdateJoy(eventData);
         }
 
@@ -74,7 +86,20 @@ namespace UiModule
 
         private void UpdateJoyPosition()
         {
-            StickJoy.anchoredPosition = InputDirection * MaxJoyMoveDistance;
+            StickJoy.anchoredPosition = InputDirection * MaxVisualStickShiftDistance;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Vector3 position = StickBody.position;
+
+            Vector3 minRadius = StickBody.TransformVector(Vector3.forward * MinPointerMoveDistance);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(position, minRadius.magnitude);
+
+            Vector3 maxRadius = StickBody.TransformVector(Vector3.forward * (MaxPointerMoveDistance + MinPointerMoveDistance));
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(position, maxRadius.magnitude);
         }
     }
 }
