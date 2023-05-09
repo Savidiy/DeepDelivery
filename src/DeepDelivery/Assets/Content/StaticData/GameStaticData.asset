@@ -20,7 +20,7 @@ MonoBehaviour:
     LevelIndex: 0
     MaxHp: 1
     ActiveGuns: 
-  UseDebugProgress: 1
+  UseDebugProgress: 0
   DebugStartProgress:
     LevelIndex: 0
     MaxHp: 5
