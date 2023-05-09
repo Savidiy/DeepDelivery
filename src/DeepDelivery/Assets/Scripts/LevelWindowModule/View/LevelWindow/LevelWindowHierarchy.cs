@@ -14,6 +14,7 @@ namespace LevelWindowModule.View
         public ItemsHierarchy ItemsHierarchy;
         public Transform QuestsRoot;
         public GameObject MobileInput;
+        public GameObject CompletedGame;
         public MoveStickBehaviour MoveStick;
         public PressButton FireButton;
     }

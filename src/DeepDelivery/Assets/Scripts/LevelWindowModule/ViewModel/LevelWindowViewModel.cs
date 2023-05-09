@@ -17,24 +17,29 @@ namespace LevelWindowModule
         private readonly MobileInput _mobileInput;
         private readonly ReactiveProperty<int> _heartCount = new();
         private readonly ReactiveProperty<IItemsViewModel> _items = new();
+        private readonly ReactiveProperty<bool> _isGameCompleted = new();
+        private readonly LevelHolder _levelHolder;
+
         private int _itemsCount = int.MinValue;
 
         public IReadOnlyReactiveProperty<int> HeartCount => _heartCount;
         public IReadOnlyReactiveProperty<IItemsViewModel> Items => _items;
         public IReadOnlyList<IQuestStatusViewModel> Quests { get; }
         public IReadOnlyReactiveProperty<bool> UseMobileInput { get; }
+        public IReadOnlyReactiveProperty<bool> IsGameCompleted => _isGameCompleted;
 
         public LevelWindowViewModel(IViewModelFactory viewModelFactory, ISettingsWindowPresenter settingsWindowPresenter,
             LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
             MobileInput mobileInput, InputSettings inputSettings)
             : base(viewModelFactory)
         {
+            _levelHolder = levelHolder;
             _settingsWindowPresenter = settingsWindowPresenter;
             _playerRestarter = playerRestarter;
             _playerHolder = playerHolder;
             _mobileInput = mobileInput;
             _mobileInput.SetInputDirection(Vector2.zero, false);
-            
+
             UseMobileInput = inputSettings
                 .SelectedControlType
                 .Select(a => a == EControlType.Mobile)
@@ -65,6 +70,24 @@ namespace LevelWindowModule
             _heartCount.Value = player.CurrentHp;
 
             UpdateItemsViewModel(player);
+            CheckGameCompleted();
+        }
+
+        private void CheckGameCompleted()
+        {
+            IReadOnlyList<QuestGiver> questGivers = _levelHolder.LevelModel.QuestGivers;
+
+            for (var index = 0; index < questGivers.Count; index++)
+            {
+                QuestGiver questGiver = questGivers[index];
+                if (!questGiver.IsQuestComplete)
+                {
+                    _isGameCompleted.Value = false;
+                    return;
+                }
+            }
+
+            _isGameCompleted.Value = true;
         }
 
         private void UpdateItemsViewModel(Player player)

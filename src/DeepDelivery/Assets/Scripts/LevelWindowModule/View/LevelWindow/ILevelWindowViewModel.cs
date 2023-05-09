@@ -11,6 +11,7 @@ namespace LevelWindowModule.View
         IReadOnlyReactiveProperty<IItemsViewModel> Items { get; }
         IReadOnlyList<IQuestStatusViewModel> Quests { get; }
         IReadOnlyReactiveProperty<bool> UseMobileInput { get; }
+        IReadOnlyReactiveProperty<bool> IsGameCompleted { get; }
 
         void SettingsClickFromView();
         void RestartLevelClickFromView();

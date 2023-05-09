@@ -34,16 +34,16 @@ namespace LevelWindowModule.View
             Bind(viewModel.HeartCount, OnHeartCountChange);
             Bind(viewModel.Items, OnItemsChange);
             Bind(viewModel.UseMobileInput, OnUseMobileInputChange);
+            Bind(viewModel.IsGameCompleted, OnIsGameCompletedChange);
 
             UpdateQuestsViews(viewModel);
             
             _tickInvoker.Updated += OnUpdated;
         }
 
-        private void OnUseMobileInputChange(bool useMobileInput)
-        {
-            Hierarchy.MobileInput.SetActive(useMobileInput);
-        }
+        private void OnIsGameCompletedChange(bool isGameCompleted) => Hierarchy.CompletedGame.SetActive(isGameCompleted);
+
+        private void OnUseMobileInputChange(bool useMobileInput) => Hierarchy.MobileInput.SetActive(useMobileInput);
 
         protected override void ReleaseViewModel()
         {

@@ -5,6 +5,7 @@ namespace MainModule
     public class QuestTakeBehaviour : MonoBehaviour
     {
         public float InteractRadius;
+        public GameObject OrderLabel;
 
         private void OnDrawGizmos()
         {

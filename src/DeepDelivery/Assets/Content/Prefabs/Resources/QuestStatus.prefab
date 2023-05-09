@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 116497758, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
+  m_Sprite: {fileID: -889525182, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +90,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 2662881258359924227}
-  NotStarted: {fileID: 19010094, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
+  NotStarted: {fileID: -889525182, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
   InProcess: {fileID: 116497758, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
   Completed: {fileID: 2054289493, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}

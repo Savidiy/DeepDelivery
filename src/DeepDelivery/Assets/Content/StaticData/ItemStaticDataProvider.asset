@@ -18,7 +18,7 @@ MonoBehaviour:
   ItemSpriteDictionary:
     keyData: 010000000200000003000000
     valueData:
-    - Sprite: {fileID: 1668910869, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
+    - Sprite: {fileID: -2058691829, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
       Prefab: {fileID: 650850682727137210, guid: 0b1b4b01cef12d74d924985448da70af, type: 3}
     - Sprite: {fileID: 116993128, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
       Prefab: {fileID: 8422208870312921948, guid: 04a203b6e35960a4f9dc9902518792f3, type: 3}

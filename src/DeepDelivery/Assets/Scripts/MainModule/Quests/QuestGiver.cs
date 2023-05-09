@@ -19,6 +19,7 @@ namespace MainModule
             _data = data;
             _questFactory = questFactory;
             _data.OrderLabel.SetActive(true);
+            _data.QuestTakeBehaviour.OrderLabel.SetActive(false);
         }
 
         public bool CanGiveQuest(Player player)
@@ -43,6 +44,7 @@ namespace MainModule
             IsQuestGave = true;
             IsQuestComplete = false;
             _data.OrderLabel.SetActive(false);
+            _data.QuestTakeBehaviour.OrderLabel.SetActive(true);
             Quest quest = _questFactory.Create(this);
             player.AddQuest(quest);
             StatusUpdated?.Invoke();
@@ -61,6 +63,7 @@ namespace MainModule
         public void SetQuestCompleted()
         {
             _data.OrderLabel.SetActive(false);
+            _data.QuestTakeBehaviour.OrderLabel.SetActive(false);
             IsQuestGave = true;
             IsQuestComplete = true;
             StatusUpdated?.Invoke();
