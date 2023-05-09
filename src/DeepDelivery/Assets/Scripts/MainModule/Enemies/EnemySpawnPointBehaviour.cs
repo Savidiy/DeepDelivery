@@ -15,8 +15,8 @@ namespace MainModule
         public RespawnType RespawnType = ByTimerWhenInvisible;
 
         private bool ShowUseCustomTimerDuration => RespawnType is ByTimer or ByTimerWhenInvisible;
-        [ShowIf(nameof(ShowUseCustomTimerDuration))] public bool UseCustomTimerDuration;
         [ShowIf(nameof(ShowUseCustomTimerDuration))] public float StartTimerValue;
+        [ShowIf(nameof(ShowUseCustomTimerDuration))] public bool UseCustomTimerDuration;
         private bool ShowCustomTimerDuration => RespawnType is ByTimer or ByTimerWhenInvisible && UseCustomTimerDuration;
         [ShowIf(nameof(ShowCustomTimerDuration))] public float CustomTimerDuration;
 
@@ -49,6 +49,9 @@ namespace MainModule
                 name += UseCustomTimerDuration
                     ? $" - T:inv,{CustomTimerDuration}s"
                     : " - T:inv,d";
+
+            if (StartTimerValue > 0)
+                name += $" - S:{StartTimerValue}s";
 
             name += MoveType switch
             {

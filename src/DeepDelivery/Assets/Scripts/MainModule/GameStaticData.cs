@@ -16,6 +16,8 @@ namespace MainModule
         [FoldoutGroup(SOUND)] public float DefaultSoundVolume = 0.5f;
 
         public StartProgress StartProgress;
+        public bool UseDebugProgress;
+        public StartProgress DebugStartProgress;
         public float HitInvulDuration = 2;
         public float BlinkPeriod = 0.2f;
         public float HurtPlayerDelay = 0.06f;

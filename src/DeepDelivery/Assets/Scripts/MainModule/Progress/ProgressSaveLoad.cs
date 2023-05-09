@@ -17,7 +17,13 @@ namespace MainModule
 
         public Progress CreateDefaultProgress()
         {
+#if UNITY_EDITOR
+            var progress = new Progress(_gameStaticData.UseDebugProgress
+                ? _gameStaticData.DebugStartProgress
+                : _gameStaticData.StartProgress);
+#else
             var progress = new Progress(_gameStaticData.StartProgress);
+#endif
             return progress;
         }
 

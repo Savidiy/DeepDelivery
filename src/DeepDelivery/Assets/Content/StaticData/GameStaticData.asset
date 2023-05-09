@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - LevelBehaviour: {fileID: 7519213052599762912, guid: 09e0eb754c9510f40a47c2bedb36ee40, type: 3}
-  RightKeys: 640000001301000006010000
-  LeftKeys: 610000001401000004010000
-  UpKeys: 770000001101000008010000
-  DownKeys: 730000001201000002010000
-  ShootKeys: 200000000501000032010000310100000f0100000d000000650000006600000071000000
-  PlayerSpeedX: 10
-  PlayerSpeedY: 11
   DefaultMusicVolume: 0.3
   DefaultSoundVolume: 0.6
   StartProgress:
     LevelIndex: 0
     MaxHp: 1
     ActiveGuns: 
+  UseDebugProgress: 1
+  DebugStartProgress:
+    LevelIndex: 0
+    MaxHp: 5
+    ActiveGuns: 03000000
   HitInvulDuration: 2
   BlinkPeriod: 0.2
   HurtPlayerDelay: 0.06
   ShootCooldown: 0.3
+  PlayerSpeedX: 10
+  PlayerSpeedY: 10
   PlayerBulletSpeed: 18
   CompassDrawDistance: 3.21
