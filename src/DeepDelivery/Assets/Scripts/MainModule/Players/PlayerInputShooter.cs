@@ -9,6 +9,7 @@ namespace MainModule
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
         private readonly GameStaticData _gameStaticData;
+        private readonly InputStaticData _inputStaticData;
         private readonly BulletFactory _bulletFactory;
         private readonly BulletHolder _bulletHolder;
         private readonly MobileInput _mobileInput;
@@ -16,11 +17,13 @@ namespace MainModule
         private float _cooldownTimer;
 
         public PlayerInputShooter(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
-            BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput, IAudioPlayer audioPlayer)
+            InputStaticData inputStaticData, BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput,
+            IAudioPlayer audioPlayer)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
             _gameStaticData = gameStaticData;
+            _inputStaticData = inputStaticData;
             _bulletFactory = bulletFactory;
             _bulletHolder = bulletHolder;
             _mobileInput = mobileInput;
@@ -59,7 +62,7 @@ namespace MainModule
 
         private bool CanShoot()
         {
-            bool isKeyPressed = _gameStaticData.ShootKeys.IsAnyKeyPressed() || _mobileInput.IsFirePressed;
+            bool isKeyPressed = _inputStaticData.ShootKeys.IsAnyKeyPressed() || _mobileInput.IsFirePressed;
             return _cooldownTimer <= 0 && isKeyPressed;
         }
 

@@ -13,6 +13,7 @@ namespace Installers
     public class ProjectInstaller : MonoInstaller
     {
         public GameStaticData GameStaticData;
+        public InputStaticData InputStaticData;
         public EnemyStaticDataProvider EnemyStaticDataProvider;
         public ItemStaticDataProvider ItemStaticDataProvider;
         public AudioLibrary AudioLibrary;
@@ -79,6 +80,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<MusicVolumeController>().AsSingle();
 
             Container.Bind<InputSettings>().AsSingle();
+            Container.Bind<InputStaticData>().FromInstance(InputStaticData);
             Container.Bind<GameStaticData>().FromInstance(GameStaticData);
             Container.Bind<EnemyStaticDataProvider>().FromInstance(EnemyStaticDataProvider);
             Container.Bind<ItemStaticDataProvider>().FromInstance(ItemStaticDataProvider);

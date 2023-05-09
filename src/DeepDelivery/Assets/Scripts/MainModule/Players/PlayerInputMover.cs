@@ -9,14 +9,16 @@ namespace MainModule
         private readonly PlayerHolder _playerHolder;
         private readonly GameStaticData _gameStaticData;
         private readonly MobileInput _mobileInput;
+        private readonly InputStaticData _inputStaticData;
 
         public PlayerInputMover(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
-            MobileInput mobileInput)
+            MobileInput mobileInput, InputStaticData inputStaticData)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
             _gameStaticData = gameStaticData;
             _mobileInput = mobileInput;
+            _inputStaticData = inputStaticData;
         }
 
         public void ActivatePlayerControls()
@@ -57,10 +59,10 @@ namespace MainModule
         {
             Vector2 direction = Vector2.zero;
 
-            if (_gameStaticData.DownKeys.IsAnyKeyPressed()) direction.y -= 1;
-            if (_gameStaticData.UpKeys.IsAnyKeyPressed()) direction.y += 1;
-            if (_gameStaticData.LeftKeys.IsAnyKeyPressed()) direction.x -= 1;
-            if (_gameStaticData.RightKeys.IsAnyKeyPressed()) direction.x += 1;
+            if (_inputStaticData.DownKeys.IsAnyKeyPressed()) direction.y -= 1;
+            if (_inputStaticData.UpKeys.IsAnyKeyPressed()) direction.y += 1;
+            if (_inputStaticData.LeftKeys.IsAnyKeyPressed()) direction.x -= 1;
+            if (_inputStaticData.RightKeys.IsAnyKeyPressed()) direction.x += 1;
 
             direction += _mobileInput.InputDirection;
 

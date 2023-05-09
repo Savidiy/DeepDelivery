@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameStaticData: {fileID: 11400000, guid: 90cfe313c33ebbf42a62c9ddbe16ed17, type: 2}
+  InputStaticData: {fileID: 11400000, guid: 43c126338ddd2a0459d6f7115e8fe15c, type: 2}
   EnemyStaticDataProvider: {fileID: 11400000, guid: 5a20cda39c9913644bcebaace779ddcb, type: 2}
   ItemStaticDataProvider: {fileID: 11400000, guid: f6999060c9c737945a836b34f232f708, type: 2}
   AudioLibrary: {fileID: 11400000, guid: 145cd338018493247909113cc6ae749a, type: 2}

@@ -9,27 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd5c385daf443239c5f38f86f3174a8, type: 3}
-  m_Name: GameStaticData
+  m_Script: {fileID: 11500000, guid: 23656d79274f41cfb36228b246eed11b, type: 3}
+  m_Name: InputStaticData
   m_EditorClassIdentifier: 
-  Levels:
-  - LevelBehaviour: {fileID: 7519213052599762912, guid: 09e0eb754c9510f40a47c2bedb36ee40, type: 3}
   RightKeys: 640000001301000006010000
   LeftKeys: 610000001401000004010000
   UpKeys: 770000001101000008010000
   DownKeys: 730000001201000002010000
   ShootKeys: 200000000501000032010000310100000f0100000d000000650000006600000071000000
   PlayerSpeedX: 10
-  PlayerSpeedY: 11
-  DefaultMusicVolume: 0.3
-  DefaultSoundVolume: 0.6
-  StartProgress:
-    LevelIndex: 0
-    MaxHp: 1
-    ActiveGuns: 
-  HitInvulDuration: 2
-  BlinkPeriod: 0.2
-  HurtPlayerDelay: 0.06
-  ShootCooldown: 0.3
-  PlayerBulletSpeed: 18
-  CompassDrawDistance: 3.21
+  PlayerSpeedY: 10
+  
