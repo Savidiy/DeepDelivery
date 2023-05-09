@@ -41,5 +41,6 @@ namespace MainModule
         public EnemyBehaviour EnemyBehaviour;
         public int HealthPoints = 1;
         public float MoveSpeed = 1f;
+        public float PingPongReverseDelay = 0.3f;
     }
 }

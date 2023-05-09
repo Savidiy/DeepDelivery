@@ -10,6 +10,7 @@ namespace MainModule
         private readonly EnemyStaticData _enemyStaticData;
         private int _targetIndex;
         private bool _isBackward;
+        private float _delayTimer;
 
         public LastMoveType LastMoveType { get; private set; }
 
@@ -27,6 +28,12 @@ namespace MainModule
             List<Transform> pathPoints = _enemySpawnPoint.PathPoints;
             if (pathPoints.Count == 0)
                 return;
+
+            if (_delayTimer > 0)
+            {
+                _delayTimer -= deltaTime;
+                return;
+            }
 
             float speed = _enemyStaticData.MoveSpeed;
             float moveDistance = speed * deltaTime;
@@ -66,13 +73,14 @@ namespace MainModule
 
         public EnemyMoveProgress GetProgress()
         {
-            return new EnemyMoveProgress(_targetIndex, _isBackward);
+            return new EnemyMoveProgress(_targetIndex, _isBackward, _delayTimer);
         }
 
         public void LoadProgress(EnemyMoveProgress progress)
         {
             _targetIndex = progress.TargetIndex;
             _isBackward = progress.IsBackward;
+            _delayTimer = progress.Timer;
         }
 
         private void SelectNextTargetIndex(List<Transform> pathPoints)
@@ -86,12 +94,14 @@ namespace MainModule
             {
                 _targetIndex = pathPoints.Count - 2;
                 _isBackward = true;
+                _delayTimer += _enemyStaticData.PingPongReverseDelay;
             }
 
             if (_targetIndex < -1)
             {
                 _targetIndex = 0;
                 _isBackward = false;
+                _delayTimer += _enemyStaticData.PingPongReverseDelay;
             }
         }
 

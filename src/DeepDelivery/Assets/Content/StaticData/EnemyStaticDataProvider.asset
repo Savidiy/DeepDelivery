@@ -23,27 +23,34 @@ MonoBehaviour:
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 0d98448415a005040b80c64e4ff4b1c5, type: 3}
     HealthPoints: 3
     MoveSpeed: 6
+    PingPongReverseDelay: 0.3
   - EnemyType: 2
     EnemyBehaviour: {fileID: 3019363166943306336, guid: 7cc0012081de70a4bb8b01f87338d79d, type: 3}
     HealthPoints: 4
     MoveSpeed: 3
+    PingPongReverseDelay: 0.5
   - EnemyType: 3
     EnemyBehaviour: {fileID: 3019363166943306336, guid: c671f631ff0c46c4cb803e10c07c47dc, type: 3}
     HealthPoints: 7
     MoveSpeed: 1
+    PingPongReverseDelay: 0.3
   - EnemyType: 4
     EnemyBehaviour: {fileID: 8786441544911431102, guid: aee08d68d2bca494c8998729bf82d4dd, type: 3}
     HealthPoints: 3
     MoveSpeed: 1
+    PingPongReverseDelay: 0.3
   - EnemyType: 5
     EnemyBehaviour: {fileID: 8786441544911431102, guid: b74ca56aa0cd3db4187504d9fae0cda3, type: 3}
     HealthPoints: 2
     MoveSpeed: 8
+    PingPongReverseDelay: 0.3
   - EnemyType: 6
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 2774e9fd16291e042a8f0df41d2d161e, type: 3}
     HealthPoints: 2
     MoveSpeed: 8
+    PingPongReverseDelay: 0.3
   - EnemyType: 7
     EnemyBehaviour: {fileID: 8786441544911431102, guid: 5fc5eb866a459874d94b34cd88a0029c, type: 3}
     HealthPoints: 2
     MoveSpeed: 8
+    PingPongReverseDelay: 0.3

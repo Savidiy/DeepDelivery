@@ -62,11 +62,13 @@ namespace MainModule
     {
         public int TargetIndex;
         public bool IsBackward;
+        public float Timer;
 
-        public EnemyMoveProgress(int targetIndex = 0, bool isBackward = false)
+        public EnemyMoveProgress(int targetIndex = 0, bool isBackward = false, float timer = 0f)
         {
             TargetIndex = targetIndex;
             IsBackward = isBackward;
+            Timer = timer;
         }
     }
 
