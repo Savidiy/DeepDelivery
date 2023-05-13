@@ -31,8 +31,9 @@ namespace MainModule
 
         public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
         {
-            CurrentHp = progress.CurrentHp;
-            MaxHp = progress.MaxHp;
+            int maxHp = progress.MaxHp;
+            CurrentHp = maxHp;
+            MaxHp = maxHp;
             ActiveGuns.Clear();
             ActiveGuns.AddRange(progress.ActiveGuns);
 
