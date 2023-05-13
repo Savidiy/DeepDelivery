@@ -7,13 +7,13 @@ namespace MainModule
 {
     public class QuestCompassUpdater
     {
-        private const string PREFAB_NAME = "Compass";
+        private const string PREFAB_NAME = "QuestCompass";
 
         private readonly IPrefabFactory _prefabFactory;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
         private readonly Transform _root;
-        private readonly List<CompassBehaviour> _compasses = new();
+        private readonly List<QuestCompassBehaviour> _compasses = new();
         private readonly GameStaticData _gameStaticData;
 
         public QuestCompassUpdater(TickInvoker tickInvoker, PlayerHolder playerHolder, IPrefabFactory prefabFactory,
@@ -24,7 +24,7 @@ namespace MainModule
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
 
-            _root = new GameObject("CompassRoot").transform;
+            _root = new GameObject("QuestCompassRoot").transform;
         }
 
         public void Activate()
@@ -58,7 +58,7 @@ namespace MainModule
 
             for (int i = _compasses.Count; i < count; i++)
             {
-                var compassBehaviour = _prefabFactory.Instantiate<CompassBehaviour>(PREFAB_NAME, _root);
+                var compassBehaviour = _prefabFactory.Instantiate<QuestCompassBehaviour>(PREFAB_NAME, _root);
                 _compasses.Add(compassBehaviour);
             }
         }
@@ -83,13 +83,13 @@ namespace MainModule
             Vector3 forward = targetPosition - playerPosition;
             forward.Normalize();
 
-            float compassDrawDistance = _gameStaticData.CompassDrawDistance;
+            float compassDrawDistance = _gameStaticData.QuestCompassDrawDistance;
             Vector3 shift = forward * compassDrawDistance;
 
             Vector3 position = playerPosition + shift;
 
-            CompassBehaviour compassBehaviour = _compasses[index];
-            Transform transform = compassBehaviour.transform;
+            QuestCompassBehaviour questCompassBehaviour = _compasses[index];
+            Transform transform = questCompassBehaviour.transform;
             transform.position = position;
             transform.LookAt(targetPosition);
         }

@@ -16,14 +16,15 @@ namespace AudioModule
         [SerializeField] private AudioClipDictionary _audioClipDictionary;
         public AudioClip MusicClip;
 
-        public AudioClip GetClip(SoundId soundId)
+        public bool TryGetClip(SoundId soundId, out AudioClip audioClip)
         {
-            if (_audioClipDictionary.TryGetValue(soundId, out AudioClip audioClip))
+            if (_audioClipDictionary.TryGetValue(soundId, out audioClip))
             {
-                return audioClip;
+                return true;
             }
 
-            throw new Exception($"Can't find audio clip '{soundId}'");
+            Debug.LogError($"Can't find audio clip with id '{soundId}'");
+            return false;
         }
     }
 }

@@ -7,14 +7,16 @@ namespace MainModule
     {
         private readonly LevelHolder _levelHolder;
         private readonly IAudioPlayer _audioPlayer;
+        private readonly TrackedItemsHolder _trackedItemsHolder;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
 
         public UseShopChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
-            IAudioPlayer audioPlayer)
+            IAudioPlayer audioPlayer, TrackedItemsHolder trackedItemsHolder)
         {
             _levelHolder = levelHolder;
             _audioPlayer = audioPlayer;
+            _trackedItemsHolder = trackedItemsHolder;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
         }
@@ -40,6 +42,11 @@ namespace MainModule
                 {
                     shop.PlayerBuy(player);
                     _audioPlayer.PlayOnce(SoundId.BuyGun);
+                }
+                else if(shop.CanPlayerTrack(player))
+                {
+                    ItemType itemType = shop.ItemType;
+                    _trackedItemsHolder.TrackItem(itemType);
                 }
             }
         }

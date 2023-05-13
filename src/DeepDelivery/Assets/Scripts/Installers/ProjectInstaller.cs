@@ -58,6 +58,8 @@ namespace Installers
             Container.Bind<ItemSpawnPointFactory>().AsSingle();
             Container.Bind<ItemBehaviourFactory>().AsSingle();
             Container.Bind<CollisionWithItemsChecker>().AsSingle();
+            Container.Bind<ItemCompassUpdater>().AsSingle();
+            Container.Bind<TrackedItemsHolder>().AsSingle();
             
             Container.Bind<LevelRestarter>().AsSingle();
             Container.Bind<LevelHolder>().AsSingle();

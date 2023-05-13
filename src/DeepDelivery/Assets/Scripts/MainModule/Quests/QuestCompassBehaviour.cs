@@ -2,7 +2,7 @@
 
 namespace MainModule
 {
-    internal class CompassBehaviour : MonoBehaviour
+    internal class QuestCompassBehaviour : MonoBehaviour
     {
     }
 }

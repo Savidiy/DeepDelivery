@@ -32,4 +32,5 @@ MonoBehaviour:
   PlayerSpeedX: 10
   PlayerSpeedY: 10
   PlayerBulletSpeed: 18
-  CompassDrawDistance: 3.21
+  QuestCompassDrawDistance: 3.21
+  ItemCompassDrawDistance: 3

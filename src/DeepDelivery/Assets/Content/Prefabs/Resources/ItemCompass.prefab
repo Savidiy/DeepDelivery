@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1419139609646188963}
-  - component: {fileID: 1419139609646188962}
+  - component: {fileID: 9090974316775950536}
   m_Layer: 0
-  m_Name: Compass
+  m_Name: ItemCompass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1419139609646188962
+--- !u!114 &9090974316775950536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419139609646188965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc008c60fec44edfb48fc3713678075b, type: 3}
+  m_Script: {fileID: 11500000, guid: b3992115b85347e8988010968d428867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 5598933117736499232}
 --- !u!1 &4264258700128069369
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,14 +70,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4264258700128069369}
-  m_LocalRotation: {x: 0.7067077, y: 0.023752682, z: 0.7067077, w: 0.023752682}
-  m_LocalPosition: {x: -0.134, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1419139609646188963}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 176.15}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5598933117736499232
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 116497758, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
+  m_Sprite: {fileID: -2058691829, guid: 954d9c77d3e286a40b5be8be3cd84bdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

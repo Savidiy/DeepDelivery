@@ -129,9 +129,8 @@ namespace MainModule
         {
             if (itemType == ItemType.Heart)
             {
-                if (CurrentHp == MaxHp)
-                    MaxHp++;
-                CurrentHp++;
+                MaxHp++;
+                CurrentHp = MaxHp;
                 return;
             }
 
@@ -172,7 +171,6 @@ namespace MainModule
         public void RemoveQuest(Quest quest)
         {
             Quests.Remove(quest);
-            CurrentHp = MaxHp;
             Debug.Log($"Complete quest. Quest count = {Quests.Count}");
         }
     }

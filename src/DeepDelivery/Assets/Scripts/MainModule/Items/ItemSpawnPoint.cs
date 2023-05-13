@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Savidiy.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -11,8 +12,11 @@ namespace MainModule
         private readonly ItemSpawnPointBehaviour _data;
         private readonly ItemBehaviourFactory _itemBehaviourFactory;
 
-        private ItemBehaviour _itemBehaviour;
-        private bool _isCollected;
+        [CanBeNull] private ItemBehaviour _itemBehaviour;
+
+        public bool IsCollected { get; private set; }
+        public ItemType ItemType => _data.ItemType;
+        public Vector3 Position => _data.transform.position;
 
         public ItemSpawnPoint(ItemSpawnPointBehaviour data, ItemBehaviourFactory itemBehaviourFactory)
         {
@@ -22,33 +26,33 @@ namespace MainModule
 
         public void LoadProgress(Progress progress)
         {
-            _isCollected = progress.CollectedItemId?.Contains(_data.UniqueId.Id) ?? false;
+            IsCollected = progress.CollectedItemId?.Contains(_data.UniqueId.Id) ?? false;
             UpdateBehaviour();
         }
 
         public void UpdateProgress(Progress progress)
         {
             progress.CollectedItemId ??= new List<string>();
-            
+
             string id = _data.UniqueId.Id;
             bool contains = progress.CollectedItemId.Contains(id);
 
-            if (contains && !_isCollected)
+            if (contains && !IsCollected)
                 progress.CollectedItemId.Remove(id);
-            else if (!contains && _isCollected)
+            else if (!contains && IsCollected)
                 progress.CollectedItemId.Add(id);
         }
 
         public void Collect(Player player)
         {
-            _isCollected = true;
+            IsCollected = true;
             DestroyBehaviour();
             player.AddItem(_data.ItemType);
         }
 
         public bool CanBeCollect(Player player)
         {
-            if (_isCollected)
+            if (IsCollected)
                 return false;
 
             bool hasCollision = _itemBehaviour.Collider.HasCollisionWith(player.Collider);
@@ -62,11 +66,11 @@ namespace MainModule
 
         private void UpdateBehaviour()
         {
-            if (_isCollected && _itemBehaviour != null)
+            if (IsCollected && _itemBehaviour != null)
             {
                 DestroyBehaviour();
             }
-            else if (!_isCollected && _itemBehaviour == null)
+            else if (!IsCollected && _itemBehaviour == null)
             {
                 ItemType itemType = _data.ItemType;
                 Vector3 position = _data.transform.position;

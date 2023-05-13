@@ -8,6 +8,8 @@ namespace MainModule
         private readonly ShopBehaviour _shopBehaviour;
         private bool _isSoldOut;
 
+        public ItemType ItemType => _shopBehaviour.PriceItemType;
+
         public Shop(ShopBehaviour shopBehaviour)
         {
             _shopBehaviour = shopBehaviour;
@@ -36,14 +38,7 @@ namespace MainModule
             if (_isSoldOut)
                 return false;
 
-            Vector3 playerPosition = player.Position;
-            Vector3 shopPosition = _shopBehaviour.transform.position;
-            shopPosition.z = playerPosition.z;
-
-            float distance = Vector3.Distance(playerPosition, shopPosition);
-            float interactRadius = _shopBehaviour.InteractRadius;
-
-            if (distance > interactRadius)
+            if (!IsPlayerOnInteractDistance(player))
                 return false;
 
             if (!player.ItemsCount.TryGetValue(_shopBehaviour.PriceItemType, out int count))
@@ -53,6 +48,26 @@ namespace MainModule
                 return false;
 
             return true;
+        }
+
+        private bool IsPlayerOnInteractDistance(Player player)
+        {
+            Vector3 playerPosition = player.Position;
+            Vector3 shopPosition = _shopBehaviour.transform.position;
+            shopPosition.z = playerPosition.z;
+
+            float distance = Vector3.Distance(playerPosition, shopPosition);
+            float interactRadius = _shopBehaviour.InteractRadius;
+
+            return distance <= interactRadius;
+        }
+
+        public bool CanPlayerTrack(Player player)
+        {
+            if (_isSoldOut)
+                return false;
+
+            return IsPlayerOnInteractDistance(player);
         }
 
         public void PlayerBuy(Player player)

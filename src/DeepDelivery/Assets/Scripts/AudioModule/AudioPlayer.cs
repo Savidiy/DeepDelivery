@@ -36,8 +36,8 @@ namespace AudioModule
             if (_audioSettings.SoundVolume.Value == 0)
                 return;
 
-            AudioClip audioClip = _audioLibrary.GetClip(soundId);
-            _soundSource.PlayOneShot(audioClip);
+            if (_audioLibrary.TryGetClip(soundId, out AudioClip audioClip))
+                _soundSource.PlayOneShot(audioClip);
         }
 
         private void OnSoundVolumeChange(float volume)

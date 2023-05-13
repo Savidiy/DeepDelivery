@@ -25,7 +25,8 @@ namespace MainModule
         public float PlayerSpeedX = 1;
         public float PlayerSpeedY = 1;
         public float PlayerBulletSpeed = 8f;
-        public float CompassDrawDistance = 1f;
+        public float QuestCompassDrawDistance = 3.21f;
+        public float ItemCompassDrawDistance = 2.5f;
     }
     
     [Serializable]

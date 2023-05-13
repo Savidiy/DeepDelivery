@@ -15,6 +15,7 @@
         HurtStone = 10,
         HurtFish = 11,
         HurtOctopus = 12,
-        HurtCoral = 13
+        HurtCoral = 13,
+        Sonar = 14,
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Savidiy.Utils;
 using UnityEngine;
 
 namespace MainModule
@@ -17,6 +16,7 @@ namespace MainModule
         public List<string> CompletedQuestsId = new();
         public List<string> SoldOutShopsId = new();
         public List<EnemySpawnPointProgress> EnemySpawnPoints = new();
+        public List<ItemType> TrackedItems = new();
 
         public Progress(StartProgress startProgress)
         {

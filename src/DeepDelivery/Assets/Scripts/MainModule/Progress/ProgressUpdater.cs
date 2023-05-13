@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MainModule
 {
-    public class ProgressUpdater
+    public class ProgressUpdater : IDisposable
     {
         private readonly List<IProgressReader> _progressReaders = new();
         private readonly List<IProgressWriter> _progressWriters = new();
@@ -43,6 +44,12 @@ namespace MainModule
                 progressWriter.UpdateProgress(_progressProvider.Progress);
 
             _progressSaveLoad.SaveProgress(_progressProvider.Progress);
+        }
+
+        public void Dispose()
+        {
+            _progressReaders.Clear();
+            _progressWriters.Clear();
         }
     }
 }
