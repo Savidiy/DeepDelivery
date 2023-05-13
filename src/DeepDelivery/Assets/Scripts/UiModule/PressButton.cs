@@ -4,8 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UiModule
 {
-    public sealed class PressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
-        IPointerExitHandler
+    public sealed class PressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
     {
         private readonly ReactiveProperty<bool> _isPressed = new();
 
@@ -19,11 +18,6 @@ namespace UiModule
         public void OnPointerUp(PointerEventData eventData)
         {
             _isPressed.Value = false;
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            _isPressed.Value = eventData.clickCount > 0;
         }
 
         public void OnPointerExit(PointerEventData eventData)
