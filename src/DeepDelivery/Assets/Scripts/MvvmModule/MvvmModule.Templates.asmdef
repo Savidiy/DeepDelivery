@@ -4,7 +4,8 @@
     "references": [
         "MvvmModule",
         "Utils",
-        "UiModule"
+        "UiModule",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

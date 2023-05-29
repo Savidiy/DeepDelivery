@@ -1,9 +1,6 @@
 namespace MvvmModule
 {
-    public abstract class EmptyViewModel : ViewModel
+    public abstract class EmptyViewModel : DisposableCollector, IViewModel
     {
-        protected EmptyViewModel(IViewModelFactory viewModelFactory) : base(viewModelFactory)
-        {
-        }
     }
 }

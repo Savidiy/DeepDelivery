@@ -12,8 +12,8 @@ namespace StartWindowModule
 
         public bool HasProgress { get; }
 
-        public StartWindowViewModel(IViewModelFactory viewModelFactory, ISettingsWindowPresenter settingsWindowPresenter,
-            MainStateMachine mainStateMachine) : base(viewModelFactory)
+        public StartWindowViewModel(ISettingsWindowPresenter settingsWindowPresenter,
+            MainStateMachine mainStateMachine)
         {
             _settingsWindowPresenter = settingsWindowPresenter;
             _mainStateMachine = mainStateMachine;

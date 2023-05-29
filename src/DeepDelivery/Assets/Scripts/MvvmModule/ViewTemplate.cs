@@ -1,7 +1,7 @@
 using System;
 using UiModule;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace MvvmModule
 {
@@ -30,7 +30,7 @@ namespace MvvmModule
         // var args = new B123Args();
         // var viewModel = CreateViewModel<B123ViewModel, B123Args>(args);
 
-        public B123ViewModel(B123Args model, IViewModelFactory viewModelFactory) : base(model, viewModelFactory)
+        public B123ViewModel(B123Args model) : base(model)
         {
         }
     }
@@ -38,45 +38,44 @@ namespace MvvmModule
     public class B123Args
     {
     }
-    
+
     public sealed class B123Presenter : IDisposable, IB123Presenter
     {
         // Container.BindInterfacesTo<B123Presenter>().AsSingle();
         private const string PREFAB_NAME = "_window";
         private readonly WindowsRootProvider _windowsRootProvider;
         private readonly IViewFactory _viewFactory;
-        private readonly IViewModelFactory _viewModelFactory;
+        private readonly IInstantiator _instantiator;
         private readonly B123View _view;
-        
-        public B123Presenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory,
-            IViewModelFactory viewModelFactory)
+
+        public B123Presenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory, IInstantiator instantiator)
         {
             _viewFactory = viewFactory;
-            _viewModelFactory = viewModelFactory;
+            _instantiator = instantiator;
             _windowsRootProvider = windowsRootProvider;
             _view = CreateView();
             _view.SetActive(false);
         }
-        
+
         public void ShowWindow()
         {
             var args = new B123Args();
-            var viewModel = _viewModelFactory.CreateViewModel<B123ViewModel, B123Args>(args);
+            var viewModel = _instantiator.Instantiate<B123ViewModel>(new object[] {args});
             _view.Initialize(viewModel);
             _view.SetActive(true);
         }
-        
+
         public void HideWindow()
         {
             _view.ClearViewModel();
             _view.SetActive(false);
         }
-        
+
         public void Dispose()
         {
             _view.Dispose();
         }
-        
+
         private B123View CreateView()
         {
             Transform root = _windowsRootProvider.GetWindowRoot();

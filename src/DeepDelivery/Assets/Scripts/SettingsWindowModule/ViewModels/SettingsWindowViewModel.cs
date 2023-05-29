@@ -21,9 +21,9 @@ namespace SettingsWindowModule
         public float MusicVolume { get; }
         public bool IsUseMobileInput { get; }
 
-        public SettingsWindowViewModel(IViewModelFactory viewModelFactory, InputSettings inputSettings,
+        public SettingsWindowViewModel(InputSettings inputSettings,
             ProgressUpdater progressUpdater, MainStateMachine mainStateMachine, AudioSettings audioSettings,
-            IAudioPlayer audioPlayer) : base(viewModelFactory)
+            IAudioPlayer audioPlayer)
         {
             _inputSettings = inputSettings;
             _progressUpdater = progressUpdater;

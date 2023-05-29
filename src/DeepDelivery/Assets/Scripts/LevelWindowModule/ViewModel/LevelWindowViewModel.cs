@@ -6,6 +6,7 @@ using Savidiy.Utils;
 using SettingsWindowModule.Contracts;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace LevelWindowModule
 {
@@ -15,6 +16,7 @@ namespace LevelWindowModule
         private readonly LevelRestarter _playerRestarter;
         private readonly PlayerHolder _playerHolder;
         private readonly MobileInput _mobileInput;
+        private readonly IInstantiator _instantiator;
         private readonly ReactiveProperty<int> _heartCount = new();
         private readonly ReactiveProperty<IItemsViewModel> _items = new();
         private readonly ReactiveProperty<bool> _isGameCompleted = new();
@@ -28,16 +30,16 @@ namespace LevelWindowModule
         public IReadOnlyReactiveProperty<bool> UseMobileInput { get; }
         public IReadOnlyReactiveProperty<bool> IsGameCompleted => _isGameCompleted;
 
-        public LevelWindowViewModel(IViewModelFactory viewModelFactory, ISettingsWindowPresenter settingsWindowPresenter,
+        public LevelWindowViewModel(ISettingsWindowPresenter settingsWindowPresenter,
             LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
-            MobileInput mobileInput, InputSettings inputSettings)
-            : base(viewModelFactory)
+            MobileInput mobileInput, InputSettings inputSettings, IInstantiator instantiator)
         {
             _levelHolder = levelHolder;
             _settingsWindowPresenter = settingsWindowPresenter;
             _playerRestarter = playerRestarter;
             _playerHolder = playerHolder;
             _mobileInput = mobileInput;
+            _instantiator = instantiator;
             _mobileInput.SetInputDirection(Vector2.zero, false);
 
             UseMobileInput = inputSettings
@@ -57,7 +59,7 @@ namespace LevelWindowModule
             foreach (QuestGiver questGiver in levelHolder.LevelModel.QuestGivers)
             {
                 var args = new QuestStatusArgs(questGiver);
-                var viewModel = CreateViewModel<QuestStatusViewModel, QuestStatusArgs>(args);
+                var viewModel = _instantiator.Instantiate<QuestStatusViewModel>(new object[]{args});
                 questStatusViewModels.Add(viewModel);
             }
 
@@ -103,7 +105,7 @@ namespace LevelWindowModule
                 _itemsCount = itemsCount;
 
                 var args = new ItemsArgs(player.ItemsCount);
-                var viewModel = CreateViewModel<ItemsViewModel, ItemsArgs>(args);
+                var viewModel = _instantiator.Instantiate<ItemsViewModel>(new object[]{args});
                 _items.Value = viewModel;
             }
         }

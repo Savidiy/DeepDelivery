@@ -5,26 +5,20 @@ namespace MvvmModule
 {
     internal sealed class ViewFactory : IViewFactory
     {
-        private readonly DiContainer _diContainer;
+        private readonly IInstantiator _instantiator;
         private readonly IPrefabFactory _prefabFactory;
 
-        public ViewFactory(DiContainer diContainer, IPrefabFactory prefabFactory)
+        public ViewFactory(IInstantiator instantiator, IPrefabFactory prefabFactory)
         {
             _prefabFactory = prefabFactory;
-            _diContainer = diContainer;
+            _instantiator = instantiator;
         }
 
         public TView CreateView<TView, THierarchy>(THierarchy hierarchy)
             where TView : View<THierarchy>
             where THierarchy : MonoBehaviour
         {
-            _diContainer.Bind<THierarchy>().FromInstance(hierarchy).AsTransient();
-            _diContainer.Bind<TView>().AsTransient();
-
-            var view = _diContainer.Resolve<TView>();
-
-            _diContainer.Unbind<TView>();
-            _diContainer.Unbind<THierarchy>();
+            var view = _instantiator.Instantiate<TView>(new object[]{hierarchy});
             return view;
         }
 

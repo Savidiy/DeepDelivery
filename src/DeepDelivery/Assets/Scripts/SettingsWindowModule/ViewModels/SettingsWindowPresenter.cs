@@ -5,6 +5,7 @@ using SettingsWindowModule.Contracts;
 using SettingsWindowModule.View;
 using UiModule;
 using UnityEngine;
+using Zenject;
 
 namespace SettingsWindowModule
 {
@@ -13,16 +14,16 @@ namespace SettingsWindowModule
         private const string PREFAB_NAME = "Settings_window";
         private readonly WindowsRootProvider _windowsRootProvider;
         private readonly IViewFactory _viewFactory;
-        private readonly IViewModelFactory _viewModelFactory;
         private readonly TickInvoker _tickInvoker;
         private readonly SettingsWindowView _view;
         private SettingsWindowViewModel _viewModel;
+        private readonly IInstantiator _instantiator;
 
-        public SettingsWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory,
-            IViewModelFactory viewModelFactory, TickInvoker tickInvoker)
+        public SettingsWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory, TickInvoker tickInvoker,
+            IInstantiator instantiator)
         {
+            _instantiator = instantiator;
             _viewFactory = viewFactory;
-            _viewModelFactory = viewModelFactory;
             _tickInvoker = tickInvoker;
             _windowsRootProvider = windowsRootProvider;
             _view = CreateView();
@@ -34,7 +35,7 @@ namespace SettingsWindowModule
             if (_viewModel != null)
                 _viewModel.NeedClose -= HideWindow;
 
-            _viewModel = _viewModelFactory.CreateEmptyViewModel<SettingsWindowViewModel>();
+            _viewModel = _instantiator.Instantiate<SettingsWindowViewModel>();
             _viewModel.NeedClose += HideWindow;
             _view.Initialize(_viewModel);
             _view.Hierarchy.transform.SetAsLastSibling();

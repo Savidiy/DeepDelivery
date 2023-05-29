@@ -4,6 +4,7 @@ using LevelWindowModule.View;
 using MvvmModule;
 using UiModule;
 using UnityEngine;
+using Zenject;
 
 namespace LevelWindowModule
 {
@@ -12,14 +13,13 @@ namespace LevelWindowModule
         private const string PREFAB_NAME = "Level_window";
         private readonly WindowsRootProvider _windowsRootProvider;
         private readonly IViewFactory _viewFactory;
-        private readonly IViewModelFactory _viewModelFactory;
         private readonly LevelWindowView _view;
+        private readonly IInstantiator _instantiator;
 
-        public LevelWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory,
-            IViewModelFactory viewModelFactory)
+        public LevelWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory, IInstantiator instantiator)
         {
+            _instantiator = instantiator;
             _viewFactory = viewFactory;
-            _viewModelFactory = viewModelFactory;
             _windowsRootProvider = windowsRootProvider;
             _view = CreateView();
             _view.SetActive(false);
@@ -27,7 +27,7 @@ namespace LevelWindowModule
 
         public void ShowWindow()
         {
-            var viewModel = _viewModelFactory.CreateEmptyViewModel<LevelWindowViewModel>();
+            var viewModel = _instantiator.Instantiate<LevelWindowViewModel>();
             _view.Initialize(viewModel);
             _view.SetActive(true);
         }

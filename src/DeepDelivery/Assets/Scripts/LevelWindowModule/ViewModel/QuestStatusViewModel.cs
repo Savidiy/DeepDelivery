@@ -21,7 +21,7 @@ namespace LevelWindowModule
      
         public IReadOnlyReactiveProperty<QuestStatus> QuestStatus => _questStatus;
 
-        public QuestStatusViewModel(QuestStatusArgs model, IViewModelFactory viewModelFactory) : base(model, viewModelFactory)
+        public QuestStatusViewModel(QuestStatusArgs model) : base(model)
         {
             model.QuestGiver.StatusUpdated += OnStatusUpdated;
             OnStatusUpdated();

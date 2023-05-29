@@ -1,10 +1,13 @@
 using AudioModule;
 using LevelWindowModule;
+using LevelWindowModule.View;
 using MainModule;
 using MvvmModule;
 using Savidiy.Utils;
 using SettingsWindowModule;
+using SettingsWindowModule.View;
 using StartWindowModule;
+using StartWindowModule.View;
 using UiModule;
 using Zenject;
 
@@ -22,8 +25,16 @@ namespace Installers
         {
             Container.BindInterfacesTo<PrefabFactory>().AsSingle();
             Container.BindInterfacesTo<ViewFactory>().AsSingle();
-            Container.BindInterfacesTo<ViewModelFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<TickInvoker>().AsSingle();
+            
+            Container.Bind<LevelWindowView>().AsTransient();
+            Container.Bind<LevelWindowViewModel>().AsTransient();
+            Container.Bind<QuestStatusView>().AsTransient();
+            Container.Bind<QuestStatusViewModel>().AsTransient();
+            Container.Bind<SettingsWindowViewModel>().AsTransient();
+            Container.Bind<SettingsWindowView>().AsTransient();
+            Container.Bind<StartWindowView>().AsTransient();
+            Container.Bind<StartWindowViewModel>().AsTransient();
 
             Container.Bind<WindowsRootProvider>().AsSingle();
             Container.BindInterfacesTo<StartWindowPresenter>().AsSingle();

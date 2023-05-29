@@ -4,6 +4,7 @@ using StartWindowModule.Contracts;
 using StartWindowModule.View;
 using UiModule;
 using UnityEngine;
+using Zenject;
 
 namespace StartWindowModule
 {
@@ -12,14 +13,13 @@ namespace StartWindowModule
         private const string PREFAB_NAME = "Start_window";
         private readonly WindowsRootProvider _windowsRootProvider;
         private readonly IViewFactory _viewFactory;
-        private readonly IViewModelFactory _viewModelFactory;
+        private readonly IInstantiator _instantiator;
         private readonly StartWindowView _view;
 
-        public StartWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory,
-            IViewModelFactory viewModelFactory)
+        public StartWindowPresenter(WindowsRootProvider windowsRootProvider, IViewFactory viewFactory, IInstantiator instantiator)
         {
             _viewFactory = viewFactory;
-            _viewModelFactory = viewModelFactory;
+            _instantiator = instantiator;
             _windowsRootProvider = windowsRootProvider;
             _view = CreateView();
             _view.SetActive(false);
@@ -27,7 +27,7 @@ namespace StartWindowModule
 
         public void ShowWindow()
         {
-            var viewModel = _viewModelFactory.CreateEmptyViewModel<StartWindowViewModel>();
+            var viewModel = _instantiator.Instantiate<StartWindowViewModel>();
             _view.Initialize(viewModel);
             _view.SetActive(true);
         }

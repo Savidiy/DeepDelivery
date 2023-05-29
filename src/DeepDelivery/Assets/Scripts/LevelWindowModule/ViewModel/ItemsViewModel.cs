@@ -10,8 +10,8 @@ namespace LevelWindowModule
     {
         public IReadOnlyList<Sprite> ItemSprites { get; }
 
-        public ItemsViewModel(ItemsArgs model, IViewModelFactory viewModelFactory, ItemStaticDataProvider itemStaticDataProvider)
-            : base(model, viewModelFactory)
+        public ItemsViewModel(ItemsArgs model, ItemStaticDataProvider itemStaticDataProvider)
+            : base(model)
         {
             List<Sprite> itemSprites = new();
             foreach ((ItemType key, int count) in model.Items)
