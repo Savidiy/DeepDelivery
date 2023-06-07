@@ -59,6 +59,7 @@ namespace MainModule
                 MoveType.Circle => " - M:C",
                 MoveType.PingPong => " - M:PP",
                 MoveType.Teleport => " - M:T",
+                MoveType.Random => " - M:R",
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -87,6 +88,7 @@ namespace MainModule
                 MoveType.Circle => Color.yellow,
                 MoveType.PingPong => Color.white,
                 MoveType.Teleport => Color.cyan,
+                MoveType.Random => Color.red,
                 _ => throw new ArgumentOutOfRangeException()
             };
 

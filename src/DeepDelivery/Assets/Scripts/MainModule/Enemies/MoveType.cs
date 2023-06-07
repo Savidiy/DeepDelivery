@@ -6,5 +6,6 @@
         Circle,
         PingPong,
         Teleport,
+        Random,
     }
 }
