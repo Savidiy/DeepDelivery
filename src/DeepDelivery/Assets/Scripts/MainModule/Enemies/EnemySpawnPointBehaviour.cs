@@ -83,6 +83,22 @@ namespace MainModule
             if (MoveType == MoveType.None)
                 return;
 
+            SelectColor();
+
+            Vector3 from = transform.position;
+
+            if (MoveType == MoveType.Random)
+            {
+                DrawMoveRandomPath(from);
+            }
+            else
+            {
+                DrawMovePingPongAndCirclePath(from);
+            }
+        }
+
+        private void SelectColor ()
+        {
             Gizmos.color = MoveType switch
             {
                 MoveType.Circle => Color.yellow,
@@ -91,8 +107,26 @@ namespace MainModule
                 MoveType.Random => Color.red,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
 
-            Vector3 from = transform.position;
+        private void DrawMoveRandomPath(Vector3 from)
+        {
+            for (int i = 0; i< PathPoints.Count; i++)
+            {
+                Gizmos.DrawLine(from, PathPoints[i].position);
+
+                if (PathPoints[i] == null || PathPoints[i] == gameObject.transform)
+                    continue;
+                
+                for (int j = 0; j < PathPoints.Count; j++)
+                {
+                    if (i < j) Gizmos.DrawLine(PathPoints[i].position, PathPoints[j].position);
+                }               
+            }
+        }
+
+        private void DrawMovePingPongAndCirclePath(Vector3 from)
+        {
             foreach (Transform pathPoint in PathPoints)
             {
                 if (pathPoint == null)
