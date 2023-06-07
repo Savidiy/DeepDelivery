@@ -37,6 +37,7 @@ namespace MainModule
                 MoveType.Circle => new CircleMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
                 MoveType.PingPong => new PingPongMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
                 MoveType.Teleport => new TeleportMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
+                MoveType.Random => new RandomMover(enemyBehaviour, enemySpawnPoint, enemyStaticData),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
