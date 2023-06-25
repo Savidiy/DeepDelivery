@@ -34,16 +34,16 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
 
             foreach (Shop shop in _levelHolder.LevelModel.Shops)
             {
-                if (shop.CanPlayerBuy(player))
+                if (shop.CanPlayerBuy(playerVisual))
                 {
-                    shop.PlayerBuy(player);
+                    shop.PlayerBuy(playerVisual);
                     _audioPlayer.PlayOnce(SoundId.BuyGun);
                 }
-                else if(shop.CanPlayerTrack(player))
+                else if(shop.CanPlayerTrack(playerVisual))
                 {
                     ItemType itemType = shop.ItemType;
                     _trackedItemsHolder.TrackItem(itemType);

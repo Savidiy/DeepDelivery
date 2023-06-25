@@ -45,6 +45,7 @@ namespace Installers
             Container.Bind<StartMainState>().AsSingle();
             Container.Bind<LevelPlayMainState>().AsSingle();
 
+            Container.Bind<PlayerGunHandler>().AsSingle();
             Container.Bind<PlayerInventory>().AsSingle();
             Container.Bind<PlayerHealth>().AsSingle();
             Container.Bind<PlayerQuestsHandler>().AsSingle();

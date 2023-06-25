@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace MainModule
 {
-    public class Player : IDisposable
+    public class PlayerVisual : IDisposable
     {
         private readonly PlayerBehaviour _playerBehaviour;
-
+        private readonly PlayerGunHandler _gunHandler;
         private bool _isFlipToLeft;
 
         public Vector3 Position => _playerBehaviour.transform.position;
         public Collider2D Collider => _playerBehaviour.Collider2D;
 
-        public List<GunType> ActiveGuns { get; } = new();
-
-        public Player(PlayerBehaviour playerBehaviour)
+        public PlayerVisual(PlayerBehaviour playerBehaviour, PlayerGunHandler gunHandler)
         {
             _playerBehaviour = playerBehaviour;
+            _gunHandler = gunHandler;
         }
 
         public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
         {
-            ActiveGuns.Clear();
-            ActiveGuns.AddRange(progress.ActiveGuns);
-
             Vector3 position = progress.HasSavedPosition
                 ? progress.SavedPosition.ToVector3()
                 : defaultPosition;
@@ -37,16 +32,15 @@ namespace MainModule
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.ActiveGuns = new List<GunType>(ActiveGuns);
             progress.HasSavedPosition = true;
             progress.SavedPosition = new SerializableVector3(Position);
         }
 
-        private void UpdateGunVisibility()
+        public void UpdateGunVisibility()
         {
-            _playerBehaviour.TopGun.SetActive(ActiveGuns.Contains(GunType.TopGun));
-            _playerBehaviour.BottomGun.SetActive(ActiveGuns.Contains(GunType.BottomGun));
-            _playerBehaviour.ForwardGun.SetActive(ActiveGuns.Contains(GunType.ForwardGun));
+            _playerBehaviour.TopGun.SetActive(_gunHandler.HasGun(GunType.TopGun));
+            _playerBehaviour.BottomGun.SetActive(_gunHandler.HasGun(GunType.BottomGun));
+            _playerBehaviour.ForwardGun.SetActive(_gunHandler.HasGun(GunType.ForwardGun));
         }
 
         public void Move(Vector2 shift)
@@ -80,7 +74,8 @@ namespace MainModule
             Object.Destroy(_playerBehaviour.gameObject);
         }
 
-        public Vector3 GetGunPosition(GunType gunType) => GetGun(gunType).BulletSpawnPoint.position;
+        public Vector3 GetGunPosition(GunType gunType) =>
+            GetGun(gunType).BulletSpawnPoint.position;
 
         public Vector3 GetGunDirection(GunType gunType)
         {
@@ -89,12 +84,6 @@ namespace MainModule
                 direction.x = -direction.x;
 
             return direction;
-        }
-
-        public void AddGun(GunType gunType)
-        {
-            ActiveGuns.Add(gunType);
-            UpdateGunVisibility();
         }
 
         private GunBehaviour GetGun(GunType gunType)

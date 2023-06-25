@@ -56,11 +56,11 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
 
             foreach (CheckPoint checkPoint in _levelHolder.LevelModel.CheckPoints)
             {
-                if (!checkPoint.CanUseCheckPoint(player))
+                if (!checkPoint.CanUseCheckPoint(playerVisual))
                     continue;
 
                 UseCheckPoint(checkPoint);

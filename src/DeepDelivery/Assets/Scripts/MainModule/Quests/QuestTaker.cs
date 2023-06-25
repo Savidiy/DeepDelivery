@@ -14,9 +14,9 @@ namespace MainModule
             _behaviour = behaviour;
         }
 
-        public bool CanTakeQuest(Player player)
+        public bool CanTakeQuest(PlayerVisual playerVisual)
         {
-            Vector3 playerPosition = player.Position;
+            Vector3 playerPosition = playerVisual.Position;
             Vector3 position = _behaviour.transform.position;
             position.z = playerPosition.z;
             float distance = Vector3.Distance(playerPosition, position);

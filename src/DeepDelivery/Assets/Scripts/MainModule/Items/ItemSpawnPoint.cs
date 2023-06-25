@@ -53,12 +53,12 @@ namespace MainModule
             _playerInventory.AddItem(_behaviour.ItemType);
         }
 
-        public bool CanBeCollect(Player player)
+        public bool CanBeCollect(PlayerVisual playerVisual)
         {
             if (IsCollected)
                 return false;
 
-            bool hasCollision = _itemBehaviour.Collider.HasCollisionWith(player.Collider);
+            bool hasCollision = _itemBehaviour.Collider.HasCollisionWith(playerVisual.Collider);
             return hasCollision;
         }
 

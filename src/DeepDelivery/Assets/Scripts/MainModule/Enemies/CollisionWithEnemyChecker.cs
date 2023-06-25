@@ -54,8 +54,8 @@ namespace MainModule
 
         private void UpdateCollidedEnemiesCollection(Dictionary<Enemy, float> collidedEnemies)
         {
-            Player player = _playerHolder.Player;
-            Collider2D playerCollider = player.Collider;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
+            Collider2D playerCollider = playerVisual.Collider;
             for (var index = 0; index < _enemyHolder.Enemies.Count; index++)
             {
                 Enemy enemy = _enemyHolder.Enemies[index];

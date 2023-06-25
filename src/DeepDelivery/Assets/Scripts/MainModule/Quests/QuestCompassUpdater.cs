@@ -66,8 +66,8 @@ namespace MainModule
 
         private void UpdateCompassesPosition()
         {
-            Player player = _playerHolder.Player;
-            Vector3 playerPosition = player.Position;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
+            Vector3 playerPosition = playerVisual.Position;
             List<Quest> quests = _playerQuestsHandler.Quests;
 
             for (var index = 0; index < quests.Count; index++)

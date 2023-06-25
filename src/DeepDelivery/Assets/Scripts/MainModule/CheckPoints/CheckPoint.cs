@@ -24,12 +24,12 @@ namespace MainModule
                 SetUnused();
         }
 
-        public bool CanUseCheckPoint(Player player)
+        public bool CanUseCheckPoint(PlayerVisual playerVisual)
         {
             if (_isActivated)
                 return false;
             
-            return player.Collider.HasCollisionWith(_behaviour.Collider);
+            return playerVisual.Collider.HasCollisionWith(_behaviour.Collider);
         }
 
         public void SetUnused()

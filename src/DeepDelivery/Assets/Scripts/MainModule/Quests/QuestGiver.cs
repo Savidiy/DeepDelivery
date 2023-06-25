@@ -24,12 +24,12 @@ namespace MainModule
             _behaviour.QuestTakeBehaviour.OrderLabel.SetActive(false);
         }
 
-        public bool CanGiveQuest(Player player)
+        public bool CanGiveQuest(PlayerVisual playerVisual)
         {
             if (IsQuestGave)
                 return false;
 
-            Vector3 playerPosition = player.Position;
+            Vector3 playerPosition = playerVisual.Position;
             Vector3 position = _behaviour.transform.position;
             position.z = playerPosition.z;
             float distance = Vector3.Distance(playerPosition, position);

@@ -40,8 +40,8 @@ namespace MainModule
         private void OnUpdated()
         {
             Vector2 shift = CalcMoveShift();
-            Player player = _playerHolder.Player;
-            player.Move(shift);
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
+            playerVisual.Move(shift);
         }
 
         private Vector2 CalcMoveShift()

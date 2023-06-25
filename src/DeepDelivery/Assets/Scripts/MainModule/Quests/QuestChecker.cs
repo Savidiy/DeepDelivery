@@ -79,15 +79,15 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
 
             LevelModel levelModel = _levelHolder.LevelModel;
             foreach (QuestGiver questGiver in levelModel.QuestGivers)
-                if (questGiver.CanGiveQuest(player))
+                if (questGiver.CanGiveQuest(playerVisual))
                     GiveQuest(questGiver);
 
             foreach (QuestTaker questTaker in levelModel.QuestTakers)
-                if (questTaker.CanTakeQuest(player))
+                if (questTaker.CanTakeQuest(playerVisual))
                     TakeQuest(questTaker);
         }
 

@@ -34,12 +34,12 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
             LevelModel levelModel = _levelHolder.LevelModel;
 
             foreach (ItemSpawnPoint item in levelModel.Items)
             {
-                if (item.CanBeCollect(player))
+                if (item.CanBeCollect(playerVisual))
                 {
                     item.Collect();
                     _audioPlayer.PlayOnce(SoundId.CollectItem);

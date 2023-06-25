@@ -7,14 +7,16 @@ namespace MainModule
     {
         private readonly ShopBehaviour _shopBehaviour;
         private readonly PlayerInventory _playerInventory;
+        private readonly PlayerGunHandler _playerGunHandler;
         private bool _isSoldOut;
 
         public ItemType ItemType => _shopBehaviour.PriceItemType;
 
-        public Shop(ShopBehaviour shopBehaviour, PlayerInventory playerInventory)
+        public Shop(ShopBehaviour shopBehaviour, PlayerInventory playerInventory, PlayerGunHandler playerGunHandler)
         {
             _shopBehaviour = shopBehaviour;
             _playerInventory = playerInventory;
+            _playerGunHandler = playerGunHandler;
         }
 
         public void LoadProgress(Progress progress)
@@ -35,12 +37,12 @@ namespace MainModule
                 progress.SoldOutShopsId.Add(id);
         }
 
-        public bool CanPlayerBuy(Player player)
+        public bool CanPlayerBuy(PlayerVisual playerVisual)
         {
             if (_isSoldOut)
                 return false;
 
-            if (!IsPlayerOnInteractDistance(player))
+            if (!IsPlayerOnInteractDistance(playerVisual))
                 return false;
 
             if (!_playerInventory.ItemsCount.TryGetValue(_shopBehaviour.PriceItemType, out int count))
@@ -52,9 +54,9 @@ namespace MainModule
             return true;
         }
 
-        private bool IsPlayerOnInteractDistance(Player player)
+        private bool IsPlayerOnInteractDistance(PlayerVisual playerVisual)
         {
-            Vector3 playerPosition = player.Position;
+            Vector3 playerPosition = playerVisual.Position;
             Vector3 shopPosition = _shopBehaviour.transform.position;
             shopPosition.z = playerPosition.z;
 
@@ -64,18 +66,19 @@ namespace MainModule
             return distance <= interactRadius;
         }
 
-        public bool CanPlayerTrack(Player player)
+        public bool CanPlayerTrack(PlayerVisual playerVisual)
         {
             if (_isSoldOut)
                 return false;
 
-            return IsPlayerOnInteractDistance(player);
+            return IsPlayerOnInteractDistance(playerVisual);
         }
 
-        public void PlayerBuy(Player player)
+        public void PlayerBuy(PlayerVisual playerVisual)
         {
             _playerInventory.RemoveItems(_shopBehaviour.PriceItemType, _shopBehaviour.PriceCount);
-            player.AddGun(_shopBehaviour.SellingGunType);
+            _playerGunHandler.AddGun(_shopBehaviour.SellingGunType);
+            playerVisual.UpdateGunVisibility();
             SetSoldOut(true);
         }
 

@@ -31,8 +31,8 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
-            Vector3 playerPosition = player.Position;
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
+            Vector3 playerPosition = playerVisual.Position;
 
             Transform cameraTransform = _cameraProvider.Camera.transform;
             Vector3 cameraPosition = cameraTransform.position;

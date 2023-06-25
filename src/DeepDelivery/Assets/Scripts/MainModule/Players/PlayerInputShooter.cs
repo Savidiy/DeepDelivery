@@ -14,11 +14,12 @@ namespace MainModule
         private readonly BulletHolder _bulletHolder;
         private readonly MobileInput _mobileInput;
         private readonly IAudioPlayer _audioPlayer;
+        private readonly PlayerGunHandler _playerGunHandler;
         private float _cooldownTimer;
 
         public PlayerInputShooter(TickInvoker tickInvoker, PlayerHolder playerHolder, GameStaticData gameStaticData,
             InputStaticData inputStaticData, BulletFactory bulletFactory, BulletHolder bulletHolder, MobileInput mobileInput,
-            IAudioPlayer audioPlayer)
+            IAudioPlayer audioPlayer, PlayerGunHandler playerGunHandler)
         {
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
@@ -28,6 +29,7 @@ namespace MainModule
             _bulletHolder = bulletHolder;
             _mobileInput = mobileInput;
             _audioPlayer = audioPlayer;
+            _playerGunHandler = playerGunHandler;
         }
 
         public void ActivatePlayerControls()
@@ -70,17 +72,17 @@ namespace MainModule
         {
             _cooldownTimer = _gameStaticData.ShootCooldown;
 
-            Player player = _playerHolder.Player;
-            if (player.ActiveGuns.Count == 0)
+            PlayerVisual playerVisual = _playerHolder.PlayerVisual;
+            if (_playerGunHandler.ActiveGuns.Count == 0)
             {
                 _audioPlayer.PlayOnce(SoundId.PlayerEmptyFire);
                 return;
             }
 
-            foreach (GunType gunType in player.ActiveGuns)
+            foreach (GunType gunType in _playerGunHandler.ActiveGuns)
             {
-                Vector3 gunPosition = player.GetGunPosition(gunType);
-                Vector3 gunDirection = player.GetGunDirection(gunType);
+                Vector3 gunPosition = playerVisual.GetGunPosition(gunType);
+                Vector3 gunDirection = playerVisual.GetGunDirection(gunType);
                 Bullet bullet = _bulletFactory.CreateBullet(gunPosition, gunDirection, true);
                 _bulletHolder.AddBullet(bullet);
             }

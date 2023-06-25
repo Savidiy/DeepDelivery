@@ -1,26 +1,26 @@
 ﻿using MvvmModule;
+using Zenject;
 
 namespace MainModule
 {
     public sealed class PlayerFactory
     {
         private readonly IPrefabFactory _prefabFactory;
-        private readonly ProgressProvider _progressProvider;
         private readonly PlayerInvulnerability _playerInvulnerability;
+        private readonly IInstantiator _instantiator;
 
-        public PlayerFactory(IPrefabFactory prefabFactory, ProgressProvider progressProvider,
-            PlayerInvulnerability playerInvulnerability)
+        public PlayerFactory(IPrefabFactory prefabFactory, PlayerInvulnerability playerInvulnerability, IInstantiator instantiator)
         {
             _prefabFactory = prefabFactory;
-            _progressProvider = progressProvider;
             _playerInvulnerability = playerInvulnerability;
+            _instantiator = instantiator;
         }
 
-        public Player CreatePlayer()
+        public PlayerVisual CreatePlayer()
         {
             var playerBehaviour = _prefabFactory.Instantiate<PlayerBehaviour>("Player", parent: null);
             _playerInvulnerability.SetSpriteRenderers(playerBehaviour.BlinkSpriteRenderers);
-            var player = new Player(playerBehaviour);
+            var player = _instantiator.Instantiate<PlayerVisual>(new object[] {playerBehaviour});
             return player;
         }
     }
