@@ -1,6 +1,8 @@
-﻿namespace MainModule
+﻿using System.Collections.Generic;
+
+namespace MainModule
 {
-    public class CheckPointFactory : IFactory<CheckPoint, CheckPointBehaviour>
+    public class CheckPointFactory
     {
         private readonly ProgressUpdater _progressUpdater;
 
@@ -8,8 +10,17 @@
         {
             _progressUpdater = progressUpdater;
         }
-        
-        public CheckPoint Create(CheckPointBehaviour data)
+
+        public List<CheckPoint> CreatePoints(List<CheckPointBehaviour> checkPointBehaviours)
+        {
+            var checkPoints = new List<CheckPoint>();
+            foreach (CheckPointBehaviour behaviour in checkPointBehaviours)
+                checkPoints.Add(Create(behaviour));
+
+            return checkPoints;
+        }
+
+        private CheckPoint Create(CheckPointBehaviour data)
         {
             return new CheckPoint(data, _progressUpdater);
         }

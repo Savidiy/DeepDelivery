@@ -25,30 +25,16 @@ namespace MainModule
         {
             LevelBehaviour levelBehaviour = Object.Instantiate(levelData.LevelBehaviour);
 
-            List<EnemySpawnPoint> enemySpawnPoints = CreateData(_enemySpawnPointFactory, levelBehaviour.EnemySpawnPoints);
-            List<ItemSpawnPoint> items = CreateData(_itemSpawnPointFactory, levelBehaviour.ItemSpawnPoints);
-            List<Shop> shops = CreateData(_shopFactory, levelBehaviour.Shops);
-            List<CheckPoint> checkPoints = CreateData(_checkPointFactory, levelBehaviour.CheckPoints);
-            List<QuestGiver> questGivers = CreateData<QuestGiver, QuestGiveBehaviour>(_questFactory, levelBehaviour.GiveQuests);
-            List<QuestTaker> questTakers = CreateData<QuestTaker, QuestTakeBehaviour>(_questFactory, levelBehaviour.TakeQuests);
+            List<EnemySpawnPoint> enemySpawnPoints = _enemySpawnPointFactory.CreatePoints(levelBehaviour.EnemySpawnPoints);
+            List<ItemSpawnPoint> items = _itemSpawnPointFactory.CreatePoints(levelBehaviour.ItemSpawnPoints);
+            List<Shop> shops = _shopFactory.CreateShops(levelBehaviour.Shops);
+            List<CheckPoint> checkPoints = _checkPointFactory.CreatePoints(levelBehaviour.CheckPoints);
+            List<QuestGiver> questGivers = _questFactory.CreateQuestGivers(levelBehaviour.GiveQuests);
+            List<QuestTaker> questTakers = _questFactory.CreateQuestTakers(levelBehaviour.TakeQuests);
 
             var levelModel = new LevelModel(levelBehaviour, items, shops, questGivers, questTakers, checkPoints, enemySpawnPoints);
 
             return levelModel;
-        }
-
-        private List<T> CreateData<T, TK>(IFactory<T, TK> factory, List<TK> behaviours)
-            where T : class
-        {
-            List<T> data = new();
-
-            foreach (TK behaviour in behaviours)
-            {
-                T item = factory.Create(behaviour);
-                data.Add(item);
-            }
-
-            return data;
         }
     }
 }
