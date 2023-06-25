@@ -9,24 +9,24 @@ namespace MainModule
 {
     public class ItemSpawnPoint : IDisposable, IProgressWriter
     {
-        private readonly ItemSpawnPointBehaviour _data;
+        private readonly ItemSpawnPointBehaviour _behaviour;
         private readonly ItemBehaviourFactory _itemBehaviourFactory;
 
         [CanBeNull] private ItemBehaviour _itemBehaviour;
 
         public bool IsCollected { get; private set; }
-        public ItemType ItemType => _data.ItemType;
-        public Vector3 Position => _data.transform.position;
+        public ItemType ItemType => _behaviour.ItemType;
+        public Vector3 Position => _behaviour.transform.position;
 
-        public ItemSpawnPoint(ItemSpawnPointBehaviour data, ItemBehaviourFactory itemBehaviourFactory)
+        public ItemSpawnPoint(ItemSpawnPointBehaviour behaviour, ItemBehaviourFactory itemBehaviourFactory)
         {
-            _data = data;
+            _behaviour = behaviour;
             _itemBehaviourFactory = itemBehaviourFactory;
         }
 
         public void LoadProgress(Progress progress)
         {
-            IsCollected = progress.CollectedItemId?.Contains(_data.UniqueId.Id) ?? false;
+            IsCollected = progress.CollectedItemId?.Contains(_behaviour.UniqueId.Id) ?? false;
             UpdateBehaviour();
         }
 
@@ -34,7 +34,7 @@ namespace MainModule
         {
             progress.CollectedItemId ??= new List<string>();
 
-            string id = _data.UniqueId.Id;
+            string id = _behaviour.UniqueId.Id;
             bool contains = progress.CollectedItemId.Contains(id);
 
             if (contains && !IsCollected)
@@ -47,7 +47,7 @@ namespace MainModule
         {
             IsCollected = true;
             DestroyBehaviour();
-            player.AddItem(_data.ItemType);
+            player.AddItem(_behaviour.ItemType);
         }
 
         public bool CanBeCollect(Player player)
@@ -72,8 +72,8 @@ namespace MainModule
             }
             else if (!IsCollected && _itemBehaviour == null)
             {
-                ItemType itemType = _data.ItemType;
-                Vector3 position = _data.transform.position;
+                ItemType itemType = _behaviour.ItemType;
+                Vector3 position = _behaviour.transform.position;
                 _itemBehaviour = _itemBehaviourFactory.Create(itemType, position);
             }
         }

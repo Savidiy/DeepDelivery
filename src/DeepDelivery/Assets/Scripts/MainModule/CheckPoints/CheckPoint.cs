@@ -4,21 +4,21 @@ namespace MainModule
 {
     public class CheckPoint : IProgressReader
     {
-        private readonly CheckPointBehaviour _data;
+        private readonly CheckPointBehaviour _behaviour;
         private readonly ProgressUpdater _progressUpdater;
         private bool _isActivated;
 
-        public string Id => _data.UniqueId.Id;
+        public string Id => _behaviour.UniqueId.Id;
 
-        public CheckPoint(CheckPointBehaviour data, ProgressUpdater progressUpdater)
+        public CheckPoint(CheckPointBehaviour behaviour, ProgressUpdater progressUpdater)
         {
-            _data = data;
+            _behaviour = behaviour;
             _progressUpdater = progressUpdater;
         }
 
         public void LoadProgress(Progress progress)
         {
-            if (_data.UniqueId.Id.Equals(progress.LastActiveCheckPointId))
+            if (_behaviour.UniqueId.Id.Equals(progress.LastActiveCheckPointId))
                 SetUsed();
             else
                 SetUnused();
@@ -29,13 +29,13 @@ namespace MainModule
             if (_isActivated)
                 return false;
             
-            return player.Collider.HasCollisionWith(_data.Collider);
+            return player.Collider.HasCollisionWith(_behaviour.Collider);
         }
 
         public void SetUnused()
         {
             _isActivated = false;
-            _data.MarkUnused();
+            _behaviour.MarkUnused();
         }
 
         public void UseCheckPoint()
@@ -47,7 +47,7 @@ namespace MainModule
         private void SetUsed()
         {
             _isActivated = true;
-            _data.MarkUsed();
+            _behaviour.MarkUsed();
         }
     }
 }
