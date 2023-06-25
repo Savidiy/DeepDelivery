@@ -1,29 +1,18 @@
-﻿using UnityEngine;
-
-namespace MainModule
+﻿namespace MainModule
 {
-    public class PlayerHolder : IProgressWriter
+    public class PlayerHolder
     {
-        private readonly LevelHolder _levelHolder;
-        public PlayerVisual PlayerVisual { get; }
+        public PlayerVisual PlayerVisual { get; private set; }
 
-        public PlayerHolder(PlayerFactory playerFactory, LevelHolder levelHolder, ProgressUpdater progressUpdater)
+        public void AddPlayer(PlayerVisual playerVisual)
         {
-            _levelHolder = levelHolder;
-            progressUpdater.Register(this);
-
-            PlayerVisual = playerFactory.CreatePlayer();
+            PlayerVisual = playerVisual;
         }
 
-        public void LoadProgress(Progress progress)
+        public void RemovePlayer()
         {
-            Vector3 defaultPosition = _levelHolder.LevelModel.GetPlayerStartPosition();
-            PlayerVisual.LoadProgress(progress.Player, defaultPosition);
-        }
-
-        public void UpdateProgress(Progress progress)
-        {
-            PlayerVisual.UpdateProgress(progress.Player);
+            PlayerVisual?.Dispose();
+            PlayerVisual = null;
         }
     }
 }

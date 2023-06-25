@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace MainModule
@@ -10,15 +11,17 @@ namespace MainModule
         private readonly ShopFactory _shopFactory;
         private readonly QuestFactory _questFactory;
         private readonly CheckPointFactory _checkPointFactory;
+        private readonly IInstantiator _instantiator;
 
         public LevelModelFactory(EnemySpawnPointFactory enemySpawnPointFactory, ItemSpawnPointFactory itemSpawnPointFactory,
-            ShopFactory shopFactory, QuestFactory questFactory, CheckPointFactory checkPointFactory)
+            ShopFactory shopFactory, QuestFactory questFactory, CheckPointFactory checkPointFactory, IInstantiator instantiator)
         {
             _enemySpawnPointFactory = enemySpawnPointFactory;
             _itemSpawnPointFactory = itemSpawnPointFactory;
             _shopFactory = shopFactory;
             _questFactory = questFactory;
             _checkPointFactory = checkPointFactory;
+            _instantiator = instantiator;
         }
 
         public LevelModel Create(LevelData levelData)
@@ -32,7 +35,8 @@ namespace MainModule
             List<QuestGiver> questGivers = _questFactory.CreateQuestGivers(levelBehaviour.GiveQuests);
             List<QuestTaker> questTakers = _questFactory.CreateQuestTakers(levelBehaviour.TakeQuests);
 
-            var levelModel = new LevelModel(levelBehaviour, items, shops, questGivers, questTakers, checkPoints, enemySpawnPoints);
+            var args = new object[] {levelBehaviour, items, shops, questGivers, questTakers, checkPoints, enemySpawnPoints};
+            var levelModel = _instantiator.Instantiate<LevelModel>(args);
 
             return levelModel;
         }

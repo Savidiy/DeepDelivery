@@ -23,13 +23,12 @@ namespace MainModule
 
         public void ActivatePlayerControls()
         {
-            _tickInvoker.FixedUpdated -= OnUpdated;
-            _tickInvoker.FixedUpdated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         public void DeactivatePlayerControls()
         {
-            _tickInvoker.FixedUpdated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         private float GetDeltaTime()

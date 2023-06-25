@@ -4,25 +4,34 @@ using Object = UnityEngine.Object;
 
 namespace MainModule
 {
-    public class PlayerVisual : IDisposable
+    public class PlayerVisual : IProgressWriter, IDisposable
     {
         private readonly PlayerBehaviour _playerBehaviour;
         private readonly PlayerGunHandler _gunHandler;
+        private readonly LevelHolder _levelHolder;
+        private readonly ProgressUpdater _progressUpdater;
         private bool _isFlipToLeft;
 
         public Vector3 Position => _playerBehaviour.transform.position;
         public Collider2D Collider => _playerBehaviour.Collider2D;
 
-        public PlayerVisual(PlayerBehaviour playerBehaviour, PlayerGunHandler gunHandler)
+        public PlayerVisual(PlayerBehaviour playerBehaviour, PlayerGunHandler gunHandler, LevelHolder levelHolder, 
+            ProgressUpdater progressUpdater)
         {
+            _progressUpdater = progressUpdater;
             _playerBehaviour = playerBehaviour;
             _gunHandler = gunHandler;
+            _levelHolder = levelHolder;
+            
+            progressUpdater.Register(this);
         }
 
-        public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
+        public void LoadProgress(Progress progress)
         {
-            Vector3 position = progress.HasSavedPosition
-                ? progress.SavedPosition.ToVector3()
+            Vector3 defaultPosition = _levelHolder.LevelModel.GetPlayerStartPosition();
+            
+            Vector3 position = progress.Player.HasSavedPosition
+                ? progress.Player.SavedPosition.ToVector3()
                 : defaultPosition;
 
             _playerBehaviour.transform.position = position;
@@ -30,10 +39,10 @@ namespace MainModule
             UpdateGunVisibility();
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateProgress(Progress progress)
         {
-            progress.HasSavedPosition = true;
-            progress.SavedPosition = new SerializableVector3(Position);
+            progress.Player.HasSavedPosition = true;
+            progress.Player.SavedPosition = new SerializableVector3(Position);
         }
 
         public void UpdateGunVisibility()
@@ -72,6 +81,7 @@ namespace MainModule
         public void Dispose()
         {
             Object.Destroy(_playerBehaviour.gameObject);
+            _progressUpdater.Unregister(this);
         }
 
         public Vector3 GetGunPosition(GunType gunType) =>

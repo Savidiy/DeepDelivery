@@ -13,12 +13,12 @@ namespace MainModule
             _tickInvoker = tickInvoker;
             _enemyHolder = enemyHolder;
             
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         public void Dispose()
         {
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         private void OnUpdated()

@@ -23,13 +23,12 @@ namespace MainModule
 
         public void Activate()
         {
-            _tickInvoker.Updated -= OnUpdated;
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         public void Deactivate()
         {
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         public void UpdateProgress(Progress progress)
@@ -45,8 +44,6 @@ namespace MainModule
 
         public void LoadProgress(Progress progress)
         {
-            _enemyHolder.Clear();
-
             foreach (EnemySpawnPoint spawnPoint in EnemySpawnPoints)
             {
                 if (HasProgress(progress, spawnPoint, out EnemySpawnPointProgress spawnPointProgress))

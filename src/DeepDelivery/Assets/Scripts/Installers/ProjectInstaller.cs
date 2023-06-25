@@ -44,6 +44,13 @@ namespace Installers
             Container.Bind<MainStateMachine>().AsSingle();
             Container.Bind<StartMainState>().AsSingle();
             Container.Bind<LevelPlayMainState>().AsSingle();
+            
+            Container.Bind<LevelStateMachine>().AsSingle();
+            Container.Bind<LoadLevelState>().AsSingle();
+            Container.Bind<ResetProgressLevelState>().AsSingle();
+            Container.Bind<PlayLevelState>().AsSingle();
+            Container.Bind<DeathPauseLevelState>().AsSingle();
+            Container.Bind<ClearLevelState>().AsSingle();
 
             Container.Bind<PlayerGunHandler>().AsSingle();
             Container.Bind<PlayerInventory>().AsSingle();
@@ -76,7 +83,6 @@ namespace Installers
             Container.Bind<ItemCompassUpdater>().AsSingle();
             Container.Bind<TrackedItemsHolder>().AsSingle();
             
-            Container.Bind<LevelRestarter>().AsSingle();
             Container.Bind<LevelHolder>().AsSingle();
             Container.Bind<LevelModelFactory>().AsSingle();
             

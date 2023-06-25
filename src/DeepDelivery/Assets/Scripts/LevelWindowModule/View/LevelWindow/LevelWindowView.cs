@@ -38,7 +38,7 @@ namespace LevelWindowModule.View
 
             UpdateQuestsViews(viewModel);
             
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         private void OnIsGameCompletedChange(bool isGameCompleted) => Hierarchy.CompletedGame.SetActive(isGameCompleted);
@@ -48,7 +48,7 @@ namespace LevelWindowModule.View
         protected override void ReleaseViewModel()
         {
             base.ReleaseViewModel();
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         private void OnUpdated()

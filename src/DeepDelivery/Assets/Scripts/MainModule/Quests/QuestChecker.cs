@@ -24,13 +24,12 @@ namespace MainModule
 
         public void Activate()
         {
-            _tickInvoker.Updated -= OnUpdated;
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         public void Deactivate()
         {
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         public void LoadProgress(Progress progress)

@@ -21,6 +21,11 @@ namespace MainModule
 
         public void Clear()
         {
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Dispose();
+            }
+
             _enemies.Clear();
         }
 

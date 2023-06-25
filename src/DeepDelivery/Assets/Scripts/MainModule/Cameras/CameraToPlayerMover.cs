@@ -1,5 +1,4 @@
-﻿using LevelWindowModule.Contracts;
-using Savidiy.Utils;
+﻿using Savidiy.Utils;
 using UnityEngine;
 
 namespace MainModule
@@ -19,14 +18,13 @@ namespace MainModule
 
         public void Activate()
         {
-            _tickInvoker.Updated -= OnUpdated;
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
             OnUpdated();
         }
 
         public void Deactivate()
         {
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         private void OnUpdated()

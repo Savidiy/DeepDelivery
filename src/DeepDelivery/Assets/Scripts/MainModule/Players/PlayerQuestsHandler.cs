@@ -3,16 +3,11 @@ using UnityEngine;
 
 namespace MainModule
 {
-    public class PlayerQuestsHandler : IProgressReader
+    public class PlayerQuestsHandler
     {
         public List<Quest> Quests { get; } = new();
 
-        public PlayerQuestsHandler(ProgressUpdater progressUpdater)
-        {
-            progressUpdater.Register(this);
-        }
-
-        public void LoadProgress(Progress progress)
+        public void ClearQuests()
         {
             Quests.Clear();
         }

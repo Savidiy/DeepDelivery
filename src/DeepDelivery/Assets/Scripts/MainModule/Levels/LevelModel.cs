@@ -10,6 +10,7 @@ namespace MainModule
     public sealed class LevelModel : DisposableCollector, IProgressWriter
     {
         private readonly LevelBehaviour _levelBehaviour;
+        private readonly ProgressUpdater _progressUpdater;
 
         public IReadOnlyList<ItemSpawnPoint> Items { get; }
         public IReadOnlyList<Shop> Shops { get; }
@@ -20,15 +21,18 @@ namespace MainModule
 
         public LevelModel(LevelBehaviour levelBehaviour, List<ItemSpawnPoint> items, List<Shop> shops,
             List<QuestGiver> questGivers, List<QuestTaker> questTakers, List<CheckPoint> checkPoints,
-            List<EnemySpawnPoint> enemySpawnPoints)
+            List<EnemySpawnPoint> enemySpawnPoints, ProgressUpdater progressUpdater)
         {
             _levelBehaviour = levelBehaviour;
+            _progressUpdater = progressUpdater;
             Items = items;
             Shops = shops;
             QuestGivers = questGivers;
             QuestTakers = questTakers;
             CheckPoints = checkPoints;
             EnemySpawnPoints = enemySpawnPoints;
+            
+            progressUpdater.Register(this);
         }
 
         public void LoadProgress(Progress progress)
@@ -97,6 +101,8 @@ namespace MainModule
             DisposeList(QuestTakers);
             DisposeList(CheckPoints);
             DisposeList(EnemySpawnPoints);
+            
+            _progressUpdater.Unregister(this);
         }
 
         private void DisposeList<T>(IReadOnlyList<T> items) where T : class

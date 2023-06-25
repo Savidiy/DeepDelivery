@@ -1,16 +1,15 @@
-using LevelWindowModule.Contracts;
+﻿using LevelWindowModule.Contracts;
 using Savidiy.Utils.StateMachine;
 
 namespace MainModule
 {
-    public sealed class LevelPlayMainState : IState, IStateWithExit, IMainState
+    public sealed class PlayLevelState : IState, IStateWithExit, ILevelState
     {
         private readonly ILevelWindowPresenter _levelWindowPresenter;
         private readonly CollisionWithEnemyChecker _collisionWithEnemyChecker;
         private readonly PlayerInputMover _playerInputMover;
         private readonly PlayerInputShooter _playerInputShooter;
         private readonly CameraToPlayerMover _cameraToPlayerMover;
-        private readonly LevelRestarter _levelRestarter;
         private readonly CollisionWithItemsChecker _collisionWithItemsChecker;
         private readonly UseShopChecker _useShopChecker;
         private readonly QuestChecker _questChecker;
@@ -20,9 +19,9 @@ namespace MainModule
         private readonly EnemySpawnUpdater _enemySpawnUpdater;
         private readonly ItemCompassUpdater _itemCompassUpdater;
 
-        public LevelPlayMainState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
+        public PlayLevelState(ILevelWindowPresenter levelWindowPresenter, CollisionWithEnemyChecker collisionWithEnemyChecker,
             PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, CameraToPlayerMover cameraToPlayerMover,
-            LevelRestarter levelRestarter, CollisionWithItemsChecker collisionWithItemsChecker, UseShopChecker useShopChecker,
+            CollisionWithItemsChecker collisionWithItemsChecker, UseShopChecker useShopChecker,
             QuestChecker questChecker, QuestCompassUpdater questCompassUpdater, UseCheckPointChecker useCheckPointChecker,
             PlayerDeathChecker playerDeathChecker, EnemySpawnUpdater enemySpawnUpdater, ItemCompassUpdater itemCompassUpdater)
         {
@@ -39,12 +38,10 @@ namespace MainModule
             _playerInputMover = playerInputMover;
             _playerInputShooter = playerInputShooter;
             _cameraToPlayerMover = cameraToPlayerMover;
-            _levelRestarter = levelRestarter;
         }
 
         public void Enter()
         {
-            _levelRestarter.LoadLevel();
             _playerInputMover.ActivatePlayerControls();
             _playerInputShooter.ActivatePlayerControls();
             _collisionWithEnemyChecker.Activate();

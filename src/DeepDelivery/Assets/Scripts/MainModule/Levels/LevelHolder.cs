@@ -2,33 +2,19 @@ using System;
 
 namespace MainModule
 {
-    public sealed class LevelHolder : IDisposable, IProgressWriter
+    public sealed class LevelHolder : IDisposable
     {
-        private readonly GameStaticData _gameStaticData;
-        private readonly LevelModelFactory _levelModelFactory;
-
         public LevelModel LevelModel { get; private set; }
 
-        public LevelHolder(GameStaticData gameStaticData, LevelModelFactory levelModelFactory, ProgressUpdater progressUpdater)
+        public void AddLevel(LevelModel levelModel)
         {
-            _gameStaticData = gameStaticData;
-            _levelModelFactory = levelModelFactory;
-            progressUpdater.Register(this);
+            LevelModel = levelModel;
         }
 
-        public void LoadProgress(Progress progress)
+        public void RemoveLevel()
         {
-            LevelModel?.Dispose();
-
-            int levelIndex = progress.LevelIndex;
-            LevelData levelData = _gameStaticData.Levels[levelIndex];
-            LevelModel = _levelModelFactory.Create(levelData);
-            LevelModel.LoadProgress(progress);
-        }
-
-        public void UpdateProgress(Progress progress)
-        {
-            LevelModel.UpdateProgress(progress);
+            LevelModel.Dispose();
+            LevelModel = null;
         }
 
         public void Dispose()

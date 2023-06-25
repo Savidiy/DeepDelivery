@@ -23,7 +23,7 @@ namespace MainModule
             _levelHolder = levelHolder;
             _gameStaticData = gameStaticData;
             _audioPlayer = audioPlayer;
-            _tickInvoker.Updated += OnUpdated;
+            _tickInvoker.Subscribe(UpdateType.Update, OnUpdated);
         }
 
         public void AddBullet(Bullet bullet) => _bullets.Add(bullet);
@@ -31,7 +31,7 @@ namespace MainModule
         public void Dispose()
         {
             ClearBullets();
-            _tickInvoker.Updated -= OnUpdated;
+            _tickInvoker.Unsubscribe(UpdateType.Update, OnUpdated);
         }
 
         public void ClearBullets()

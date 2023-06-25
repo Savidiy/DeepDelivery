@@ -24,6 +24,13 @@ namespace MainModule
                 _progressWriters.Add(writer);
         }
 
+        public void Unregister(IProgressReader reader)
+        {
+            _progressReaders.Remove(reader);
+            if (reader is IProgressWriter writer)
+                _progressWriters.Remove(writer);
+        }
+
         public void ResetProgress()
         {
             Progress progress = _progressSaveLoad.CreateDefaultProgress();

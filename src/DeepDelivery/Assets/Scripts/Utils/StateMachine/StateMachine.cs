@@ -64,7 +64,10 @@ namespace Savidiy.Utils.StateMachine
         private void ExitFromCurrentState()
         {
             if (_currentState is IStateWithExit stateWithExit)
+            {
                 stateWithExit.Exit();
+                _currentState = null;
+            }
         }
 
         public void Dispose()
