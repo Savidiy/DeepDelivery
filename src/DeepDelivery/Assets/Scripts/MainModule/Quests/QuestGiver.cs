@@ -7,6 +7,7 @@ namespace MainModule
     {
         private readonly QuestGiveBehaviour _behaviour;
         private readonly QuestFactory _questFactory;
+        private readonly PlayerQuestsHandler _playerQuestsHandler;
 
         public bool IsQuestGave { get; private set; }
         public bool IsQuestComplete { get; private set; }
@@ -14,8 +15,9 @@ namespace MainModule
 
         public event Action StatusUpdated;
 
-        public QuestGiver(QuestGiveBehaviour behaviour, QuestFactory questFactory)
+        public QuestGiver(QuestGiveBehaviour behaviour, QuestFactory questFactory, PlayerQuestsHandler playerQuestsHandler)
         {
+            _playerQuestsHandler = playerQuestsHandler;
             _behaviour = behaviour;
             _questFactory = questFactory;
             _behaviour.OrderLabel.SetActive(true);
@@ -39,14 +41,14 @@ namespace MainModule
             return true;
         }
 
-        public void GiveQuest(Player player)
+        public void GiveQuest()
         {
             IsQuestGave = true;
             IsQuestComplete = false;
             _behaviour.OrderLabel.SetActive(false);
             _behaviour.QuestTakeBehaviour.OrderLabel.SetActive(true);
             Quest quest = _questFactory.Create(this);
-            player.AddQuest(quest);
+            _playerQuestsHandler.AddQuest(quest);
             StatusUpdated?.Invoke();
         }
 

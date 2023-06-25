@@ -15,11 +15,13 @@ namespace MainModule
         private readonly Transform _root;
         private readonly List<QuestCompassBehaviour> _compasses = new();
         private readonly GameStaticData _gameStaticData;
+        private readonly PlayerQuestsHandler _playerQuestsHandler;
 
         public QuestCompassUpdater(TickInvoker tickInvoker, PlayerHolder playerHolder, IPrefabFactory prefabFactory,
-            GameStaticData gameStaticData)
+            GameStaticData gameStaticData, PlayerQuestsHandler playerQuestsHandler)
         {
             _gameStaticData = gameStaticData;
+            _playerQuestsHandler = playerQuestsHandler;
             _prefabFactory = prefabFactory;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
@@ -46,8 +48,7 @@ namespace MainModule
 
         private void UpdateCompassCount()
         {
-            Player player = _playerHolder.Player;
-            List<Quest> quests = player.Quests;
+            List<Quest> quests = _playerQuestsHandler.Quests;
             int count = quests.Count;
 
             for (int i = _compasses.Count - 1; i >= count; i--)
@@ -67,7 +68,7 @@ namespace MainModule
         {
             Player player = _playerHolder.Player;
             Vector3 playerPosition = player.Position;
-            List<Quest> quests = player.Quests;
+            List<Quest> quests = _playerQuestsHandler.Quests;
 
             for (var index = 0; index < quests.Count; index++)
             {

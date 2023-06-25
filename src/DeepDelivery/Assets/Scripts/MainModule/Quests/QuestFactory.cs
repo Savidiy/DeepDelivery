@@ -4,6 +4,13 @@ namespace MainModule
 {
     public class QuestFactory
     {
+        private readonly PlayerQuestsHandler _playerQuestsHandler;
+
+        public QuestFactory(PlayerQuestsHandler playerQuestsHandler)
+        {
+            _playerQuestsHandler = playerQuestsHandler;
+        }
+        
         public Quest Create(QuestGiver data)
         {
             return new Quest(data);
@@ -29,12 +36,12 @@ namespace MainModule
 
         private QuestGiver Create(QuestGiveBehaviour data)
         {
-            return new QuestGiver(data, this);
+            return new QuestGiver(data, this, _playerQuestsHandler);
         }
 
         private QuestTaker Create(QuestTakeBehaviour data)
         {
-            return new QuestTaker(data);
+            return new QuestTaker(data, _playerQuestsHandler);
         }
     }
 }

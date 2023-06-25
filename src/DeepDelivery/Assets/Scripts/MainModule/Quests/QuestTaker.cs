@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MainModule
 {
     public class QuestTaker
     {
         private readonly QuestTakeBehaviour _behaviour;
+        private readonly PlayerQuestsHandler _playerQuestsHandler;
 
-        public QuestTaker(QuestTakeBehaviour behaviour)
+        public QuestTaker(QuestTakeBehaviour behaviour, PlayerQuestsHandler playerQuestsHandler)
         {
+            _playerQuestsHandler = playerQuestsHandler;
             _behaviour = behaviour;
         }
 
@@ -22,7 +25,7 @@ namespace MainModule
             if (distance > interactRadius)
                 return false;
             
-            foreach (Quest quest in player.Quests)
+            foreach (Quest quest in _playerQuestsHandler.Quests)
             {
                 if (quest.IsQuestDestination(_behaviour))
                     return true;
@@ -31,16 +34,17 @@ namespace MainModule
             return false;
         }
 
-        public void TakeQuest(Player player)
+        public void TakeQuest()
         {
-            for (var index = player.Quests.Count - 1; index >= 0; index--)
+            List<Quest> quests = _playerQuestsHandler.Quests;
+            for (var index = quests.Count - 1; index >= 0; index--)
             {
-                Quest quest = player.Quests[index];
+                Quest quest = quests[index];
                 if (!quest.IsQuestDestination(_behaviour))
                     continue;
                 
                 quest.SetQuestCompleted();
-                player.RemoveQuest(quest);
+                _playerQuestsHandler.RemoveQuest(quest);
             }
         }
     }

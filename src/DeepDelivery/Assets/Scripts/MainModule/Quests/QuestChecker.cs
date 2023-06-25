@@ -41,10 +41,9 @@ namespace MainModule
                 if (NeedCompleteQuest(progress, questGiver))
                     questGiver.SetQuestCompleted();
 
-            Player player = _playerHolder.Player;
             foreach (QuestGiver questGiver in levelModel.QuestGivers)
                 if (NeedGiveQuest(progress, questGiver))
-                    questGiver.GiveQuest(player);
+                    questGiver.GiveQuest();
         }
 
         private static bool NeedGiveQuest(Progress progress, QuestGiver questGiver)
@@ -85,22 +84,22 @@ namespace MainModule
             LevelModel levelModel = _levelHolder.LevelModel;
             foreach (QuestGiver questGiver in levelModel.QuestGivers)
                 if (questGiver.CanGiveQuest(player))
-                    GiveQuest(questGiver, player);
+                    GiveQuest(questGiver);
 
             foreach (QuestTaker questTaker in levelModel.QuestTakers)
                 if (questTaker.CanTakeQuest(player))
-                    TakeQuest(questTaker, player);
+                    TakeQuest(questTaker);
         }
 
-        private void TakeQuest(QuestTaker questTaker, Player player)
+        private void TakeQuest(QuestTaker questTaker)
         {
-            questTaker.TakeQuest(player);
+            questTaker.TakeQuest();
             _audioPlayer.PlayOnce(SoundId.TakeQuest);
         }
 
-        private void GiveQuest(QuestGiver questGiver, Player player)
+        private void GiveQuest(QuestGiver questGiver)
         {
-            questGiver.GiveQuest(player);
+            questGiver.GiveQuest();
             _audioPlayer.PlayOnce(SoundId.GiveQuest);
         }
     }
