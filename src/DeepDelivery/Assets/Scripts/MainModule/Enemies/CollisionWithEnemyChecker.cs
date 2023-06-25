@@ -11,16 +11,20 @@ namespace MainModule
         private readonly EnemyHolder _enemyHolder;
         private readonly IAudioPlayer _audioPlayer;
         private readonly GameStaticData _gameStaticData;
+        private readonly PlayerInvulnerability _playerInvulnerability;
+        private readonly PlayerHealth _playerHealth;
         private readonly TickInvoker _tickInvoker;
         private readonly PlayerHolder _playerHolder;
         private readonly Dictionary<Enemy, float> _collidedEnemies = new();
 
         public CollisionWithEnemyChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, EnemyHolder enemyHolder,
-            IAudioPlayer audioPlayer, GameStaticData gameStaticData)
+            IAudioPlayer audioPlayer, GameStaticData gameStaticData, PlayerInvulnerability playerInvulnerability, PlayerHealth playerHealth)
         {
             _enemyHolder = enemyHolder;
             _audioPlayer = audioPlayer;
             _gameStaticData = gameStaticData;
+            _playerInvulnerability = playerInvulnerability;
+            _playerHealth = playerHealth;
             _tickInvoker = tickInvoker;
             _playerHolder = playerHolder;
         }
@@ -55,7 +59,7 @@ namespace MainModule
             for (var index = 0; index < _enemyHolder.Enemies.Count; index++)
             {
                 Enemy enemy = _enemyHolder.Enemies[index];
-                bool hasNotCollision = player.IsInvulnerable || !enemy.HasCollisionWith(playerCollider);
+                bool hasNotCollision = _playerInvulnerability.IsInvulnerable || !enemy.HasCollisionWith(playerCollider);
                 if (hasNotCollision)
                 {
                     if (collidedEnemies.ContainsKey(enemy))
@@ -83,14 +87,14 @@ namespace MainModule
 
         private void HitPlayer(Dictionary<Enemy, float> collidedEnemies)
         {
-            Player player = _playerHolder.Player;
             foreach ((Enemy _, float value) in collidedEnemies)
             {
                 if (!(value >= _gameStaticData.HurtPlayerDelay))
                     continue;
 
-                player.GetHit();
-                _audioPlayer.PlayOnce(player.CurrentHp > 0 ? SoundId.PlayerHurt : SoundId.PlayerDead);
+                _playerHealth.GetHit();
+                _playerInvulnerability.StartInvulnerableTimer();
+                _audioPlayer.PlayOnce(_playerHealth.CurrentHp > 0 ? SoundId.PlayerHurt : SoundId.PlayerDead);
             }
         }
     }

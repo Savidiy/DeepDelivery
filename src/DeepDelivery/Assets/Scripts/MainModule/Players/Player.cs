@@ -8,31 +8,21 @@ namespace MainModule
     public class Player : IDisposable
     {
         private readonly PlayerBehaviour _playerBehaviour;
-        private readonly PlayerInvulnerability _playerInvulnerability;
 
         private bool _isFlipToLeft;
 
         public Vector3 Position => _playerBehaviour.transform.position;
         public Collider2D Collider => _playerBehaviour.Collider2D;
 
-        public int CurrentHp { get; private set; }
-        public int MaxHp { get; private set; }
-        public bool IsInvulnerable => _playerInvulnerability.IsInvulnerable;
         public List<GunType> ActiveGuns { get; } = new();
-        public Dictionary<ItemType, int> ItemsCount { get; } = new();
 
-        public Player(PlayerBehaviour playerBehaviour,
-            PlayerInvulnerability playerInvulnerability)
+        public Player(PlayerBehaviour playerBehaviour)
         {
             _playerBehaviour = playerBehaviour;
-            _playerInvulnerability = playerInvulnerability;
         }
 
         public void LoadProgress(PlayerProgress progress, Vector3 defaultPosition)
         {
-            int maxHp = progress.MaxHp;
-            CurrentHp = maxHp;
-            MaxHp = maxHp;
             ActiveGuns.Clear();
             ActiveGuns.AddRange(progress.ActiveGuns);
 
@@ -42,29 +32,14 @@ namespace MainModule
 
             _playerBehaviour.transform.position = position;
 
-            ItemsCount.Clear();
-            if (progress.Items != null)
-                foreach (ItemType itemType in progress.Items)
-                {
-                    ItemsCount.TryAdd(itemType, 0);
-                    ItemsCount[itemType] += 1;
-                }
-
             UpdateGunVisibility();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.ActiveGuns = new List<GunType>(ActiveGuns);
-            progress.MaxHp = MaxHp;
-            progress.CurrentHp = CurrentHp;
             progress.HasSavedPosition = true;
             progress.SavedPosition = new SerializableVector3(Position);
-
-            progress.Items = new List<ItemType>();
-            foreach ((ItemType key, int count) in ItemsCount)
-                for (int i = 0; i < count; i++)
-                    progress.Items.Add(key);
         }
 
         private void UpdateGunVisibility()
@@ -100,12 +75,6 @@ namespace MainModule
             _playerBehaviour.FlipRoot.localScale = scale;
         }
 
-        public void GetHit()
-        {
-            CurrentHp--;
-            _playerInvulnerability.StartInvulnerableTimer();
-        }
-
         public void Dispose()
         {
             Object.Destroy(_playerBehaviour.gameObject);
@@ -120,26 +89,6 @@ namespace MainModule
                 direction.x = -direction.x;
 
             return direction;
-        }
-
-        public void AddItem(ItemType itemType)
-        {
-            if (itemType == ItemType.Heart)
-            {
-                MaxHp++;
-                CurrentHp = MaxHp;
-                return;
-            }
-
-            if (ItemsCount.TryGetValue(itemType, out var count))
-                ItemsCount[itemType] = count + 1;
-            else
-                ItemsCount.Add(itemType, 1);
-        }
-
-        public void RemoveItems(ItemType itemType, int count)
-        {
-            ItemsCount[itemType] -= count;
         }
 
         public void AddGun(GunType gunType)

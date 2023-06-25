@@ -34,8 +34,11 @@ namespace MainModule
 
         public void PublishProgress()
         {
-            foreach (IProgressReader progressReader in _progressReaders)
+            for (var index = 0; index < _progressReaders.Count; index++)
+            {
+                IProgressReader progressReader = _progressReaders[index];
                 progressReader.LoadProgress(_progressProvider.Progress);
+            }
         }
 
         public void SaveProgress()

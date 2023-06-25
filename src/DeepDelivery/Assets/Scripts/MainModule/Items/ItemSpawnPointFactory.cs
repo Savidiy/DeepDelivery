@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using Zenject;
 
 namespace MainModule
 {
     public class ItemSpawnPointFactory
     {
-        private readonly ItemBehaviourFactory _itemBehaviourFactory;
+        private readonly IInstantiator _instantiator;
 
-        public ItemSpawnPointFactory(ItemBehaviourFactory itemBehaviourFactory)
+        public ItemSpawnPointFactory(IInstantiator instantiator)
         {
-            _itemBehaviourFactory = itemBehaviourFactory;
+            _instantiator = instantiator;
         }
 
         public List<ItemSpawnPoint> CreatePoints(List<ItemSpawnPointBehaviour> behaviours)
@@ -22,8 +23,8 @@ namespace MainModule
 
         private ItemSpawnPoint Create(ItemSpawnPointBehaviour itemSpawnPointBehaviour)
         {
-            var item = new ItemSpawnPoint(itemSpawnPointBehaviour, _itemBehaviourFactory);
-            return item;
+            var point = _instantiator.Instantiate<ItemSpawnPoint>(new object[] {itemSpawnPointBehaviour});
+            return point;
         }
     }
 }

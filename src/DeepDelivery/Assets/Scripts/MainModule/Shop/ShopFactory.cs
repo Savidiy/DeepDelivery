@@ -1,9 +1,17 @@
 ﻿using System.Collections.Generic;
+using Zenject;
 
 namespace MainModule
 {
     public class ShopFactory
     {
+        private readonly IInstantiator _instantiator;
+
+        public ShopFactory(IInstantiator instantiator)
+        {
+            _instantiator = instantiator;
+        }
+        
         public List<Shop> CreateShops(List<ShopBehaviour> shopBehaviours)
         {
             var shops = new List<Shop>();
@@ -15,7 +23,7 @@ namespace MainModule
 
         private Shop Create(ShopBehaviour shopBehaviour)
         {
-            return new Shop(shopBehaviour);
+            return _instantiator.Instantiate<Shop>(new object[] {shopBehaviour});
         }
     }
 }

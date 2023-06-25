@@ -41,7 +41,7 @@ namespace MainModule
             {
                 if (item.CanBeCollect(player))
                 {
-                    item.Collect(player);
+                    item.Collect();
                     _audioPlayer.PlayOnce(SoundId.CollectItem);
                     _trackedItemsHolder.UntrackItem(item.ItemType);
                 }

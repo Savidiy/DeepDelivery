@@ -14,9 +14,10 @@ namespace LevelWindowModule
     {
         private readonly ISettingsWindowPresenter _settingsWindowPresenter;
         private readonly LevelRestarter _playerRestarter;
-        private readonly PlayerHolder _playerHolder;
         private readonly MobileInput _mobileInput;
         private readonly IInstantiator _instantiator;
+        private readonly PlayerHealth _playerHealth;
+        private readonly PlayerInventory _playerInventory;
         private readonly ReactiveProperty<int> _heartCount = new();
         private readonly ReactiveProperty<IItemsViewModel> _items = new();
         private readonly ReactiveProperty<bool> _isGameCompleted = new();
@@ -31,15 +32,17 @@ namespace LevelWindowModule
         public IReadOnlyReactiveProperty<bool> IsGameCompleted => _isGameCompleted;
 
         public LevelWindowViewModel(ISettingsWindowPresenter settingsWindowPresenter,
-            LevelRestarter playerRestarter, TickInvoker tickInvoker, PlayerHolder playerHolder, LevelHolder levelHolder,
-            MobileInput mobileInput, InputSettings inputSettings, IInstantiator instantiator)
+            LevelRestarter playerRestarter, TickInvoker tickInvoker, LevelHolder levelHolder,
+            MobileInput mobileInput, InputSettings inputSettings, IInstantiator instantiator, PlayerHealth playerHealth,
+            PlayerInventory playerInventory)
         {
             _levelHolder = levelHolder;
             _settingsWindowPresenter = settingsWindowPresenter;
             _playerRestarter = playerRestarter;
-            _playerHolder = playerHolder;
             _mobileInput = mobileInput;
             _instantiator = instantiator;
+            _playerHealth = playerHealth;
+            _playerInventory = playerInventory;
             _mobileInput.SetInputDirection(Vector2.zero, false);
 
             UseMobileInput = inputSettings
@@ -59,7 +62,7 @@ namespace LevelWindowModule
             foreach (QuestGiver questGiver in levelHolder.LevelModel.QuestGivers)
             {
                 var args = new QuestStatusArgs(questGiver);
-                var viewModel = _instantiator.Instantiate<QuestStatusViewModel>(new object[]{args});
+                var viewModel = _instantiator.Instantiate<QuestStatusViewModel>(new object[] {args});
                 questStatusViewModels.Add(viewModel);
             }
 
@@ -68,10 +71,9 @@ namespace LevelWindowModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
-            _heartCount.Value = player.CurrentHp;
+            _heartCount.Value = _playerHealth.CurrentHp;
 
-            UpdateItemsViewModel(player);
+            UpdateItemsViewModel();
             CheckGameCompleted();
         }
 
@@ -92,10 +94,10 @@ namespace LevelWindowModule
             _isGameCompleted.Value = true;
         }
 
-        private void UpdateItemsViewModel(Player player)
+        private void UpdateItemsViewModel()
         {
             int itemsCount = 0;
-            foreach ((ItemType _, int count) in player.ItemsCount)
+            foreach ((ItemType _, int count) in _playerInventory.ItemsCount)
             {
                 itemsCount += count;
             }
@@ -104,8 +106,8 @@ namespace LevelWindowModule
             {
                 _itemsCount = itemsCount;
 
-                var args = new ItemsArgs(player.ItemsCount);
-                var viewModel = _instantiator.Instantiate<ItemsViewModel>(new object[]{args});
+                var args = new ItemsArgs(_playerInventory.ItemsCount);
+                var viewModel = _instantiator.Instantiate<ItemsViewModel>(new object[] {args});
                 _items.Value = viewModel;
             }
         }

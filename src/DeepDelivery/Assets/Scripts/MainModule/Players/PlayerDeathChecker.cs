@@ -9,12 +9,12 @@ namespace MainModule
         private readonly PlayerInputShooter _playerInputShooter;
         private readonly GameStaticData _gameStaticData;
         private readonly TickInvoker _tickInvoker;
-        private readonly PlayerHolder _playerHolder;
+        private readonly PlayerHealth _playerHealth;
         private readonly LevelRestarter _levelRestarter;
 
         private Sequence _restartTween;
 
-        public PlayerDeathChecker(TickInvoker tickInvoker, PlayerHolder playerHolder, LevelRestarter levelRestarter,
+        public PlayerDeathChecker(TickInvoker tickInvoker, PlayerHealth playerHealth, LevelRestarter levelRestarter,
             PlayerInputMover playerInputMover, PlayerInputShooter playerInputShooter, GameStaticData gameStaticData)
         {
             _levelRestarter = levelRestarter;
@@ -22,7 +22,7 @@ namespace MainModule
             _playerInputShooter = playerInputShooter;
             _gameStaticData = gameStaticData;
             _tickInvoker = tickInvoker;
-            _playerHolder = playerHolder;
+            _playerHealth = playerHealth;
         }
 
         public void Activate()
@@ -39,8 +39,7 @@ namespace MainModule
 
         private void OnUpdated()
         {
-            Player player = _playerHolder.Player;
-            if (player.CurrentHp > 0 || _restartTween != null)
+            if (_playerHealth.CurrentHp > 0 || _restartTween != null)
                 return;
 
             _playerInputMover.DeactivatePlayerControls();

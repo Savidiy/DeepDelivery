@@ -11,6 +11,7 @@ namespace MainModule
     {
         private readonly ItemSpawnPointBehaviour _behaviour;
         private readonly ItemBehaviourFactory _itemBehaviourFactory;
+        private readonly PlayerInventory _playerInventory;
 
         [CanBeNull] private ItemBehaviour _itemBehaviour;
 
@@ -18,10 +19,12 @@ namespace MainModule
         public ItemType ItemType => _behaviour.ItemType;
         public Vector3 Position => _behaviour.transform.position;
 
-        public ItemSpawnPoint(ItemSpawnPointBehaviour behaviour, ItemBehaviourFactory itemBehaviourFactory)
+        public ItemSpawnPoint(ItemSpawnPointBehaviour behaviour, ItemBehaviourFactory itemBehaviourFactory,
+            PlayerInventory playerInventory)
         {
             _behaviour = behaviour;
             _itemBehaviourFactory = itemBehaviourFactory;
+            _playerInventory = playerInventory;
         }
 
         public void LoadProgress(Progress progress)
@@ -43,11 +46,11 @@ namespace MainModule
                 progress.CollectedItemId.Add(id);
         }
 
-        public void Collect(Player player)
+        public void Collect()
         {
             IsCollected = true;
             DestroyBehaviour();
-            player.AddItem(_behaviour.ItemType);
+            _playerInventory.AddItem(_behaviour.ItemType);
         }
 
         public bool CanBeCollect(Player player)

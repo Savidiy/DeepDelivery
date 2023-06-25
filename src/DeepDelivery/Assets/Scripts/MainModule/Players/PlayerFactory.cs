@@ -20,7 +20,7 @@ namespace MainModule
         {
             var playerBehaviour = _prefabFactory.Instantiate<PlayerBehaviour>("Player", parent: null);
             _playerInvulnerability.SetSpriteRenderers(playerBehaviour.BlinkSpriteRenderers);
-            var player = new Player(playerBehaviour, _playerInvulnerability);
+            var player = new Player(playerBehaviour);
             return player;
         }
     }

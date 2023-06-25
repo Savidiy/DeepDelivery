@@ -6,13 +6,15 @@ namespace MainModule
     public class Shop : IProgressWriter
     {
         private readonly ShopBehaviour _shopBehaviour;
+        private readonly PlayerInventory _playerInventory;
         private bool _isSoldOut;
 
         public ItemType ItemType => _shopBehaviour.PriceItemType;
 
-        public Shop(ShopBehaviour shopBehaviour)
+        public Shop(ShopBehaviour shopBehaviour, PlayerInventory playerInventory)
         {
             _shopBehaviour = shopBehaviour;
+            _playerInventory = playerInventory;
         }
 
         public void LoadProgress(Progress progress)
@@ -41,7 +43,7 @@ namespace MainModule
             if (!IsPlayerOnInteractDistance(player))
                 return false;
 
-            if (!player.ItemsCount.TryGetValue(_shopBehaviour.PriceItemType, out int count))
+            if (!_playerInventory.ItemsCount.TryGetValue(_shopBehaviour.PriceItemType, out int count))
                 return false;
 
             if (count < _shopBehaviour.PriceCount)
@@ -72,7 +74,7 @@ namespace MainModule
 
         public void PlayerBuy(Player player)
         {
-            player.RemoveItems(_shopBehaviour.PriceItemType, _shopBehaviour.PriceCount);
+            _playerInventory.RemoveItems(_shopBehaviour.PriceItemType, _shopBehaviour.PriceCount);
             player.AddGun(_shopBehaviour.SellingGunType);
             SetSoldOut(true);
         }
